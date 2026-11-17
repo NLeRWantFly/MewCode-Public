@@ -1,0 +1,510 @@
+/*
+ * Shared liquid-glass treatment for fixed-shape dialogs.
+ *
+ * The panels stay ordinary DOM/CSS surfaces: the translucent layers let the
+ * page show through, while the two optical pseudo-elements provide a quiet
+ * edge highlight and a local specular reflection.  Both pseudo-elements are
+ * deliberately non-interactive and sit below the dialog content.
+ */
+:root,
+[data-theme="dark"] {
+  --liquid-glass-panel: rgba(37, 35, 31, 0.82);
+  --liquid-glass-surface-sheen: rgba(255, 255, 255, 0.07);
+  --liquid-glass-surface-shadow: rgba(0, 0, 0, 0.12);
+  --liquid-glass-specular: rgba(255, 220, 202, 0.18);
+  --liquid-glass-border: rgba(255, 255, 255, 0.17);
+  --liquid-glass-edge-top: rgba(255, 255, 255, 0.31);
+  --liquid-glass-edge-right: rgba(255, 255, 255, 0.13);
+  --liquid-glass-edge-bottom: rgba(0, 0, 0, 0.27);
+  --liquid-glass-edge-left: rgba(0, 0, 0, 0.15);
+  --liquid-glass-overlay: rgba(8, 7, 6, 0.42);
+  --liquid-glass-text-shadow: rgba(0, 0, 0, 0.16);
+}
+
+[data-theme="light"] {
+  --liquid-glass-panel: rgba(255, 253, 249, 0.82);
+  --liquid-glass-surface-sheen: rgba(255, 255, 255, 0.72);
+  --liquid-glass-surface-shadow: rgba(112, 80, 42, 0.08);
+  --liquid-glass-specular: rgba(255, 255, 255, 0.74);
+  --liquid-glass-border: rgba(112, 84, 51, 0.18);
+  --liquid-glass-edge-top: rgba(255, 255, 255, 0.92);
+  --liquid-glass-edge-right: rgba(255, 255, 255, 0.48);
+  --liquid-glass-edge-bottom: rgba(112, 79, 42, 0.18);
+  --liquid-glass-edge-left: rgba(112, 79, 42, 0.08);
+  --liquid-glass-overlay: rgba(53, 50, 42, 0.22);
+  --liquid-glass-text-shadow: rgba(255, 255, 255, 0.18);
+}
+
+/* The mask keeps the conversation/graph visible, but shifts contrast toward
+   the focused dialog.  Keep pointer events on the masks: both settings and
+   pipeline use a click on the mask as their close affordance. */
+.settings-overlay,
+.mew-confirm-mask,
+.modal-mask {
+  background:
+    radial-gradient(75% 65% at 8% 0%, var(--ambient-accent), transparent 72%),
+    radial-gradient(65% 70% at 100% 100%, var(--ambient-secondary), transparent 76%),
+    linear-gradient(180deg, var(--liquid-glass-overlay), var(--liquid-glass-overlay)),
+    var(--overlay);
+  -webkit-backdrop-filter: blur(9px) saturate(125%) contrast(105%);
+  backdrop-filter: blur(9px) saturate(125%) contrast(105%);
+}
+
+/* A translucent, theme-aware surface shared by all three fixed dialog
+   shapes.  The inset shadows are intentionally directional so the edge reads
+   as a rounded optical surface instead of a flat one-pixel outline. */
+.settings-dialog,
+.mew-confirm,
+.modal {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  color: var(--text);
+  border: 1px solid var(--liquid-glass-border);
+  background:
+    radial-gradient(120% 100% at 0% 0%, var(--ambient-accent), transparent 68%),
+    radial-gradient(90% 85% at 100% 100%, var(--ambient-secondary), transparent 72%),
+    linear-gradient(145deg, var(--liquid-glass-surface-sheen), transparent 46%, var(--liquid-glass-surface-shadow)),
+    var(--liquid-glass-panel, var(--glass-modal));
+  -webkit-backdrop-filter: blur(25px) saturate(145%) contrast(105%);
+  backdrop-filter: blur(25px) saturate(145%) contrast(105%);
+  box-shadow:
+    var(--shadow-modal, var(--shadow-pop)),
+    inset 0 1px 0 var(--liquid-glass-edge-top),
+    inset 1px 0 0 var(--liquid-glass-edge-right),
+    inset 0 -1px 0 var(--liquid-glass-edge-bottom),
+    inset -1px 0 0 var(--liquid-glass-edge-left);
+  text-shadow: 0 1px 1px var(--liquid-glass-text-shadow);
+}
+
+/* Local light follows the pointer.  The fallback location is the natural
+   upper-center reflection used before the first pointer event. */
+.settings-dialog::before,
+.mew-confirm::before,
+.modal::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      circle at var(--liquid-glass-pointer-x, 50%) var(--liquid-glass-pointer-y, 18%),
+      var(--liquid-glass-specular) 0%,
+      transparent 38%
+    ),
+    linear-gradient(135deg, var(--liquid-glass-surface-sheen), transparent 42%, var(--liquid-glass-surface-shadow));
+  opacity: 0.88;
+}
+
+/* A fine, multi-directional border reflection.  Masking leaves the panel
+   content untouched while preserving a gradient around the rounded edge. */
+.settings-dialog::after,
+.mew-confirm::after,
+.modal::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: 1px;
+  border: 1px solid transparent;
+  border-radius: inherit;
+  pointer-events: none;
+  background:
+    linear-gradient(145deg, var(--liquid-glass-edge-top), transparent 27%, transparent 69%, var(--liquid-glass-edge-bottom)) border-box;
+  -webkit-mask: linear-gradient(#000 0 0) padding-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) padding-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  opacity: 0.82;
+}
+
+/* Content remains above optical layers and keeps normal hit testing. */
+.settings-dialog > *,
+.mew-confirm > *,
+.modal > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Light entrance motion is tied to the visible state so dynamically-created
+   confirmations animate after feedback.js adds its .show class. */
+@keyframes liquid-glass-dialog-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.975);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.settings-overlay:not(.hidden) .settings-dialog,
+.mew-confirm-mask.show .mew-confirm,
+.modal-mask.show .modal {
+  animation: liquid-glass-dialog-enter var(--motion-enter, 240ms cubic-bezier(0.25, 1, 0.5, 1)) both;
+}
+
+/* Ordinary panels are the intentional accessibility fallback. */
+@supports not ((backdrop-filter: blur(1px))) {
+  .settings-overlay,
+  .mew-confirm-mask,
+  .modal-mask {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: var(--overlay);
+  }
+
+  .settings-dialog,
+  .mew-confirm,
+  .modal {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: var(--bg-panel);
+    border-color: var(--border);
+    text-shadow: none;
+  }
+
+  .settings-dialog::before,
+  .settings-dialog::after,
+  .mew-confirm::before,
+  .mew-confirm::after,
+  .modal::before,
+  .modal::after {
+    display: none;
+  }
+}
+
+@media (prefers-contrast: more), (forced-colors: active) {
+  .settings-overlay,
+  .mew-confirm-mask,
+  .modal-mask {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: var(--overlay);
+  }
+
+  .settings-dialog,
+  .mew-confirm,
+  .modal {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: var(--bg-panel);
+    border-color: var(--border);
+    box-shadow: var(--shadow-modal, var(--shadow-pop));
+    text-shadow: none;
+  }
+
+  .settings-dialog::before,
+  .settings-dialog::after,
+  .mew-confirm::before,
+  .mew-confirm::after,
+  .modal::before,
+  .modal::after {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .settings-overlay,
+  .mew-confirm-mask,
+  .modal-mask,
+  .settings-dialog,
+  .mew-confirm,
+  .modal {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .settings-dialog,
+  .mew-confirm,
+  .modal,
+  .modal-mask.show .modal,
+  .mew-confirm-mask.show .mew-confirm {
+    transform: none !important;
+  }
+}
+
+/* Keep the existing settings sheet geometry on narrow screens. */
+@media (max-width: 720px) {
+  .settings-overlay {
+    align-items: end;
+    padding: 0;
+  }
+
+  .settings-dialog {
+    width: 100%;
+    max-height: 96dvh;
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  }
+}
+
+/*
+ * The composer is the one free-form surface in the shell.  Its optical layer
+ * is created by liquid_glass.js so the source markup stays stable for the
+ * attachment and slash-command controllers.  Keep every enhancement behind
+ * the JS marker class: an unavailable SVG filter must never change input
+ * geometry or hit testing.
+ */
+:root,
+[data-theme="dark"] {
+  --liquid-composer-panel: rgba(31, 31, 30, 0.42);
+  --liquid-composer-sheen: rgba(255, 255, 250, 0.15);
+  --liquid-composer-shadow: rgba(0, 0, 0, 0.25);
+  --liquid-composer-edge: rgba(255, 255, 255, 0.29);
+  --liquid-composer-edge-strong: rgba(255, 255, 255, 0.5);
+  --liquid-composer-edge-dark: rgba(0, 0, 0, 0.28);
+  --liquid-composer-send: #f2f2ed;
+  --liquid-composer-send-ink: #111111;
+}
+
+[data-theme="light"] {
+  --liquid-composer-panel: rgba(255, 255, 255, 0.18);
+  --liquid-composer-sheen: rgba(255, 255, 255, 0.46);
+  --liquid-composer-shadow: rgba(62, 56, 48, 0.12);
+  --liquid-composer-edge: rgba(78, 78, 78, 0.23);
+  --liquid-composer-edge-strong: rgba(78, 78, 78, 0.36);
+  --liquid-composer-edge-dark: rgba(106, 96, 84, 0.17);
+  --liquid-composer-send: #050505;
+  --liquid-composer-send-ink: #ffffff;
+}
+
+.input-wrap.has-liquid-composer {
+  isolation: isolate;
+  border: 1px solid transparent;
+  border-radius: 34px;
+  background:
+    linear-gradient(165deg, var(--liquid-composer-panel), color-mix(in srgb, var(--liquid-composer-panel) 36%, transparent) 57%, color-mix(in srgb, var(--liquid-composer-edge-dark) 38%, transparent)) padding-box,
+    linear-gradient(145deg, color-mix(in srgb, var(--liquid-composer-edge-dark) 86%, transparent) 0%, var(--liquid-composer-sheen) 13%, color-mix(in srgb, var(--liquid-composer-edge) 62%, transparent) 37%, color-mix(in srgb, var(--liquid-composer-edge) 50%, transparent) 69%, color-mix(in srgb, var(--liquid-composer-edge-dark) 92%, transparent) 100%) border-box;
+  -webkit-backdrop-filter: blur(8px) saturate(114%) brightness(103%);
+  backdrop-filter: blur(8px) saturate(114%) brightness(103%);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--liquid-composer-edge-dark) 18%, transparent),
+    var(--glass-clear-shadow),
+    inset 0 1px 0 color-mix(in srgb, var(--liquid-composer-sheen) 92%, transparent),
+    inset 1px 0 0 color-mix(in srgb, var(--liquid-composer-sheen) 56%, transparent),
+    inset -1px -1px 0 color-mix(in srgb, var(--liquid-composer-edge-dark) 78%, transparent),
+    inset 0 -9px 15px color-mix(in srgb, var(--liquid-composer-edge-dark) 18%, transparent);
+}
+
+/* The base shell has a moving sheen; the milk-glass composer uses one quiet
+   surface, so disable that decorative layer when the optical enhancement is active. */
+.input-wrap.has-liquid-composer::before {
+  inset: 1px;
+  border-radius: 33px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--liquid-composer-sheen) 76%, transparent) 0, color-mix(in srgb, var(--liquid-composer-sheen) 22%, transparent) 2px, transparent 9px),
+    radial-gradient(104% 40% at 10% -5%, color-mix(in srgb, var(--liquid-composer-sheen) 70%, transparent) 0%, color-mix(in srgb, var(--liquid-composer-sheen) 12%, transparent) 48%, transparent 80%),
+    linear-gradient(132deg, color-mix(in srgb, var(--liquid-composer-sheen) 22%, transparent), transparent 42%, transparent 68%, color-mix(in srgb, var(--liquid-composer-edge-dark) 14%, transparent));
+  animation: none;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.input-wrap.has-liquid-composer::after {
+  inset: 4px;
+  border: 1px solid color-mix(in srgb, var(--liquid-composer-sheen) 46%, transparent);
+  border-radius: 30px;
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--liquid-composer-sheen) 56%, transparent),
+    inset 0 -1px 0 color-mix(in srgb, var(--liquid-composer-edge-dark) 25%, transparent);
+  -webkit-mask: linear-gradient(#000 0 0) padding-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) padding-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  opacity: 0.9;
+}
+
+/* The layer is below all controls and below the existing drag affordance. */
+.input-wrap.has-liquid-composer > .liquid-composer-optics {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+  background: transparent;
+  -webkit-backdrop-filter: url("#mew-liquid-composer-refraction") blur(5px) saturate(112%) contrast(102%);
+  backdrop-filter: url("#mew-liquid-composer-refraction") blur(5px) saturate(112%) contrast(102%);
+  filter: none;
+  opacity: 0.11;
+}
+
+/* Keep textarea, attachment tray, footer and every control above the optics. */
+.input-wrap.has-liquid-composer > :not(.liquid-composer-optics):not(.liquid-composer-svg) {
+  position: relative;
+  z-index: 1;
+}
+
+/* The pre-existing drag message intentionally remains the topmost layer. */
+.input-wrap.has-liquid-composer.is-dragging::after {
+  z-index: 5;
+}
+
+.input-wrap.has-liquid-composer > .liquid-composer-optics::before,
+.input-wrap.has-liquid-composer > .liquid-composer-optics::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+/* A quiet uniform rim keeps the edge legible without adding color. */
+.input-wrap.has-liquid-composer > .liquid-composer-optics::before {
+  inset: 0;
+  border: 1px solid var(--liquid-composer-edge);
+  background: transparent;
+  box-shadow: inset 0 1px 0 var(--liquid-composer-sheen);
+  opacity: 0.72;
+}
+
+/* Keep the optical after-layer disabled: the panel remains even and neutral. */
+.input-wrap.has-liquid-composer > .liquid-composer-optics::after {
+  display: none;
+  background: none;
+  opacity: 0;
+}
+
+.input-wrap.has-liquid-composer:focus-within,
+.input-wrap.has-liquid-composer.is-liquid-active {
+  border-color: transparent;
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--liquid-composer-sheen) 58%, transparent),
+    var(--glass-clear-shadow),
+    inset 0 1px 0 color-mix(in srgb, var(--liquid-composer-sheen) 96%, transparent),
+    inset 1px 0 0 color-mix(in srgb, var(--liquid-composer-sheen) 62%, transparent),
+    inset -1px -1px 0 color-mix(in srgb, var(--liquid-composer-edge-dark) 88%, transparent),
+    inset 0 -9px 15px color-mix(in srgb, var(--liquid-composer-edge-dark) 22%, transparent);
+}
+
+.input-wrap.has-liquid-composer .input-btn:hover,
+.input-wrap.has-liquid-composer .btn.send:hover {
+  border-color: color-mix(in srgb, var(--liquid-composer-edge) 52%, var(--border));
+  background: color-mix(in srgb, var(--liquid-composer-panel) 48%, var(--bg-hover));
+  box-shadow: inset 0 1px 0 var(--liquid-composer-sheen);
+}
+
+.input-wrap.has-liquid-composer .input-btn {
+  min-height: 38px;
+  border-radius: 999px;
+  border-color: color-mix(in srgb, var(--liquid-composer-edge) 17%, transparent);
+  background: color-mix(in srgb, var(--liquid-composer-panel) 46%, transparent);
+}
+
+.input-wrap.has-liquid-composer .attach-btn {
+  width: 40px;
+  padding-inline: 0;
+  justify-content: center;
+}
+
+.input-wrap.has-liquid-composer .btn.send {
+  border: 1px solid color-mix(in srgb, var(--liquid-composer-edge) 34%, transparent);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--liquid-composer-send);
+  color: var(--liquid-composer-send-ink);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--liquid-composer-sheen) 35%, transparent), 0 3px 10px var(--liquid-composer-shadow);
+}
+
+@media (max-width: 520px) {
+  .input-wrap.has-liquid-composer {
+    padding: 14px 14px 12px;
+    border-radius: 31px;
+  }
+
+  .input-wrap.has-liquid-composer::before { border-radius: 30px; }
+  .input-wrap.has-liquid-composer::after { border-radius: 27px; }
+  .input-wrap.has-liquid-composer .composer-footer { padding-top: 12px; }
+}
+
+.input-wrap.has-liquid-composer > .liquid-composer-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* SVG URL filters are an enhancement; blur remains the first fallback. */
+@supports not ((backdrop-filter: url("#mew-liquid-composer-refraction"))) {
+  .input-wrap.has-liquid-composer > .liquid-composer-optics {
+    -webkit-backdrop-filter: blur(9px) saturate(100%) contrast(102%);
+    backdrop-filter: blur(9px) saturate(100%) contrast(102%);
+  }
+}
+
+@supports not ((filter: url("#mew-liquid-composer-refraction"))) {
+  .input-wrap.has-liquid-composer > .liquid-composer-optics {
+    filter: none;
+  }
+}
+
+@supports not ((backdrop-filter: blur(1px))) {
+  .input-wrap.has-liquid-composer {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: var(--bg-panel);
+    border-color: var(--border);
+    box-shadow: var(--shadow-elevated, var(--shadow-pop));
+  }
+
+  .input-wrap.has-liquid-composer > .liquid-composer-optics {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    filter: none;
+    opacity: 0;
+  }
+}
+
+@media (prefers-contrast: more) {
+  .input-wrap.has-liquid-composer {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: var(--bg-panel);
+    border-color: var(--border);
+    box-shadow: var(--shadow-elevated, var(--shadow-pop));
+  }
+
+  .input-wrap.has-liquid-composer > .liquid-composer-optics {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    filter: none;
+    display: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .input-wrap.has-liquid-composer {
+    forced-color-adjust: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: Canvas;
+    border: 1px solid CanvasText;
+    box-shadow: none;
+    color: CanvasText;
+  }
+
+  .input-wrap.has-liquid-composer > .liquid-composer-optics {
+    display: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    filter: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .input-wrap.has-liquid-composer {
+    transition: none;
+  }
+
+  .input-wrap.has-liquid-composer > .liquid-composer-optics {
+    opacity: 0.27;
+  }
+}

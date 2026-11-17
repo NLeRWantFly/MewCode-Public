@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-mobile-pairing-state"
+description = "Enables the mobile_pairing_state command without any pre-configured scope."
+commands.allow = ["mobile_pairing_state"]
+
+[[permission]]
+identifier = "deny-mobile-pairing-state"
+description = "Denies the mobile_pairing_state command without any pre-configured scope."
+commands.deny = ["mobile_pairing_state"]

@@ -1,0 +1,14 @@
+[[permission]]
+identifier = "allow-mobile-bridge"
+description = "Allow Android pairing, host probe, and remote MewCode conversation commands."
+commands.allow = [
+  "mobile_backend_url",
+  "mobile_pairing_state",
+  "mobile_discover_nodes",
+  "mobile_probe_host",
+  "mobile_request_pairing",
+  "mobile_poll_pairing",
+  "mobile_set_active_peer",
+  "mobile_clear_pairing",
+  "mobile_remote_request"
+]

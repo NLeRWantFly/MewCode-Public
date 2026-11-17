@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>MewCode</title>
+<style>
+:root, [data-theme="dark"] {
+  color-scheme: dark;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", "Source Han Sans SC", system-ui, sans-serif;
+  --bg: #0d0d0d;
+  --bg-soft: #151515;
+  --bg-panel: #1c1c1c;
+  --border: #3b3b3b;
+  --border-soft: #2c2c2c;
+  --text: #f6f6f2;
+  --text-dim: #b8b8b3;
+  --text-faint: #858581;
+  --on-accent: #0d0d0d;
+  --accent: #edede9;
+  --pulse: #c8f27a;
+  --glass-bar: rgba(16, 16, 16, 0.72);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { min-height: 100%; background: var(--bg); color: var(--text); font-family: var(--font-sans); }
+body.mobile-runtime { display: block; min-height: 100dvh; overflow: hidden; padding: env(safe-area-inset-top, 0px) 0 env(safe-area-inset-bottom, 0px); }
+.hidden { display: none !important; }
+.mobile-shell { display: flex; flex-direction: column; min-height: calc(100dvh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px)); height: calc(100dvh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px)); }
+.mobile-manual-host input, .mobile-composer textarea { font: 16px/1.4 var(--font-sans); }
+.mobile-composer-send { touch-action: manipulation; }
+@media (min-width: 840px) {
+  .mobile-workspace { display: grid; grid-template-columns: minmax(280px, 36%) 1fr; }
+  .mobile-detail-sheet { position: relative; }
+}
+</style>
+<link rel="stylesheet" href="mobile.css">
+<link rel="stylesheet" href="vendor/katex.min.css">
+<link rel="stylesheet" href="chat-messages.css?v=chat-fold-2">
+</head>
+<body class="mobile-runtime">
+<section id="mobile-shell" class="mobile-shell" aria-label="MewCode 移动端">
+  <header class="mobile-header">
+    <div class="mobile-brand"><span class="mobile-mark">M</span><div><strong>MewCode</strong><small>REMOTE WORKSPACE</small></div></div>
+    <div class="mobile-header-actions">
+      <button id="mobile-new-chat" class="mobile-icon-button" type="button" aria-label="新对话" title="新对话">＋</button>
+      <button id="mobile-refresh" class="mobile-icon-button" type="button" aria-label="刷新" title="刷新">↻</button>
+    </div>
+  </header>
+  <div class="mobile-workspace">
+    <aside class="mobile-rail">
+      <main class="mobile-content">
+        <section id="mobile-pairing" class="mobile-panel">
+          <div class="mobile-panel-heading"><div><span class="mobile-kicker">DEVICE ACCESS</span><h1>连接电脑端</h1></div><span id="mobile-pairing-state" class="mobile-state">未配对</span></div>
+          <div class="mobile-panel-body">
+            <p id="mobile-pairing-copy">请填写电脑的 MagicDNS 域名（以 .ts.net 结尾）。可在电脑端「手机设备」设置里查看。</p>
+          </div>
+          <div id="mobile-node-list" class="mobile-node-list"></div>
+          <div id="mobile-manual-host" class="mobile-manual-host">
+            <label for="mobile-host-input">电脑 MagicDNS（例如 mypc.tailnet.ts.net）</label>
+            <input id="mobile-host-input" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="mypc.tailnet.ts.net" />
+            <button id="mobile-host-connect" class="mobile-primary-button" type="button">连接这台电脑</button>
+          </div>
+          <div id="mobile-peer-list" class="mobile-peer-list"></div>
+          <button id="mobile-pairing-button" class="mobile-primary-button" type="button">刷新附近电脑</button>
+          <button id="mobile-unpair" class="mobile-secondary-button hidden" type="button">解除当前设备</button>
+        </section>
+        <section id="mobile-connection" class="mobile-connection" aria-live="polite">
+          <span id="mobile-connection-dot" class="mobile-connection-dot"></span><span id="mobile-connection-text">尚未连接</span>
+          <button id="mobile-retry" class="mobile-link-button" type="button">立即重试</button>
+        </section>
+        <section class="mobile-history-section">
+          <div class="mobile-section-heading"><div><span class="mobile-kicker">RECENT ACTIVITY</span><h2>远程对话</h2></div><span id="mobile-history-count" class="mobile-count">0</span></div>
+          <div id="mobile-history" class="mobile-history"><div class="mobile-empty">配对后会显示电脑上的 MewCode 对话</div></div>
+        </section>
+      </main>
+    </aside>
+    <section id="mobile-detail-sheet" class="mobile-detail-sheet hidden" aria-label="对话详情">
+      <header class="mobile-detail-header">
+        <button type="button" id="mobile-detail-back" class="mobile-icon-button mobile-detail-back" aria-label="返回">←</button>
+        <div class="mobile-detail-heading">
+          <strong id="mobile-detail-title">对话</strong>
+          <small id="mobile-detail-meta"></small>
+        </div>
+        <span id="mobile-sync-chip" class="mobile-sync-chip">电脑协同中</span>
+      </header>
+      <div id="mobile-orch-board" class="mobile-orch-board hidden">
+        <div class="mobile-orch-board-head">
+          <strong id="mobile-orch-title">专家团</strong>
+          <small id="mobile-orch-status"></small>
+        </div>
+        <ol id="mobile-orch-steps" class="mobile-orch-steps"></ol>
+        <div class="mobile-orch-actions">
+          <button id="mobile-interrupt" class="mobile-secondary-button" type="button">暂停</button>
+          <button id="mobile-resume" class="mobile-primary-button hidden" type="button">继续</button>
+        </div>
+      </div>
+      <div id="mobile-detail-body" class="mobile-detail-body"><div class="mobile-empty">从左侧打开一条 MewCode 对话</div></div>
+      <div id="mobile-prompt-sheet" class="mobile-prompt-sheet hidden" role="dialog" aria-modal="true">
+        <div class="mobile-prompt-card">
+          <span id="mobile-prompt-badge" class="mobile-prompt-badge">需要你的决定</span>
+          <p id="mobile-prompt-question"></p>
+          <p id="mobile-prompt-context" class="mobile-prompt-context hidden"></p>
+          <div id="mobile-prompt-options" class="mobile-prompt-options"></div>
+          <textarea id="mobile-prompt-other" class="mobile-prompt-other hidden" rows="3" placeholder="补充说明"></textarea>
+          <div class="mobile-prompt-actions">
+            <button type="button" id="mobile-prompt-allow">允许</button>
+            <button type="button" id="mobile-prompt-always">始终允许</button>
+            <button type="button" id="mobile-prompt-deny">拒绝</button>
+            <button type="button" id="mobile-prompt-submit">确认选择</button>
+            <button type="button" id="mobile-prompt-cancel">取消</button>
+          </div>
+        </div>
+      </div>
+      <div id="mobile-send-status" class="mobile-send-status hidden" role="status" aria-live="polite"></div>
+      <form id="mobile-composer" class="mobile-composer" action="javascript:void(0)">
+        <textarea id="mobile-composer-input" rows="1" placeholder="发给电脑上的这条对话" autocomplete="off"></textarea>
+        <button id="mobile-composer-interrupt" class="mobile-composer-interrupt hidden" type="button">暂停</button>
+        <button id="mobile-composer-send" class="mobile-composer-send" type="button" aria-label="发送">↑</button>
+      </form>
+    </section>
+  </div>
+</section>
+<script src="vendor/marked.min.js"></script>
+<script src="vendor/purify.min.js"></script>
+<script src="vendor/katex.min.js"></script>
+<script src="vendor/katex-auto-render.min.js"></script>
+<script src="markdown-render.js?v=katex-chat-1"></script>
+<script src="mobile.js?v=mobile-send-projects-1"></script>
+</body>
+</html>

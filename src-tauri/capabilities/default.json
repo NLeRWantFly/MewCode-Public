@@ -1,0 +1,17 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "Default permissions for MewCode windows",
+  "windows": ["main", "pipeline", "expert-flow", "orch-canvas"],
+  "platforms": ["linux", "windows", "macOS"],
+  "remote": {
+    "urls": [
+      "http://127.0.0.1:*",
+      "http://localhost:*"
+    ]
+  },
+  "permissions": [
+    "core:default",
+    "allow-desktop-bridge"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "../gen/schemas/android-schema.json",
+  "identifier": "android-main",
+  "description": "Android remote workspace",
+  "windows": ["main"],
+  "platforms": ["android"],
+  "remote": {
+    "urls": [
+      "https://tauri.localhost/*",
+      "http://tauri.localhost/*",
+      "https://asset.localhost/*",
+      "http://asset.localhost/*",
+      "https://com.mewcode.desktop.localhost/*"
+    ]
+  },
+  "permissions": ["core:default", "allow-mobile-bridge"]
+}

@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-usage-browser-command"
+description = "Enables the usage_browser_command command without any pre-configured scope."
+commands.allow = ["usage_browser_command"]
+
+[[permission]]
+identifier = "deny-usage-browser-command"
+description = "Denies the usage_browser_command command without any pre-configured scope."
+commands.deny = ["usage_browser_command"]

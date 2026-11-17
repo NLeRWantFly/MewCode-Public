@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-mobile-probe-host"
+description = "Enables the mobile_probe_host command without any pre-configured scope."
+commands.allow = ["mobile_probe_host"]
+
+[[permission]]
+identifier = "deny-mobile-probe-host"
+description = "Denies the mobile_probe_host command without any pre-configured scope."
+commands.deny = ["mobile_probe_host"]

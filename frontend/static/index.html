@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>MewCode</title>
+<!-- Mobile CSS is intentionally loaded first.  The desktop token/layout sheets
+     below must win when this shared document is not running in mobile mode. -->
+<link rel="stylesheet" href="/static/mobile.css?v=orch-live-1">
+<link rel="stylesheet" href="/static/_tokens.css?v=solid-usage-1">
+<link rel="stylesheet" href="/static/_primitives.css?v=confirm-viewport-2">
+<link rel="stylesheet" href="/static/style.css?v=20261112-fast-mode">
+  <link rel="stylesheet" href="/static/chat-messages.css?v=handoff-review-1">
+
+  <link rel="stylesheet" href="/static/chat-queue.css?v=chat-queue-1">
+<link rel="stylesheet" href="/static/workbench/workbench.css?v=20261117-exploration">
+<link rel="stylesheet" href="/static/vendor/katex.min.css?v=0.16.11">
+<style>
+  .hidden { display: none !important; }
+  body.mobile-runtime > #mobile-shell { display: flex; flex-direction: column; }
+  body.mobile-runtime > #drawer,
+  body.mobile-runtime > #drawer-backdrop,
+  body.mobile-runtime > #main { display: none !important; }
+</style>
+<script src="/static/vendor/marked.min.js"></script>
+<script src="/static/vendor/purify.min.js"></script>
+<script src="/static/vendor/katex.min.js?v=0.16.11"></script>
+<script src="/static/vendor/katex-auto-render.min.js?v=0.16.11"></script>
+<link rel="stylesheet" href="/static/file-links.css?v=20261109">
+<script src="/static/file-links.js?v=20261109"></script>
+<script src="/static/markdown-render.js?v=local-files-20261109"></script>
+</head>
+<body>
+
+<section id="mobile-shell" class="mobile-shell" aria-label="MewCode 移动端">
+  <header class="mobile-header">
+    <div class="mobile-brand"><span class="mobile-mark">M</span><div><strong>MewCode</strong><small>REMOTE WORKSPACE</small></div></div>
+    <div class="mobile-header-actions">
+      <button id="mobile-new-chat" class="mobile-icon-button" type="button" aria-label="新对话" title="新对话">＋</button>
+      <button id="mobile-refresh" class="mobile-icon-button" type="button" aria-label="刷新" title="刷新">↻</button>
+    </div>
+  </header>
+  <div class="mobile-workspace">
+    <aside class="mobile-rail">
+      <main class="mobile-content">
+        <section id="mobile-pairing" class="mobile-panel">
+          <div class="mobile-panel-heading"><div><span class="mobile-kicker">DEVICE ACCESS</span><h1>连接电脑端</h1></div><span id="mobile-pairing-state" class="mobile-state">未配对</span></div>
+          <div class="mobile-panel-body">
+            <p id="mobile-pairing-copy">请填写电脑的 MagicDNS 域名（以 .ts.net 结尾）。可在电脑端「手机设备」设置里查看。</p>
+          </div>
+          <div id="mobile-node-list" class="mobile-node-list"></div>
+          <div id="mobile-manual-host" class="mobile-manual-host">
+            <label for="mobile-host-input">电脑 MagicDNS（例如 mypc.tailnet.ts.net）</label>
+            <input id="mobile-host-input" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="mypc.tailnet.ts.net" />
+            <button id="mobile-host-connect" class="mobile-primary-button" type="button">连接这台电脑</button>
+          </div>
+          <div id="mobile-peer-list" class="mobile-peer-list"></div>
+          <button id="mobile-pairing-button" class="mobile-primary-button" type="button">刷新附近电脑</button>
+          <button id="mobile-unpair" class="mobile-secondary-button hidden" type="button">解除当前设备</button>
+        </section>
+        <section id="mobile-connection" class="mobile-connection" aria-live="polite">
+          <span id="mobile-connection-dot" class="mobile-connection-dot"></span><span id="mobile-connection-text">尚未连接</span>
+          <button id="mobile-retry" class="mobile-link-button" type="button">立即重试</button>
+        </section>
+        <section class="mobile-history-section">
+          <div class="mobile-section-heading"><div><span class="mobile-kicker">RECENT ACTIVITY</span><h2>远程对话</h2></div><span id="mobile-history-count" class="mobile-count">0</span></div>
+          <div id="mobile-history" class="mobile-history"><div class="mobile-empty">配对后会显示电脑上的 MewCode 对话</div></div>
+        </section>
+      </main>
+    </aside>
+    <section id="mobile-detail-sheet" class="mobile-detail-sheet hidden" aria-label="对话详情">
+      <header class="mobile-detail-header">
+        <button type="button" id="mobile-detail-back" class="mobile-icon-button mobile-detail-back" aria-label="返回">←</button>
+        <div class="mobile-detail-heading">
+          <strong id="mobile-detail-title">对话</strong>
+          <small id="mobile-detail-meta"></small>
+        </div>
+        <span id="mobile-sync-chip" class="mobile-sync-chip">电脑协同中</span>
+      </header>
+      <div id="mobile-orch-board" class="mobile-orch-board hidden">
+        <div class="mobile-orch-board-head">
+          <strong id="mobile-orch-title">专家团</strong>
+          <small id="mobile-orch-status"></small>
+        </div>
+        <ol id="mobile-orch-steps" class="mobile-orch-steps"></ol>
+        <div class="mobile-orch-actions">
+          <button id="mobile-interrupt" class="mobile-secondary-button" type="button">暂停</button>
+          <button id="mobile-resume" class="mobile-primary-button hidden" type="button">继续</button>
+        </div>
+      </div>
+      <div id="mobile-detail-body" class="mobile-detail-body"><div class="mobile-empty">从左侧打开一条 MewCode 对话</div></div>
+      <div id="mobile-prompt-sheet" class="mobile-prompt-sheet hidden" role="dialog" aria-modal="true">
+        <div class="mobile-prompt-card">
+          <span id="mobile-prompt-badge" class="mobile-prompt-badge">需要你的决定</span>
+          <p id="mobile-prompt-question"></p>
+          <p id="mobile-prompt-context" class="mobile-prompt-context hidden"></p>
+          <div id="mobile-prompt-options" class="mobile-prompt-options"></div>
+          <textarea id="mobile-prompt-other" class="mobile-prompt-other hidden" rows="3" placeholder="补充说明"></textarea>
+          <div class="mobile-prompt-actions">
+            <button type="button" id="mobile-prompt-allow">允许</button>
+            <button type="button" id="mobile-prompt-always">始终允许</button>
+            <button type="button" id="mobile-prompt-deny">拒绝</button>
+            <button type="button" id="mobile-prompt-submit">确认选择</button>
+            <button type="button" id="mobile-prompt-cancel">取消</button>
+          </div>
+        </div>
+      </div>
+      <div id="mobile-send-status" class="mobile-send-status hidden" role="status" aria-live="polite"></div>
+      <form id="mobile-composer" class="mobile-composer" action="javascript:void(0)">
+        <textarea id="mobile-composer-input" rows="1" placeholder="发给电脑上的这条对话" autocomplete="off"></textarea>
+        <button id="mobile-composer-interrupt" class="mobile-composer-interrupt hidden" type="button">暂停</button>
+        <button id="mobile-composer-send" class="mobile-composer-send" type="button" aria-label="发送">↑</button>
+      </form>
+    </section>
+  </div>
+</section>
+
+<!-- 左侧抽屉：对话管理 -->
+<aside id="drawer" aria-label="对话列表" aria-hidden="false">
+  <div class="drawer-head">
+    <button id="new-chat" title="新建对话">
+      <svg class="ui-icon" aria-hidden="true"><use href="/static/icons.svg#plus"></use></svg><span>新建对话</span>
+    </button>
+    <button id="drawer-toggle" title="收起侧栏" aria-label="收起侧栏" aria-controls="drawer" aria-expanded="true"><svg class="ui-icon" aria-hidden="true"><use href="/static/icons.svg#menu"></use></svg></button>
+  </div>
+
+  <div class="logo-area">
+    <div class="logo-monogram" aria-hidden="true">M</div>
+    <div class="logo-text">
+      <div class="logo-name">MewCode</div>
+      <div class="logo-sub">LOCAL AGENT WORKSPACE</div>
+    </div>
+  </div>
+
+
+  <div class="search-box">
+    <input id="conv-search" type="text" placeholder="搜索对话…">
+  </div>
+
+  <div id="sidebar-scroll" class="density-compact">
+    <div id="sidebar-groups"></div>
+  </div>
+
+  <div class="drawer-foot density-compact">
+    <button id="workspace-settings" type="button">设置</button>
+    <button id="open-web-client" type="button">在浏览器打开</button>
+    <button id="workbench-sidebar-btn" type="button" data-open-workbench title="查看当前对话的任务、步骤和待处理事项">任务工作台</button>
+    <details id="task-panel">
+      <summary>任务 <span id="task-count" class="task-count"></span></summary>
+      <ul id="task-list"></ul>
+    </details>
+  </div>
+</aside>
+<div id="drawer-backdrop" class="drawer-backdrop hidden" aria-hidden="true"></div>
+
+<!-- 主区域 -->
+<div id="main">
+  <header id="topbar">
+    <div class="topbar-identity">
+      <button id="drawer-toggle-2" class="topbar-no-drag" title="展开侧栏" aria-label="展开侧栏" aria-controls="drawer" aria-expanded="false"><svg class="ui-icon" aria-hidden="true"><use href="/static/icons.svg#menu"></use></svg></button>
+      <span class="topbar-mark" aria-hidden="true">M</span>
+      <div class="topbar-breadcrumb" aria-label="当前项目和对话">
+        <strong id="topbar-project">MewCode</strong>
+        <span aria-hidden="true">/</span>
+        <span id="topbar-conversation">新对话</span>
+      </div>
+    </div>
+    <div id="topbar-modes" class="topbar-modes" aria-label="Agent 模式">
+      <span id="topbar-mode-normal" class="topbar-mode is-active">单 Agent</span>
+      <span id="topbar-mode-multi" class="topbar-mode hidden">多 Agent</span>
+      <span id="topbar-mode-orch-plan" class="topbar-mode hidden">编排商量</span>
+      <span id="topbar-mode-expert" class="topbar-mode hidden">编排</span>
+      <span id="topbar-mode-goal" class="topbar-mode hidden">目标</span>
+    </div>
+    <span class="spacer"></span>
+    <button id="workbench-toggle" class="topbar-no-drag" type="button" aria-controls="task-workbench" aria-expanded="true">工作台</button>
+    <button id="continue-in-mewcode" class="btn always hidden topbar-no-drag" type="button">用 MewCode 继续</button>
+    <nav id="conversation-view-tabs" class="conversation-view-tabs topbar-no-drag" role="tablist" aria-label="会话视图">
+      <button id="view-chat-tab" class="conversation-view-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="messages">对话</button>
+      <button id="view-trajectory-tab" class="conversation-view-tab" type="button" role="tab" aria-selected="false" aria-controls="trajectory-view">
+        执行过程<span id="trajectory-tab-count" class="trajectory-tab-count hidden">0</span>
+      </button>
+    </nav>
+    <button id="runtime-capsule" class="runtime-capsule topbar-no-drag" type="button" aria-label="查看运行状态与模型设置" title="查看运行状态与模型设置">
+      <span class="runtime-dot" aria-hidden="true"></span>
+      <span id="runtime-capsule-label">--</span>
+      <svg class="ui-icon runtime-caret" aria-hidden="true"><use href="/static/icons.svg#chevron-down"></use></svg>
+    </button>
+    <span id="ctx-badge" class="visually-hidden" title="上下文占用">ctx --</span>
+    <button id="completion-link" class="icon-btn topbar-no-drag" type="button" aria-label="打开代码补全实验室" title="代码补全实验室"><svg class="ui-icon" aria-hidden="true"><use href="/static/icons.svg#completion"></use></svg></button>
+    <button id="bgtasks-btn" class="icon-btn topbar-no-drag" type="button" title="后台任务" aria-controls="bgtasks-panel" aria-expanded="false">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="3" y="4" width="18" height="6" rx="2"/>
+        <rect x="3" y="14" width="18" height="6" rx="2"/>
+        <circle cx="7" cy="7" r="1" fill="currentColor"/>
+        <circle cx="7" cy="17" r="1" fill="currentColor"/>
+      </svg>
+      <span id="bgtasks-badge" class="bt-badge hidden">0</span>
+    </button>
+
+    <button id="theme-toggle" class="icon-btn topbar-no-drag" title="切换主题" aria-label="切换主题">
+      <svg id="theme-symbol" class="ui-icon" aria-hidden="true"><use id="theme-icon-use" href="/static/icons.svg#sun"></use></svg>
+    </button>
+    <button id="conversation-usage-toggle" class="icon-btn topbar-no-drag" title="当前对话模型统计" aria-label="当前对话模型统计" aria-expanded="false" aria-controls="conversation-usage">▥</button>
+    <button id="user-btn" class="icon-btn topbar-no-drag" title="账户用量统计">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <circle cx="12" cy="8" r="4"/>
+        <path d="M4 20c0-4 3.6-6 8-6s8 2 8 6"/>
+      </svg>
+    </button>
+  </header>
+
+  <div id="workbench-layout">
+  <div id="conversation-pane">
+  <main id="messages" role="tabpanel" aria-labelledby="view-chat-tab"></main>
+
+  <section id="trajectory-view" class="trajectory-view hidden" role="tabpanel" aria-labelledby="view-trajectory-tab" aria-hidden="true">
+    <div class="trajectory-shell">
+      <div class="trajectory-toolbar" role="toolbar" aria-label="轨迹工具栏">
+        <div class="trajectory-toolbar-summary">
+          <strong>运行轨迹</strong>
+          <span id="pipeline-sub">等待新的 turn</span>
+        </div>
+        <button id="trajectory-duration-toggle" class="trajectory-toolbar-btn is-active" type="button" aria-pressed="true" title="按实际耗时显示 Overview">
+          <svg class="ui-icon" aria-hidden="true"><use href="/static/icons.svg#clock"></use></svg><span>耗时</span>
+        </button>
+        <button id="trajectory-collapse-turns" class="trajectory-toolbar-btn" type="button" aria-pressed="false" title="折叠所有轮次">
+          <svg class="ui-icon" aria-hidden="true"><use href="/static/icons.svg#align"></use></svg><span>轮次</span>
+        </button>
+        <label class="trajectory-search-wrap">
+          <svg class="ui-icon" aria-hidden="true"><use href="/static/icons.svg#fit"></use></svg>
+          <input id="trajectory-search" type="search" aria-label="搜索轨迹" placeholder="搜索轨迹" autocomplete="off">
+        </label>
+      </div>
+
+      <div class="execution-context-bar">
+        <p>当前对话的实际执行记录：点击步骤查看输入、输出与错误。仅记录了计划或模型名单，不代表团队成员已经启动。</p>
+        <div><button id="execution-members-btn" type="button">成员状态</button><button id="workbench-teams-btn" type="button" data-open-workbench>查看任务工作台</button></div>
+      </div>
+
+      <div id="trajectory-overview" class="trajectory-overview" aria-label="轨迹时间概览">
+        <div class="trajectory-overview-labels" aria-hidden="true"><span>用户</span><span>专家</span><span>工具</span></div>
+        <div id="trajectory-overview-track" class="trajectory-overview-track"></div>
+      </div>
+
+      <div class="trajectory-workspace">
+        <div id="pipeline-items" class="trajectory-ledger" role="table" aria-label="完整运行轨迹"></div>
+        <aside id="trajectory-details" class="trajectory-details hidden" aria-label="事件详情" aria-hidden="true">
+          <header class="trajectory-details-head">
+            <div>
+              <span id="trajectory-detail-kicker" class="trajectory-detail-kicker">EVENT</span>
+              <strong id="trajectory-detail-title">事件详情</strong>
+            </div>
+            <button id="trajectory-details-close" class="icon-btn" type="button" title="关闭详情" aria-label="关闭事件详情"><svg class="ui-icon" aria-hidden="true"><use href="/static/icons.svg#close"></use></svg></button>
+          </header>
+          <div id="trajectory-detail-tabs" class="trajectory-detail-tabs" role="tablist" aria-label="事件详情">
+            <button type="button" role="tab" data-detail-tab="summary" aria-selected="true">摘要</button>
+            <button type="button" role="tab" data-detail-tab="input" aria-selected="false">输入</button>
+            <button type="button" role="tab" data-detail-tab="output" aria-selected="false">输出</button>
+            <button type="button" role="tab" data-detail-tab="timing" aria-selected="false">计时</button>
+          </div>
+          <div id="trajectory-detail-content" class="trajectory-detail-content" role="tabpanel"></div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- 权限确认条：授权范围必须与按钮显示一致 -->
+  <div id="permission-bar" class="hidden">
+    <div class="perm-text">
+      <strong id="perm-tool"></strong>
+      <span id="perm-desc"></span>
+    </div>
+    <div class="perm-actions">
+      <button id="perm-allow" class="btn allow">仅允许当前操作</button>
+      <button id="perm-always" class="btn always">同参数本会话免问</button>
+      <button id="perm-directory" class="btn always" hidden>授权整个目录（30 天）</button>
+      <button id="perm-deny" class="btn deny">拒绝</button>
+    </div>
+  </div>
+
+  <div id="pairing-bar" class="hidden">
+    <div class="perm-text">
+      <strong id="pairing-title">配对请求</strong>
+      <span id="pairing-desc"></span>
+    </div>
+    <div class="perm-actions">
+      <button id="pairing-allow-once" class="btn allow" type="button">允许本次</button>
+      <button id="pairing-allow-always" class="btn always" type="button">始终允许</button>
+      <button id="pairing-deny" class="btn deny" type="button">拒绝</button>
+    </div>
+  </div>
+
+  <section id="chat-human-oncall" class="hidden" aria-live="polite">
+    <div class="human-oncall-heading">
+      <span class="human-oncall-badge" id="human-oncall-badge">需要你的决定</span>
+      <strong id="human-oncall-question"></strong>
+      <p id="human-oncall-context"></p>
+    </div>
+    <div id="human-oncall-options" class="human-oncall-options" role="radiogroup"></div>
+    <div id="ask-user-questions" class="ask-user-questions hidden"></div>
+    <label id="human-oncall-note-wrap" class="human-oncall-note hidden">
+      <span>补充说明（可选）</span>
+      <textarea id="human-oncall-note" rows="2" maxlength="2000" autocomplete="off" placeholder="可选：补充背景或核验线索。"></textarea>
+    </label>
+    <label id="human-oncall-other-wrap" class="human-oncall-other hidden">
+      <span>其他答案</span>
+      <input id="human-oncall-other" type="text" maxlength="500" autocomplete="off" placeholder="输入你的选择…" />
+    </label>
+    <p id="human-oncall-feedback" class="human-oncall-feedback hidden" role="status" aria-live="polite"></p>
+    <div class="human-oncall-actions">
+      <button id="human-oncall-cancel" class="btn deny" type="button">取消</button>
+      <button id="human-oncall-submit" class="btn allow" type="button">确认选择</button>
+    </div>
+  </section>
+
+  <footer id="input-area">
+
+    <div class="composer-shell">
+    <div id="slash-menu" class="slash-menu hidden" role="listbox" aria-label="斜杠命令"></div>
+    <div class="input-wrap">
+      <div id="chat-queue" class="chat-queue hidden" aria-live="polite" aria-label="等待发送的消息"></div>
+      <div id="attachment-tray" class="attachment-tray hidden" aria-live="polite"></div>
+      <textarea id="chat-input" rows="1" aria-label="消息" placeholder="畅所欲问"></textarea>
+      <div class="composer-footer">
+        <div class="composer-controls" aria-label="会话选项">
+          <button id="attach-btn" class="input-btn icon-only attach-btn" type="button" title="添加图片或文档" aria-label="添加图片或文档">
+            <svg class="ui-icon" aria-hidden="true"><use href="/static/icons.svg#paperclip"></use></svg>
+          </button>
+          <input id="attachment-input" class="hidden" type="file" multiple accept="image/png,image/jpeg,image/webp,text/*,.md,.json,.yaml,.yml,.csv,.tsv,.log,.pdf,.docx,.xlsx" />
+          <button id="perm-mode-btn" class="input-btn labeled-btn" title="权限模式" aria-haspopup="menu">
+            <span class="shield symbol-badge" aria-hidden="true"><svg class="ui-icon"><use href="/static/icons.svg#sparkles"></use></svg></span><span id="perm-mode-label">授权运行</span>
+          </button>
+          <button id="multi-agent-btn" class="input-btn labeled-btn" title="多 Agent 模式：允许主 Agent 派发子 Agent / 组建团队（token 消耗会显著增加），默认关闭">
+            <svg class="ui-icon agent-glyph" aria-hidden="true"><use href="/static/icons.svg#agents"></use></svg><span id="multi-agent-label">多 Agent</span><span class="ma-dot" aria-hidden="true"></span>
+          </button>
+        </div>
+        <div class="composer-actions">
+          <button id="task-auth-btn" class="input-btn labeled-btn" type="button" title="明确授权当前任务的目录、工具和期限">任务授权</button>
+          <button id="approval-metrics-btn" class="input-btn labeled-btn" type="button" title="只读查看当前会话的权限指标">权限统计</button>
+          <button id="native-execution-btn" class="input-btn labeled-btn" type="button" title="配置联网开关、网络黑名单及执行环境">沙箱设置</button>
+          <button id="model-effort-btn" class="input-btn labeled-btn model-chip" title="模型与推理强度" aria-haspopup="menu">
+            <span id="model-effort-label">--</span><svg class="ui-icon caret" aria-hidden="true"><use href="/static/icons.svg#chevron-down"></use></svg>
+          </button>
+          <button id="composer-ctx-ring" class="ctx-ring" type="button" title="上下文占用" aria-label="上下文占用">
+            <svg viewBox="0 0 36 36" aria-hidden="true">
+              <circle class="ctx-ring-track" cx="18" cy="18" r="14"></circle>
+              <circle id="composer-ctx-arc" class="ctx-ring-arc" cx="18" cy="18" r="14"></circle>
+            </svg>
+            <span id="composer-ctx-pct">--</span>
+          </button>
+          <button id="btn-stop" class="btn stop hidden">打断</button>
+          <button id="continue-task-btn" class="input-btn labeled-btn" type="button" title="向当前任务补充说明，保留当前任务身份。">补充当前任务</button>
+          <button id="btn-send" class="btn send" title="普通发送；本任务的补充说明请用「续接发送」" aria-label="普通发送消息">
+            <svg class="ui-icon" aria-hidden="true"><use href="/static/icons.svg#send"></use></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    </div>
+    <div id="status-line">
+      <span id="session-badge">--</span>
+      <span id="cache-badge" class="cache-badge is-pending" title="等待模型返回缓存用量">缓存命中 --</span>
+    </div>
+  </footer>
+  </div>
+  <div id="workbench-resize" role="separator" tabindex="0" aria-label="调整任务工作台宽度" aria-orientation="vertical" aria-controls="task-workbench" aria-valuemin="320" aria-valuenow="420"></div>
+  <aside id="task-workbench" aria-label="任务工作台"></aside>
+  </div>
+</div>
+<div id="workbench-backdrop" hidden></div>
+
+
+<div id="popover" class="hidden"></div>
+
+<div id="settings-overlay" class="settings-overlay hidden" aria-hidden="true">
+  <section id="settings-dialog" class="settings-dialog" role="dialog" aria-modal="true" aria-labelledby="settings-dialog-title">
+    <header class="settings-dialog-head">
+      <div>
+        <span class="settings-eyebrow">MewCode Settings</span>
+        <h2 id="settings-dialog-title"></h2>
+      </div>
+      <button id="settings-dialog-close" class="icon-btn" type="button" title="关闭" aria-label="关闭"><svg class="ui-icon" aria-hidden="true"><use href="/static/icons.svg#close"></use></svg></button>
+    </header>
+    <div id="settings-dialog-body" class="settings-dialog-body"></div>
+    <footer id="settings-dialog-footer" class="settings-dialog-footer"></footer>
+  </section>
+</div>
+
+<!-- 后台任务面板（右侧滑出：子 Agent / 团队实时遥测） -->
+<div id="bgtasks-backdrop" class="bt-backdrop hidden" aria-hidden="true"></div>
+<aside id="bgtasks-panel" class="collapsed" aria-hidden="true" aria-labelledby="bgtasks-title">
+  <div class="bt-head">
+    <span id="bgtasks-title" class="bt-title">后台任务</span>
+    <span id="bgtasks-sub" class="bt-sub"></span>
+    <button id="bgtasks-close" class="icon-btn" type="button" title="返回对话" aria-label="关闭后台任务并返回对话"><svg class="ui-icon" aria-hidden="true"><use href="/static/icons.svg#close"></use></svg></button>
+  </div>
+  <div id="bgtasks-body"></div>
+</aside>
+
+<!-- 编排规划子会话：展示输入对话、可见模型输出和结构处理轨迹 -->
+
+
+<!-- 编排模型请求：常驻进度、耗时与取消入口 -->
+
+
+<!-- 用量统计面板（右上角用户按钮触发） -->
+<div id="usage-overlay" class="hidden">
+  <div id="usage-panel">
+    <div class="usage-head">
+      <span class="usage-title">用量</span>
+      <button id="usage-refresh" class="btn always" type="button">刷新</button>
+      <div class="usage-ranges">
+        <button data-days="0" class="on">全部</button>
+        <button data-days="30">30天</button>
+        <button data-days="7">7天</button>
+      </div>
+      <button id="usage-close" class="icon-btn" title="关闭" aria-label="关闭用量统计"><svg class="ui-icon" aria-hidden="true"><use href="/static/icons.svg#close"></use></svg></button>
+    </div>
+    <div class="usage-section-head"><strong>Provider 计量</strong><span>官方接口按厂商规则；非官方走中转额度探测</span></div>
+    <div id="usage-financials"></div>
+    <div class="usage-section-head usage-local-head"><strong>本地明细</strong><span>Token 与请求账本</span></div>
+    <div id="usage-cards"></div>
+    <div id="usage-grid"></div>
+    <div id="usage-note"></div>
+  </div>
+</div>
+<div id="usage-tip" class="hidden"></div>
+
+<div id="conn-status" class="hidden"><span id="conn-status-text">连接已断开，正在重连…</span> <a id="conn-retry" href="#">立即重连</a></div>
+<dialog id="team-workspace-dialog" aria-labelledby="team-workspace-title">
+  <header class="workspace-shell-header"><div><strong id="team-workspace-title">任务工作台</strong><small>独立团队记录 · 关闭后回到当前对话</small></div><button id="team-workspace-close" type="button">返回对话 <span aria-hidden="true">×</span></button></header>
+  <iframe id="team-workspace-frame" title="责任编排任务工作台"></iframe>
+</dialog>
+
+<script src="/static/feedback.js?v=1"></script>
+<script src="/static/slash_input.js?v=auto-v2"></script>
+<script src="/static/plugin-runtime.js?v=cordis-2"></script>
+<script src="/static/tauri-bridge.js?v=mobile-pairing-2"></script>
+<script src="/static/mobile.js?v=mobile-send-projects-1"></script>
+
+
+<script src="/static/chat-queue.js?v=chat-queue-2"></script>
+
+
+
+
+<aside id="conversation-usage" hidden aria-label="当前对话模型统计">
+  <header>
+    <svg class="conversation-usage-mascot" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 10V4l5 3a12 12 0 0 1 6 0l5-3v6c3 8-1 11-8 11S1 18 4 10Z" fill="currentColor" opacity=".16"/><path d="M4 10V4l5 3a12 12 0 0 1 6 0l5-3v6c3 8-1 11-8 11S1 18 4 10Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M8 12v1m8-1v1m-6 3 2 1 2-1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    <strong>模型足迹</strong><button id="conversation-usage-info" type="button" aria-label="查看对话总用量和统计说明">ⓘ</button><button id="conversation-usage-refresh" type="button" aria-label="刷新对话统计">↻</button><button id="conversation-usage-close" type="button" aria-label="关闭对话统计">×</button>
+  </header>
+  <div id="conversation-usage-content"><p>请选择一个对话。</p></div>
+  <p id="conversation-usage-note"></p>
+</aside>
+<div id="conversation-usage-tooltip" role="tooltip" hidden></div>
+<link rel="stylesheet" href="/static/conversation-usage.css?v=overlay-live-3">
+<script src="/static/conversation-usage.js?v=overlay-live-3"></script>
+<script src="/static/approval-metrics.js?v=1"></script>
+
+
+
+<script src="/static/sandbox-network.js?v=network-2"></script>
+<script src="/static/chat-scroll.js?v=20261029"></script>
+<script src="/static/fast-mode.js?v=20261112"></script>
+<script src="/static/app.js?v=20261117-exploration"></script>
+<script src="/static/browser-launch.js?v=1"></script>
+<script type="module" src="/static/workbench/index.js?v=20261117-exploration"></script>
+</body>
+</html>

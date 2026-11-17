@@ -1,0 +1,124 @@
+# ===== 核心保留（以下内容会被提交）=====
+# mewcode/        核心源码
+# docs/           文档
+# pyproject.toml  项目与依赖定义
+# uv.lock         依赖锁定
+# README.md / MEWCODE.md / CLAUDE.md / spec.md / tasks.md / checklist.md
+
+# ===== 测试与验证 =====
+# tests/ 必须入库——忽略测试目录等于宣布仓库永远零测试覆盖
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+.tox/
+.nox/
+.hypothesis/
+
+# ===== Python 缓存与编译产物 =====
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# ===== 打包与构建 =====
+dist/
+build/
+node_modules/
+out/
+out-*/
+.tmp/
+*.egg-info/
+*.egg
+.eggs/
+wheels/
+
+# ===== 虚拟环境 =====
+.venv/
+venv/
+env/
+ENV/
+
+# ===== 运行时配置与本地状态（含密钥，切勿提交）=====
+.mewcode/
+.claude/
+.codex/
+config.yaml
+config.local.yaml
+.env
+.env.*
+*.log
+
+# Local extension packages are source and may be committed; runtime state stays ignored.
+/.mewcode/
+/.mewcode/*
+!/.mewcode/plugins/
+!/.mewcode/plugins/**
+
+# Agent worktrees and test scratch data are local-only.
+.worktrees/
+.pytest-tmp/
+
+# ===== IDE / 编辑器 =====
+.idea/
+.vscode/
+.qoder/
+*.swp
+*.swo
+
+# ===== 操作系统 =====
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ===== Tauri / Android 本地构建产物 =====
+src-tauri/target/
+src-tauri/.gradle/
+artifacts/
+.npm-cache/
+.grok/
+*.apk
+*.aab
+
+# ===== 临时诊断脚本 =====
+_diag_*.py
+
+# ===== 管线运行产物（Agent 任务生成的数据文件，不入库）=====
+inner_mongolia_*.json
+2026_inner_mongolia_*.json
+.pytest_tmp
+.artifacts_scratch
+
+# ===== 本地验收/渲染临时目录与运行时状态（不入库，可清理）=====
+.tmp-*/
+.playwright-mcp/
+.superpowers/
+output/
+agent-test/
+.bak-*
+*.bak-*
+export_2024_*.md
+
+# Public snapshot: runtime data and publication artifacts stay local.
+outputs/
+agent-test/
+.pytest-*/
+*.db
+*.sqlite
+*.sqlite3
+*.jsonl
+*.mlog
+*.pem
+*.key
+*.pfx
+*.p12
+*.keystore
+*.jks
+providers*.json*
+usage-accounts*.json*
+auth.json
+credentials*
+local.properties
+src-tauri/mobile-dist/
+src-tauri/gen/android/app/src/main/assets/
+!tests/fixtures/**/*.jsonl

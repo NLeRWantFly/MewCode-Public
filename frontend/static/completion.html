@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>代码补全实验室 - MewCode</title>
+  <script>
+    (function () {
+      try {
+        var theme = localStorage.getItem('mewcode-theme');
+        document.documentElement.setAttribute('data-theme', theme === 'light' ? 'light' : 'dark');
+      } catch (error) { /* 无 localStorage 时保持暗色 */ }
+    })();
+  </script>
+  <link rel="stylesheet" href="/static/_tokens.css?v=porcelain-glass-3">
+  <link rel="stylesheet" href="/static/_primitives.css?v=porcelain-glass-3">
+  <link rel="stylesheet" href="/static/completion.css?v=apple-ide-2">
+</head>
+<body>
+  <header class="lab-topbar">
+    <a class="lab-brand" href="/" aria-label="返回 MewCode 对话页">
+      <span class="lab-brand__mark" aria-hidden="true">M</span>
+      <span><strong>MewCode</strong><small>Completion Lab</small></span>
+    </a>
+    <div class="lab-topbar__actions">
+      <span id="capability-status" class="status-pill is-loading" data-testid="capability-status">
+        <i aria-hidden="true"></i><span>正在连接补全图</span>
+      </span>
+      <a class="quiet-button" href="/?workbench=tasks">任务工作台</a>
+      <a class="quiet-button" href="/">返回对话</a>
+      <button id="theme-toggle" class="icon-button" type="button" title="切换主题" aria-label="切换主题"><svg class="ui-icon" aria-hidden="true"><use id="completion-theme-icon" href="/static/icons.svg#sun"></use></svg></button>
+    </div>
+  </header>
+
+  <main class="lab-main">
+    <section class="hero" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">LANGGRAPH · DETERMINISTIC HOT PATH</p>
+        <h1 id="page-title">让轻量语法分析先回答，<br><span>Agent 只在必要时介入。</span></h1>
+        <p class="hero-copy">在不上传项目目录的前提下解析当前 Java 文档，合并 JDK 成员、项目符号和聚合偏好。试着把光标放在 <code>in.next</code> 后面。</p>
+      </div>
+      <dl class="hero-metrics" aria-label="实现特性">
+        <div><dt>5</dt><dd>固定图节点</dd></div>
+        <div><dt>100ms</dt><dd>输入防抖</dd></div>
+        <div><dt>0</dt><dd>源码持久化</dd></div>
+      </dl>
+    </section>
+
+    <section class="workspace" aria-label="代码补全工作区">
+      <article class="panel editor-panel">
+        <header class="panel-head">
+          <div>
+            <span class="panel-kicker">JAVA EDITOR</span>
+            <h2>当前文档</h2>
+          </div>
+          <div class="panel-actions">
+            <button id="reset-code" class="text-button" type="button">恢复示例</button>
+            <button id="clear-code" class="text-button" type="button">清空</button>
+          </div>
+        </header>
+
+        <div class="editor-shell">
+          <pre id="line-numbers" class="line-numbers" aria-hidden="true">1</pre>
+          <textarea
+            id="code-editor"
+            data-testid="code-editor"
+            aria-label="Java 源代码"
+            aria-describedby="editor-help"
+            autocomplete="off"
+            autocapitalize="off"
+            spellcheck="false"
+            wrap="off"
+          ></textarea>
+        </div>
+
+        <footer class="editor-footer">
+          <div class="editor-meta">
+            <span id="cursor-position">Ln 1, Col 1</span>
+            <span>UTF-8</span>
+            <span>Java</span>
+          </div>
+          <div class="editor-controls">
+            <label class="switch-control">
+              <input id="auto-complete" type="checkbox" checked>
+              <span aria-hidden="true"></span>
+              自动补全
+            </label>
+            <button id="request-completion" class="primary-button" data-testid="request-completion" type="button">
+              <svg class="ui-icon" aria-hidden="true"><use href="/static/icons.svg#sparkles"></use></svg>获取建议
+            </button>
+          </div>
+        </footer>
+        <p id="editor-help" class="sr-only">输入成员访问表达式后自动请求候选；也可按 Control 加空格手动请求。</p>
+      </article>
+
+      <aside class="results-column">
+        <section class="panel suggestions-panel" aria-labelledby="suggestions-title">
+          <header class="panel-head compact">
+            <div>
+              <span class="panel-kicker">SUGGESTIONS</span>
+              <h2 id="suggestions-title">补全候选</h2>
+            </div>
+            <span id="candidate-count" class="count-badge">0</span>
+          </header>
+          <div id="completion-state" class="completion-state" role="status" aria-live="polite">
+            <span class="state-glyph" aria-hidden="true"><svg class="ui-icon"><use href="/static/icons.svg#completion"></use></svg></span>
+            <strong>等待成员表达式</strong>
+            <p>在编辑器中输入类似 <code>in.next</code> 的内容。</p>
+          </div>
+          <div id="candidate-list" class="candidate-list" data-testid="candidate-list"></div>
+        </section>
+
+        <section class="panel analysis-panel" aria-labelledby="analysis-title">
+          <header class="panel-head compact">
+            <div>
+              <span class="panel-kicker">GRAPH TRACE</span>
+              <h2 id="analysis-title">分析轨迹</h2>
+            </div>
+            <span id="latency" class="latency">— ms</span>
+          </header>
+          <dl class="analysis-grid">
+            <div><dt>接收者</dt><dd id="receiver">—</dd></div>
+            <div><dt>推断类型</dt><dd id="resolved-type">—</dd></div>
+            <div><dt>推断来源</dt><dd id="type-inference">—</dd></div>
+            <div><dt>置信度</dt><dd id="confidence">—</dd></div>
+          </dl>
+          <ol id="graph-path" class="graph-path" aria-label="LangGraph 节点路径">
+            <li class="is-muted">尚未运行</li>
+          </ol>
+          <p id="feedback-status" class="feedback-status" role="status" aria-live="polite"></p>
+        </section>
+      </aside>
+    </section>
+
+    <section class="trust-strip" aria-label="数据与安全边界">
+      <div><span aria-hidden="true"><svg class="ui-icon"><use href="/static/icons.svg#file-code"></use></svg></span><p><strong>请求级源码</strong><small>服务端不把源码写入偏好库</small></p></div>
+      <div><span aria-hidden="true"><svg class="ui-icon"><use href="/static/icons.svg#database"></use></svg></span><p><strong>聚合式学习</strong><small>只保存候选统计与别名证据哈希</small></p></div>
+      <div><span aria-hidden="true"><svg class="ui-icon"><use href="/static/icons.svg#bolt"></use></svg></span><p><strong>确定性热路径</strong><small>低置信度时才允许进入可选回退</small></p></div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="/static/completion.js?v=apple-ide-2"></script>
+</body>
+</html>

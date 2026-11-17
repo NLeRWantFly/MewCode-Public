@@ -1,0 +1,24 @@
+[[permission]]
+identifier = "allow-desktop-bridge"
+description = "Allow desktop bridge commands used by the web UI loaded from the local backend."
+commands.allow = [
+  "set_theme",
+  "select_directory",
+  "open_directory",
+  "open_external",
+  "provider_presets",
+  "provider_list",
+  "provider_save",
+  "provider_remove",
+  "provider_test",
+  "usage_list_accounts",
+  "usage_save_account",
+  "usage_remove_account",
+  "usage_browser_command",
+  "diagnostics",
+  "open_pipeline",
+  "close_pipeline",
+  "restart_backend",
+  "startup_status",
+  "retry_startup"
+]

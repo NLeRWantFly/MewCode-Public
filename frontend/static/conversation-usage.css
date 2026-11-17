@@ -1,0 +1,40 @@
+/* A small, quiet model ledger. Exact numbers only appear on hover/focus/tap. */
+#conversation-usage {
+  position: fixed; top: 68px; right: 16px; width: 224px;
+  max-height: calc(100dvh - 96px); overflow: auto; z-index: 25;
+  background: var(--bg-panel, #fff); color: var(--text, #222);
+  border: 1px solid var(--border-soft, #eee); border-radius: 18px;
+  box-shadow: 0 6px 24px #0000000a; padding: 12px 14px 10px; font-size: 12px;
+}
+#conversation-usage[hidden], #conversation-usage-tooltip[hidden] { display: none; }
+#conversation-usage header { display: flex; align-items: center; gap: 5px; margin-bottom: 8px; }
+#conversation-usage header strong { flex: 1; font-size: 12px; font-weight: 600; letter-spacing: .03em; }
+.conversation-usage-mascot { width: 19px; height: 19px; color: #aa92d4; margin-right: 2px; }
+#conversation-usage button { color: inherit; background: transparent; border: 0; cursor: pointer; }
+#conversation-usage header button { width: 24px; height: 24px; padding: 0; border-radius: 8px; color: var(--text-faint, #888); font-size: 14px; }
+#conversation-usage header button:hover { background: var(--bg-hover, #f5f3fa); color: var(--text, #222); }
+#conversation-usage button:focus-visible { outline: 2px solid #aa92d4; outline-offset: 2px; }
+#conversation-usage-info[data-warning="true"] { color: #cf9156; }
+.conversation-usage-model { padding: 5px 0 3px; }
+.conversation-usage-label { display: flex; align-items: center; gap: 7px; font-size: 11.5px; line-height: 18px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.conversation-usage-label::before { content: ""; flex: 0 0 5px; height: 5px; border-radius: 50%; background: var(--usage-color); }
+#conversation-usage .conversation-usage-meter { display: block; width: 100%; height: 20px; padding: 7px 0; border-radius: 8px; text-align: left; }
+.conversation-usage-track { display: block; height: 6px; border-radius: 999px; overflow: hidden; background: var(--border-soft, #f0edf4); }
+.conversation-usage-fill { display: block; height: 100%; border-radius: inherit; background: var(--usage-color); transition: width 220ms ease; }
+.conversation-usage-empty { padding: 10px 0; color: var(--text-dim, #777); line-height: 1.7; font-size: 11px; }
+#conversation-usage-note { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+#conversation-usage-tooltip {
+  position: fixed; z-index: 80; width: min(270px, calc(100vw - 16px)); max-height: calc(100dvh - 16px); overflow: auto;
+  padding: 13px 15px; border: 1px solid var(--border, #e9e5ed); border-radius: 14px;
+  background: var(--bg-panel, #fff); color: var(--text, #222); box-shadow: 0 8px 28px #0000001a;
+  font: 11px/1.6 var(--font-sans, sans-serif); overflow-wrap: anywhere;
+}
+#conversation-usage-tooltip strong { display: block; font-size: 12px; }
+.conversation-usage-tip-value { margin: 5px 0 2px; font-size: 15px; font-weight: 650; font-variant-numeric: tabular-nums; }
+#conversation-usage-tooltip p { color: var(--text-dim, #777); margin: 0; }
+#conversation-usage-tooltip dl { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 12px; margin: 10px 0 0; padding-top: 9px; border-top: 1px solid var(--border-soft, #eee); }
+#conversation-usage-tooltip dt { color: var(--text-dim, #777); }
+#conversation-usage-tooltip dd { margin: 0; text-align: right; font-variant-numeric: tabular-nums; }
+/* This is an overlay: opening it must not resize chat, graph, or composer. */
+@media (max-width: 640px) { #conversation-usage { top: 60px; right: 10px; width: min(224px, calc(100vw - 20px)); } }
+@media (prefers-reduced-motion: reduce) { .conversation-usage-fill { transition: none; } }

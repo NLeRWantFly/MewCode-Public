@@ -1,0 +1,3625 @@
+{
+  "schema_version": 1,
+  "scenario": "capability_missing_scheduler_hold",
+  "source": {
+    "run_snapshot": {
+      "type": "expert-runs-v1 JSON snapshot",
+      "sha256": "da352803f746a116ab22a01e58d851e8221c11d07dd4f42f861f756e3aacb3b3",
+      "bytes": 15540363,
+      "run_id": "9a0db8ac217a48aa8556b9076e9d105a"
+    },
+    "maintenance_database": {
+      "type": "read-only SQLite maintenance database",
+      "sha256": "c9e90b9a28edecf918ee8f96e05fa11cd175677df2ffa9b1315e7e024ae85377",
+      "bytes": 3465216
+    },
+    "handoff_report": {
+      "type": "handoff report",
+      "sha256": "5e203bc1d8c562ad86282e0a626b5dacb4cc9aa97204aa2e30b049ba8a41efda",
+      "bytes": 51300
+    }
+  },
+  "shape_counts": {
+    "locked_flow_nodes": 32,
+    "locked_flow_edges": 36,
+    "scheduler_decisions": 18,
+    "hold_until_clearance": 12,
+    "capability_missing_triggers": 12,
+    "command_receipts": 2,
+    "run_input_contract_items": 9
+  },
+  "locked_flow": {
+    "flow_id": "fixture-capability-hold",
+    "version": 1,
+    "label": "fixture-capability-hold",
+    "finalizer_node_id": "N12B",
+    "finalizer_plugin": "model",
+    "nodes": [
+      {
+        "node_id": "N01",
+        "role": "planner",
+        "label": "<redacted>",
+        "kind": "role",
+        "responsibility": "<redacted>",
+        "members": [],
+        "reducer": "collect",
+        "failure_policy": {
+          "action": "stop",
+          "max_attempts": 1,
+          "target_node_id": ""
+        },
+        "model": {
+          "provider_key": "fixture",
+          "model_id": "fixture-mock",
+          "effort": "low"
+        },
+        "position": {
+          "x": 80.0,
+          "y": 160.0
+        }
+      },
+      {
+        "node_id": "N02",
+        "role": "manager",
+        "label": "<redacted>",
+        "kind": "role",
+        "responsibility": "<redacted>",
+        "members": [],
+        "reducer": "collect",
+        "failure_policy": {
+          "action": "stop",
+          "max_attempts": 1,
+          "target_node_id": ""
+        },
+        "model": null,
+        "position": {
+          "x": 360.0,
+          "y": 160.0
+        }
+      },
+      {
+        "node_id": "N03",
+        "role": "executor",
+        "label": "<redacted>",
+        "kind": "role",
+        "responsibility": "<redacted>",
+        "members": [],
+        "reducer": "collect",
+        "failure_policy": {
+          "action": "retry",
+          "max_attempts": 3,
+          "target_node_id": ""
+        },
+        "model": {
+          "provider_key": "fixture",
+          "model_id": "fixture-mock",
+          "effort": "low"
+        },
+        "position": {
+          "x": 640.0,
+          "y": 160.0
+        }
+      },
+      {
+        "node_id": "N04A",
+        "role": "auditor",
+        "label": "<redacted>",
+        "kind": "role",
+        "responsibility": "<redacted>",
+        "members": [],
+        "reducer": "collect",
+        "failure_policy": {
+          "action": "stop",
+          "max_attempts": 1,
+          "target_node_id": ""
+        },
+        "model": {
+          "provider_key": "fixture",
+          "model_id": "fixture-mock",
+          "effort": "low"
+        },
+        "position": {
+          "x": 920.0,
+          "y": 160.0
+        }
+      },
+      {
+        "node_id": "N04B",
+        "role": "planner",
+        "label": "<redacted>",
+        "kind": "role",
+        "responsibility": "<redacted>",
+        "members": [],
+        "reducer": "collect",
+        "failure_policy": {
+          "action": "stop",
+          "max_attempts": 1,
+          "target_node_id": ""
+        },
+        "model": {
+          "provider_key": "fixture",
+          "model_id": "fixture-mock",
+          "effort": "low"
+        },
+        "position": {
+          "x": 1200.0,
+          "y": 160.0
+        }
+      },
+      {
+        "node_id": "N05",
+        "role": "executor",
+        "label": "<redacted>",
+        "kind": "role",
+        "responsibility": "<redacted>",
+        "members": [],
+        "reducer": "collect",
+        "failure_policy": {
+          "action": "retry",
+          "max_attempts": 3,
+          "target_node_id": ""
+        },
+        "model": {
+          "provider_key": "fixture",
+          "model_id": "fixture-mock",
+          "effort": "low"
+        },
+        "position": {
+          "x": 1480.0,
+          "y": 160.0
+        }
+      },
+      {
+        "node_id": "N06",
+        "role": "planner",
+        "label": "<redacted>",
+        "kind": "role",
+        "responsibility": "<redacted>",
+        "members": [],
+        "reducer": "collect",
+        "failure_policy": {
+          "action": "retry",
+          "max_attempts": 3,
+          "target_node_id": ""
+        },
+        "model": {
+          "provider_key": "fixture",
+          "model_id": "fixture-mock",
+          "effort": "low"
+        },
+        "position": {
+          "x": 1760.0,
+          "y": 160.0
+        },
+        "tools": [
+          "ReadFile",
+          "Glob",
+          "Grep"
+        ]
+      },
+      {
+        "node_id": "N06_RECOGNIZE",
+        "role": "executor",
+        "label": "<redacted>",
+        "kind": "role",
+        "responsibility": "<redacted>",
+        "members": [],
+        "reducer": "collect",
+        "failure_policy": {
+          "action": "stop",
+          "max_attempts": 1,
+          "target_node_id": ""
+        },
+        "model": {
+          "provider_key": "fixture",
+          "model_id": "fixture-mock",
+          "effort": "low"
+        },
+        "position": {
+          "x": 2040.0,
+          "y": 160.0
+        }
+      },
+      {
+        "node_id": "N06_AUDIT",
+        "role": "auditor",
+        "label": "<redacted>",
+        "kind": "role",
+        "responsibility": "<redacted>",
+        "members": [],
+        "reducer": "collect",
+        "failure_policy": {
+          "action": "stop",
+          "max_attempts": 1,
+          "target_node_id": ""
+        },
+        "model": {
+          "provider_key": "fixture",
+          "model_id": "fixture-mock",
+          "effort": "low"
+        },
+        "position": {
+          "x": 2320.0,
+          "y": 160.0
+        }
+      },
+      {
+        "node_id": "N06_DECIDE",
+        "role": "auditor",
+        "label": "<redacted>",
+        "kind": "role",
+        "responsibility": "<redacted>",
+        "members": [],
+        "reducer": "collect",
+        "failure_policy": {
+          "action": "stop",
+          "max_attempts": 1,
+          "target_node_id": ""
+        },
+        "model": {
+          "provider_key": "fixture",
+          "model_id": "fixture-mock",
+          "effort": "low"
+        },
+        "position": {
+          "x": 2600.0,
+          "y": 160.0
+        }
+      },
+      {
+        "node_id": "N06_REPAIR",
+        "role": "executor",
+        "label": "<redacted>",
+        "kind": "role",
+        "responsibility": "<redacted>",
+        "members": [],
+        "reducer": "collect",
+        "failure_policy": {
+          "action": "stop",
+          "max_attempts": 1,
+          "target_node_id": ""
+        },
+        "model": {
+          "provider_key": "fixture",
+          "model_id": "fixture-mock",
+          "effort": "low"
+        },
+        "position": {
+          "x": 2880.0,
+          "y": 160.0
+        }
+      },
+      {
+        "node_id": "N07",
+        "role": "planner",
+        "label": "<redacted>",
+        "kind": "role",
+        "responsibility": "<redacted>",
+        "members": [],
+        "reducer": "collect",
+        "failure_policy": {
+          "action": "retry",
+          "max_attempts": 3,
+          "target_node_id": ""
+        },
+        "model": {
+          "provider_key": "fixture",
+          "model_id": "fixture-mock",
+          "effort": "low"
+        },
+        "position": {
+          "x": 3160.0,
+          "y": 160.0
+        },
+        "tools": [
+          "ReadFile",
+          "Glob",
+          "Grep"
+        ]
+      },
+      {
+        "node_id": "N07_STRUCTURE",
+        "role": "executor",
+        "label": "<redacted>",
+        "kind": "role",
+        "responsibility": "<redacted>",
+        "members": [],
+        "reducer": "collect",
+        "failure_policy": {
+          "action": "stop",
+          "max_attempts": 1,
+          "target_node_id": ""
+        },
+        "model": {
+          "provider_key": "fixture",
+          "model_id": "fixture-mock",
+          "effort": "low"
+        },
+        "position": {
+          "x": 3440.0,
+          "y": 160.0
+        }
+      },
+      {
+        "node_id": "N07_AUDIT",
+        "role": "auditor",
+        "label": "<redacted>",
+        "kind": "role",
+        "responsibility": "<redacted>",
+        "members": [],
+        "reducer": "collect",
+        "failure_policy": {
+          "action": "stop",
+          "max_attempts": 1,
+          "target_node_id": ""
+        },
+        "model": {
+          "provider_key": "fixture",
+          "model_id": "fixture-mock",
+          "effort": "low"
+        },
+        "position": {
+          "x": 3720.0,
+          "y": 160.0
+        }
+      },
+      {
+        "node_id": "N07_DECIDE",
+        "role": "auditor",
+        "label": "<redacted>",
+        "kind": "role",
+        "responsibility": "<redacted>",
+        "members": [],
+        "reducer": "collect",
+        "failure_policy": {
+          "action": "stop",
+          "max_attempts": 1,
+          "target_node_id": ""
+        },
+        "model": {
+          "provider_key": "fixture",
+          "model_id": "fixture-mock",
+          "effort": "low"
+        },
+        "position": {
+          "x": 4000.0,
+          "y": 160.0
+        }
+      },
+      {
+        "node_id": "N07_REPAIR",
+        "role": "executor",
+        "label": "<redacted>",
+        "kind": "role",
+        "responsibility": "<redacted>",
+        "members": [],
+        "reducer": "collect",
+        "failure_policy": {
+          "action": "stop",
+          "max_attempts": 1,
+          "target_node_id": ""
+        },
+        "model": {
+          "provider_key": "fixture",
+          "model_id": "fixture-mock",
+          "effort": "low"
+        },
+        "position": {
+          "x": 4280.0,
+          "y": 160.0
+        }
+      },
+      {
+        "node_id": "N08",
+        "role": "planner",
+        "label": "<redacted>",
+        "kind": "role",
+        "responsibility": "<redacted>",
+        "members": [],
+        "reducer": "collect",
+        "failure_policy": {
+          "action": "stop",
+          "max_attempts": 1,
+          "target_node_id": ""
+        },
+        "model": {
+          "provider_key": "fixture",
+          "model_id": "fixture-mock",
+          "effort": "low"
+        },
+        "position": {
+          "x": 4560.0,
+          "y": 160.0
+        },
+        "tools": [
+          "ReadFile",
+          "Glob",
+          "Grep"
+        ]
+      },
+      {
+        "node_id": "N08_DEEPSEEK",
+        "role": "executor",
+        "label": "<redacted>",
+        "kind": "role",
+        "responsibility": "<redacted>",
+        "members": [],
+        "reducer": "collect",
+        "failure_policy": {
+          "action": "stop",
+          "max_attempts": 1,
+          "target_node_id": ""
+        },
+        "model": {
+          "provider_key": "fixture",
+          "model_id": "fixture-mock",
+          "effort": "low"
+        },
+        "position": {
+          "x": 4840.0,
+          "y": 160.0
+        }
+      },
+      {
+        "node_id": "N08_GROK",
+        "role": "executor",
+        "label": "<redacted>",
+        "kind": "role",
+        "responsibility": "<redacted>",
+        "members": [],
+        "reducer": "collect",
+        "failure_policy": {
+          "action": "stop",
+          "max_attempts": 1,
+          "target_node_id": ""
+        },
+        "model": {
+          "provider_key": "fixture",
+          "model_id": "fixture-mock",
+          "effort": "low"
+        },
+        "position": {
+          "x": 5120.0,
+          "y": 160.0
+        }
+      },
+      {
+        "node_id": "N08_REDUCE",
+        "role": "manager",
+        "label": "<redacted>",
+        "kind": "role",
+        "responsibility": "<redacted>",
+        "members": [],
+        "reducer": "collect",
+        "failure_policy": {
+          "action": "stop",
+          "max_attempts": 1,
+          "target_node_id": ""
+        },
+        "model": {
+          "provider_key": "fixture",
+          "model_id": "fixture-mock",
+          "effort": "low"
+        },
+        "position": {
+          "x": 5400.0,
+          "y": 160.0
+        }
+      },
+      {
+        "node_id": "N08_AUDIT",
+        "role": "auditor",
+        "label": "<redacted>",
+        "kind": "role",
+        "responsibility": "<redacted>",
+        "members": [],
+        "reducer": "collect",
+        "failure_policy": {
+          "action": "stop",
+          "max_attempts": 1,
+          "target_node_id": ""
+        },
+        "model": {
+          "provider_key": "fixture",
+          "model_id": "fixture-mock",
+          "effort": "low"
+        },
+        "position": {
+          "x": 5680.0,
+          "y": 160.0
+        }
+      },
+      {
+        "node_id": "N08_COMMIT",
+        "role": "executor",
+        "label": "<redacted>",
+        "kind": "role",
+        "responsibility": "<redacted>",
+        "members": [],
+        "reducer": "collect",
+        "failure_policy": {
+          "action": "stop",
+          "max_attempts": 1,
+          "target_node_id": ""
+        },
+        "model": {
+          "provider_key": "fixture",
+          "model_id": "fixture-mock",
+          "effort": "low"
+        },
+        "position": {
+          "x": 5960.0,
+          "y": 160.0
+        }
+      },
+      {
+        "node_id": "N08_DECIDE",
+        "role": "auditor",
+        "label": "<redacted>",
+        "kind": "role",
+        "responsibility": "<redacted>",
+        "members": [],
+        "reducer": "collect",
+        "failure_policy": {
+          "action": "stop",
+          "max_attempts": 1,
+          "target_node_id": ""
+        },
+        "model": {
+          "provider_key": "fixture",
+          "model_id": "fixture-mock",
+          "effort": "low"
+        },
+        "position": {
+          "x": 6240.0,
+          "y": 160.0
+        }
+      },
+      {
+        "node_id": "N08_REPAIR",
+        "role": "executor",
+        "label": "<redacted>",
+        "kind": "role",
+        "responsibility": "<redacted>",
+        "members": [],
+        "reducer": "collect",
+        "failure_policy": {
+          "action": "stop",
+          "max_attempts": 1,
+          "target_node_id": ""
+        },
+        "model": {
+          "provider_key": "fixture",
+          "model_id": "fixture-mock",
+          "effort": "low"
+        },
+        "position": {
+          "x": 6520.0,
+          "y": 160.0
+        }
+      },
+      {
+        "node_id": "N09",
+        "role": "planner",
+        "label": "<redacted>",
+        "kind": "role",
+        "responsibility": "<redacted>",
+        "members": [],
+        "reducer": "collect",
+        "failure_policy": {
+          "action": "retry",
+          "max_attempts": 3,
+          "target_node_id": ""
+        },
+        "model": {
+          "provider_key": "fixture",
+          "model_id": "fixture-mock",
+          "effort": "low"
+        },
+        "position": {
+          "x": 6800.0,
+          "y": 160.0
+        },
+        "tools": [
+          "ReadFile",
+          "Glob",
+          "Grep"
+        ]
+      },
+      {
+        "node_id": "N09_DATABASE",
+        "role": "executor",
+        "label": "<redacted>",
+        "kind": "role",
+        "responsibility": "<redacted>",
+        "members": [],
+        "reducer": "collect",
+        "failure_policy": {
+          "action": "retry",
+          "max_attempts": 3,
+          "target_node_id": ""
+        },
+        "model": {
+          "provider_key": "fixture",
+          "model_id": "fixture-mock",
+          "effort": "low"
+        },
+        "position": {
+          "x": 7080.0,
+          "y": 160.0
+        }
+      },
+      {
+        "node_id": "N09_VECTOR",
+        "role": "executor",
+        "label": "<redacted>",
+        "kind": "role",
+        "responsibility": "<redacted>",
+        "members": [],
+        "reducer": "collect",
+        "failure_policy": {
+          "action": "retry",
+          "max_attempts": 3,
+          "target_node_id": ""
+        },
+        "model": {
+          "provider_key": "fixture",
+          "model_id": "fixture-mock",
+          "effort": "low"
+        },
+        "position": {
+          "x": 7360.0,
+          "y": 160.0
+        }
+      },
+      {
+        "node_id": "N10",
+        "role": "auditor",
+        "label": "<redacted>",
+        "kind": "role",
+        "responsibility": "<redacted>",
+        "members": [],
+        "reducer": "collect",
+        "failure_policy": {
+          "action": "stop",
+          "max_attempts": 1,
+          "target_node_id": ""
+        },
+        "model": {
+          "provider_key": "fixture",
+          "model_id": "fixture-mock",
+          "effort": "low"
+        },
+        "position": {
+          "x": 7640.0,
+          "y": 160.0
+        }
+      },
+      {
+        "node_id": "N11",
+        "role": "manager",
+        "label": "<redacted>",
+        "kind": "role",
+        "responsibility": "<redacted>",
+        "members": [],
+        "reducer": "collect",
+        "failure_policy": {
+          "action": "stop",
+          "max_attempts": 1,
+          "target_node_id": ""
+        },
+        "model": null,
+        "position": {
+          "x": 7920.0,
+          "y": 160.0
+        }
+      },
+      {
+        "node_id": "N12A",
+        "role": "executor",
+        "label": "<redacted>",
+        "kind": "role",
+        "responsibility": "<redacted>",
+        "members": [],
+        "reducer": "collect",
+        "failure_policy": {
+          "action": "retry",
+          "max_attempts": 3,
+          "target_node_id": ""
+        },
+        "model": {
+          "provider_key": "fixture",
+          "model_id": "fixture-mock",
+          "effort": "low"
+        },
+        "position": {
+          "x": 8200.0,
+          "y": 160.0
+        }
+      },
+      {
+        "node_id": "N12B",
+        "role": "manager",
+        "label": "<redacted>",
+        "kind": "role",
+        "responsibility": "<redacted>",
+        "members": [],
+        "reducer": "collect",
+        "failure_policy": {
+          "action": "stop",
+          "max_attempts": 1,
+          "target_node_id": ""
+        },
+        "model": {
+          "provider_key": "fixture",
+          "model_id": "fixture-mock",
+          "effort": "low"
+        },
+        "position": {
+          "x": 8480.0,
+          "y": 160.0
+        }
+      },
+      {
+        "node_id": "N04_MODEL_ANALYSIS",
+        "role": "planner",
+        "label": "<redacted>",
+        "kind": "role",
+        "responsibility": "<redacted>",
+        "members": [],
+        "reducer": "collect",
+        "failure_policy": {
+          "action": "stop",
+          "max_attempts": 1,
+          "target_node_id": ""
+        },
+        "model": {
+          "provider_key": "fixture",
+          "model_id": "fixture-mock",
+          "effort": "low"
+        },
+        "position": {
+          "x": 8760.0,
+          "y": 160.0
+        }
+      }
+    ],
+    "edges": [
+      {
+        "from_node": "N01",
+        "to_node": "N02",
+        "condition": "always",
+        "router": "default"
+      },
+      {
+        "from_node": "N02",
+        "to_node": "N03",
+        "condition": "pass",
+        "router": "default"
+      },
+      {
+        "from_node": "N03",
+        "to_node": "N04A",
+        "condition": "always",
+        "router": "default"
+      },
+      {
+        "from_node": "N04A",
+        "to_node": "N04B",
+        "condition": "pass",
+        "router": "default"
+      },
+      {
+        "from_node": "N04B",
+        "to_node": "N05",
+        "condition": "always",
+        "router": "default"
+      },
+      {
+        "from_node": "N05",
+        "to_node": "N06",
+        "condition": "always",
+        "router": "default"
+      },
+      {
+        "from_node": "N06",
+        "to_node": "N06_RECOGNIZE",
+        "condition": "always",
+        "router": "default"
+      },
+      {
+        "from_node": "N06_RECOGNIZE",
+        "to_node": "N06_AUDIT",
+        "condition": "always",
+        "router": "default"
+      },
+      {
+        "from_node": "N06_AUDIT",
+        "to_node": "N06_DECIDE",
+        "condition": "always",
+        "router": "default"
+      },
+      {
+        "from_node": "N06_REPAIR",
+        "to_node": "N06_AUDIT",
+        "condition": "always",
+        "router": "default"
+      },
+      {
+        "from_node": "N06_DECIDE",
+        "to_node": "N07",
+        "condition": "pass",
+        "router": "default"
+      },
+      {
+        "from_node": "N07",
+        "to_node": "N07_STRUCTURE",
+        "condition": "always",
+        "router": "default"
+      },
+      {
+        "from_node": "N07_STRUCTURE",
+        "to_node": "N07_AUDIT",
+        "condition": "always",
+        "router": "default"
+      },
+      {
+        "from_node": "N07_AUDIT",
+        "to_node": "N07_DECIDE",
+        "condition": "always",
+        "router": "default"
+      },
+      {
+        "from_node": "N07_REPAIR",
+        "to_node": "N07_AUDIT",
+        "condition": "always",
+        "router": "default"
+      },
+      {
+        "from_node": "N07_DECIDE",
+        "to_node": "N08",
+        "condition": "pass",
+        "router": "default"
+      },
+      {
+        "from_node": "N08",
+        "to_node": "N08_DEEPSEEK",
+        "condition": "always",
+        "router": "default"
+      },
+      {
+        "from_node": "N08",
+        "to_node": "N08_GROK",
+        "condition": "always",
+        "router": "default"
+      },
+      {
+        "from_node": "N08_GROK",
+        "to_node": "N08_REDUCE",
+        "condition": "always",
+        "router": "default"
+      },
+      {
+        "from_node": "N08_REDUCE",
+        "to_node": "N08_AUDIT",
+        "condition": "always",
+        "router": "default"
+      },
+      {
+        "from_node": "N08_AUDIT",
+        "to_node": "N08_COMMIT",
+        "condition": "pass",
+        "router": "default"
+      },
+      {
+        "from_node": "N08_AUDIT",
+        "to_node": "N08_DECIDE",
+        "condition": "fail",
+        "router": "default"
+      },
+      {
+        "from_node": "N08_COMMIT",
+        "to_node": "N08_DECIDE",
+        "condition": "always",
+        "router": "default"
+      },
+      {
+        "from_node": "N08_REPAIR",
+        "to_node": "N08_REDUCE",
+        "condition": "always",
+        "router": "default"
+      },
+      {
+        "from_node": "N08_DECIDE",
+        "to_node": "N09",
+        "condition": "pass",
+        "router": "default"
+      },
+      {
+        "from_node": "N09",
+        "to_node": "N09_DATABASE",
+        "condition": "always",
+        "router": "default"
+      },
+      {
+        "from_node": "N09_DATABASE",
+        "to_node": "N09_VECTOR",
+        "condition": "pass",
+        "router": "default",
+        "branch_group": "vector-search-choice",
+        "input_when": {
+          "input": "enable_vector_search",
+          "equals": "<fixture-choice-1>"
+        }
+      },
+      {
+        "from_node": "N09_DATABASE",
+        "to_node": "N10",
+        "condition": "pass",
+        "router": "default",
+        "branch_group": "vector-search-choice",
+        "input_when": {
+          "input": "enable_vector_search",
+          "equals": "<fixture-choice-2>"
+        }
+      },
+      {
+        "from_node": "N09_VECTOR",
+        "to_node": "N10",
+        "condition": "pass",
+        "router": "default"
+      },
+      {
+        "from_node": "N10",
+        "to_node": "N11",
+        "condition": "pass",
+        "router": "default"
+      },
+      {
+        "from_node": "N11",
+        "to_node": "N12A",
+        "condition": "pass",
+        "router": "default",
+        "branch_group": "publication-choice",
+        "input_when": {
+          "input": "publication_choice",
+          "equals": "<fixture-choice-1>"
+        }
+      },
+      {
+        "from_node": "N12A",
+        "to_node": "N12B",
+        "condition": "always",
+        "router": "default"
+      },
+      {
+        "from_node": "N04A",
+        "to_node": "N04_MODEL_ANALYSIS",
+        "condition": "pass",
+        "router": "default"
+      },
+      {
+        "from_node": "N04_MODEL_ANALYSIS",
+        "to_node": "N04B",
+        "condition": "always",
+        "router": "default"
+      },
+      {
+        "from_node": "N08_DEEPSEEK",
+        "to_node": "N08_REDUCE",
+        "condition": "always",
+        "router": "default"
+      },
+      {
+        "from_node": "N11",
+        "to_node": "N12B",
+        "condition": "pass",
+        "router": "default",
+        "branch_group": "publication-choice",
+        "input_when": {
+          "input": "publication_choice",
+          "equals": "<fixture-choice-2>"
+        }
+      }
+    ],
+    "meta": {
+      "node_kinds": {
+        "N01": "plan",
+        "N02": "gate",
+        "N03": "implement",
+        "N04A": "audit",
+        "N04B": "plan",
+        "N05": "implement",
+        "N06": "implement",
+        "N06_RECOGNIZE": "implement",
+        "N06_AUDIT": "audit",
+        "N06_REPAIR": "implement",
+        "N07": "implement",
+        "N07_STRUCTURE": "implement",
+        "N07_AUDIT": "audit",
+        "N07_REPAIR": "implement",
+        "N08": "implement",
+        "N08_DEEPSEEK": "implement",
+        "N08_GROK": "implement",
+        "N08_REDUCE": "reduce",
+        "N08_AUDIT": "audit",
+        "N08_COMMIT": "implement",
+        "N08_REPAIR": "implement",
+        "N09": "implement",
+        "N09_DATABASE": "implement",
+        "N09_VECTOR": "implement",
+        "N10": "audit",
+        "N11": "gate",
+        "N12A": "implement",
+        "N12B": "reduce",
+        "N04_MODEL_ANALYSIS": "plan"
+      },
+      "node_plan_briefs": {},
+      "run_input_contract": [
+        {
+          "name": "pdf_paths",
+          "required": true,
+          "source_type_field_present": false,
+          "source_effective_type": "text",
+          "default": "<fixture>/input_01.pdf\n<fixture>/input_02.pdf\n<fixture>/input_03.pdf\n<fixture>/input_04.pdf",
+          "default_redacted": true
+        },
+        {
+          "name": "new_output_directory",
+          "required": true,
+          "source_type_field_present": false,
+          "source_effective_type": "text",
+          "default": "<redacted>",
+          "default_redacted": true
+        },
+        {
+          "name": "model_bindings",
+          "required": false,
+          "source_type_field_present": false,
+          "source_effective_type": "text",
+          "default": "<redacted>",
+          "default_redacted": true
+        },
+        {
+          "name": "content_external_authorization",
+          "required": true,
+          "source_type_field_present": false,
+          "source_effective_type": "text",
+          "default": null
+        },
+        {
+          "name": "model_cost_policy",
+          "required": true,
+          "source_type_field_present": false,
+          "source_effective_type": "text",
+          "default": null
+        },
+        {
+          "name": "enable_vector_search",
+          "required": true,
+          "source_type_field_present": false,
+          "source_effective_type": "text",
+          "default": null
+        },
+        {
+          "name": "publication_choice",
+          "required": true,
+          "source_type_field_present": false,
+          "source_effective_type": "text",
+          "default": null
+        },
+        {
+          "name": "hierarchy_label_interpretation",
+          "required": true,
+          "source_type_field_present": false,
+          "source_effective_type": "text",
+          "default": null
+        },
+        {
+          "name": "embedding_binding",
+          "required": false,
+          "source_type_field_present": false,
+          "source_effective_type": "text",
+          "default": null
+        }
+      ],
+      "loops": [],
+      "source_loop_count": 3
+    }
+  },
+  "node_states": {
+    "N03": {
+      "source_keys": [
+        "active_seconds",
+        "activity_records",
+        "applied_constraints",
+        "attempt",
+        "attempt_history",
+        "audit_snapshot",
+        "auto_policy_version",
+        "available_tools",
+        "billable_tokens",
+        "capability_snapshot_version",
+        "command_receipts",
+        "completed_at",
+        "duration_monotonic_ms",
+        "duration_ms",
+        "effort",
+        "error_kind",
+        "execution_status",
+        "fallback_reason",
+        "handoff",
+        "input_revision",
+        "input_tokens",
+        "iteration_recovery",
+        "iterations_used",
+        "knowledge_cards",
+        "knowledge_observations",
+        "label",
+        "loop_decision",
+        "member_id",
+        "messages",
+        "model",
+        "model_spans",
+        "node_attempt",
+        "node_id",
+        "output_chunks",
+        "output_diagnostics_separated",
+        "output_tokens",
+        "partial_reasoning",
+        "partial_text",
+        "passed",
+        "provider",
+        "recovery_contract_version",
+        "recovery_round",
+        "request_error",
+        "retired_safety_reviews",
+        "review_progress",
+        "role",
+        "run_supervisor",
+        "safety_review",
+        "safety_review_spans",
+        "safety_review_state",
+        "scheduler_recovery",
+        "segment_health",
+        "segment_health_history",
+        "slice_progress_baseline",
+        "started_at",
+        "status",
+        "status_reason",
+        "text",
+        "tool_promotion_proposals",
+        "tools",
+        "topology",
+        "usage",
+        "usage_by_attempt",
+        "verdict",
+        "verification_records",
+        "wait_intervals",
+        "wait_seconds",
+        "wait_timeout"
+      ],
+      "node_id": "N03",
+      "status": "needs_attention",
+      "attempt": 17,
+      "command_receipts": [
+        {
+          "source_keys": [
+            "command_started",
+            "evidence_source",
+            "exit_code",
+            "input_revision",
+            "node_id",
+            "reason",
+            "request",
+            "request_id",
+            "status",
+            "stderr",
+            "stdout"
+          ],
+          "node_id": "N03",
+          "status": "outcome_unknown",
+          "command_started": null,
+          "dispatch_closed": null,
+          "exit_code": null,
+          "reason_code": "<redacted>",
+          "request_id": "fixture-request-1",
+          "request": "<redacted>",
+          "stdout": "<redacted>",
+          "stderr": "<redacted>"
+        },
+        {
+          "source_keys": [
+            "command_started",
+            "evidence_source",
+            "exit_code",
+            "input_revision",
+            "legacy_dispatch_seq",
+            "node_id",
+            "output",
+            "output_truncated",
+            "reason",
+            "request",
+            "request_id",
+            "status",
+            "stderr",
+            "stdout",
+            "successful",
+            "tool_id"
+          ],
+          "node_id": "N03",
+          "status": "not_started",
+          "command_started": false,
+          "dispatch_closed": null,
+          "exit_code": null,
+          "reason_code": "<redacted>",
+          "request_id": "fixture-request-2",
+          "request": "<redacted>",
+          "stdout": "<redacted>",
+          "stderr": "<redacted>"
+        }
+      ],
+      "scheduler_recovery": {
+        "source_keys": [
+          "allowed_actions",
+          "continuation_count",
+          "decisions",
+          "last_diagnosis",
+          "last_health_summary",
+          "phase",
+          "work_cursor"
+        ],
+        "phase": "paused",
+        "continuation_count": 6,
+        "allowed_actions": [],
+        "decisions": {
+          "count": 18,
+          "action_counts": {
+            "continue_checkpoint": 6,
+            "hold_until_clearance": 12
+          },
+          "trigger_counts": {
+            "internal_work": 6,
+            "capability_missing": 12
+          },
+          "decisions": [
+            {
+              "action": "continue_checkpoint",
+              "source": "host_progress_checkpoint",
+              "boundary_type": "continuation",
+              "continuation_receipt": {
+                "input_revision": "<redacted>",
+                "segment_id": "<redacted>",
+                "progress_after": {
+                  "schema_version": 2,
+                  "observed_sources": [
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>"
+                  ],
+                  "inline_outputs": [
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>"
+                  ],
+                  "review_complete": 0,
+                  "review_recorded": 0,
+                  "write_receipts": [
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>"
+                  ],
+                  "submitted_items": [],
+                  "submitted_revisions": []
+                }
+              },
+              "host_check": "<redacted>",
+              "chosen": {
+                "action": "continue_checkpoint",
+                "next_step": "<redacted>"
+              },
+              "decision_id": "fixture-decision-01",
+              "trigger": "internal_work",
+              "host_facts": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "active_blockers",
+                    "boundary_type",
+                    "capabilities",
+                    "checkpoint_present",
+                    "declared_backup",
+                    "diagnosis",
+                    "hard_boundary",
+                    "health_summary",
+                    "pending_human_request",
+                    "recovery_ladder",
+                    "run_supervisor",
+                    "scope",
+                    "stop_reason",
+                    "trigger",
+                    "unknown_tool_effects",
+                    "upward_report"
+                  ]
+                }
+              },
+              "decision_tokens": 0,
+              "decision_seconds": 0.2926223000395112,
+              "diagnosis": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "confidence_source",
+                    "contract_effect",
+                    "evidence_refs",
+                    "hard_boundary",
+                    "policy_version",
+                    "primary_kind",
+                    "recommended_action",
+                    "schema_version",
+                    "secondary_signals"
+                  ]
+                }
+              },
+              "clearance_conditions": [],
+              "execution_status": "<redacted>",
+              "presentation": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "eta",
+                    "input_revision",
+                    "kind",
+                    "next_step",
+                    "note",
+                    "open_item_count",
+                    "phase",
+                    "progress",
+                    "reason",
+                    "schema_version",
+                    "segment_id",
+                    "title"
+                  ]
+                }
+              }
+            },
+            {
+              "action": "continue_checkpoint",
+              "source": "host_progress_checkpoint",
+              "boundary_type": "continuation",
+              "continuation_receipt": {
+                "input_revision": "<redacted>",
+                "segment_id": "<redacted>",
+                "progress_after": {
+                  "schema_version": 2,
+                  "observed_sources": [
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>"
+                  ],
+                  "inline_outputs": [
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>"
+                  ],
+                  "review_complete": 0,
+                  "review_recorded": 0,
+                  "write_receipts": [
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>"
+                  ],
+                  "submitted_items": [],
+                  "submitted_revisions": []
+                }
+              },
+              "host_check": "<redacted>",
+              "chosen": {
+                "action": "continue_checkpoint",
+                "next_step": "<redacted>"
+              },
+              "decision_id": "fixture-decision-02",
+              "trigger": "internal_work",
+              "host_facts": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "active_blockers",
+                    "boundary_type",
+                    "capabilities",
+                    "checkpoint_present",
+                    "declared_backup",
+                    "diagnosis",
+                    "hard_boundary",
+                    "health_summary",
+                    "pending_human_request",
+                    "recovery_ladder",
+                    "run_supervisor",
+                    "scope",
+                    "stop_reason",
+                    "trigger",
+                    "unknown_tool_effects",
+                    "upward_report"
+                  ]
+                }
+              },
+              "decision_tokens": 0,
+              "decision_seconds": 0.331128699996043,
+              "diagnosis": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "confidence_source",
+                    "contract_effect",
+                    "evidence_refs",
+                    "hard_boundary",
+                    "policy_version",
+                    "primary_kind",
+                    "recommended_action",
+                    "schema_version",
+                    "secondary_signals"
+                  ]
+                }
+              },
+              "clearance_conditions": [],
+              "execution_status": "<redacted>",
+              "presentation": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "eta",
+                    "input_revision",
+                    "kind",
+                    "next_step",
+                    "note",
+                    "open_item_count",
+                    "phase",
+                    "progress",
+                    "reason",
+                    "schema_version",
+                    "segment_id",
+                    "title"
+                  ]
+                }
+              }
+            },
+            {
+              "action": "continue_checkpoint",
+              "source": "host_progress_checkpoint",
+              "boundary_type": "continuation",
+              "continuation_receipt": {
+                "input_revision": "<redacted>",
+                "segment_id": "<redacted>",
+                "progress_after": {
+                  "schema_version": 2,
+                  "observed_sources": [
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>"
+                  ],
+                  "inline_outputs": [
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>"
+                  ],
+                  "review_complete": 0,
+                  "review_recorded": 0,
+                  "write_receipts": [
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>"
+                  ],
+                  "submitted_items": [],
+                  "submitted_revisions": []
+                }
+              },
+              "host_check": "<redacted>",
+              "chosen": {
+                "action": "continue_checkpoint",
+                "next_step": "<redacted>"
+              },
+              "decision_id": "fixture-decision-03",
+              "trigger": "internal_work",
+              "host_facts": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "active_blockers",
+                    "boundary_type",
+                    "capabilities",
+                    "checkpoint_present",
+                    "declared_backup",
+                    "diagnosis",
+                    "hard_boundary",
+                    "health_summary",
+                    "pending_human_request",
+                    "recovery_ladder",
+                    "run_supervisor",
+                    "scope",
+                    "stop_reason",
+                    "trigger",
+                    "unknown_tool_effects",
+                    "upward_report"
+                  ]
+                }
+              },
+              "decision_tokens": 0,
+              "decision_seconds": 0.42489429999841377,
+              "diagnosis": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "confidence_source",
+                    "contract_effect",
+                    "evidence_refs",
+                    "hard_boundary",
+                    "policy_version",
+                    "primary_kind",
+                    "recommended_action",
+                    "schema_version",
+                    "secondary_signals"
+                  ]
+                }
+              },
+              "clearance_conditions": [],
+              "execution_status": "<redacted>",
+              "presentation": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "eta",
+                    "input_revision",
+                    "kind",
+                    "next_step",
+                    "note",
+                    "open_item_count",
+                    "phase",
+                    "progress",
+                    "reason",
+                    "schema_version",
+                    "segment_id",
+                    "title"
+                  ]
+                }
+              }
+            },
+            {
+              "action": "continue_checkpoint",
+              "source": "host_progress_checkpoint",
+              "boundary_type": "continuation",
+              "continuation_receipt": {
+                "input_revision": "<redacted>",
+                "segment_id": "<redacted>",
+                "progress_after": {
+                  "schema_version": 2,
+                  "observed_sources": [
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>"
+                  ],
+                  "inline_outputs": [
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>"
+                  ],
+                  "review_complete": 0,
+                  "review_recorded": 0,
+                  "write_receipts": [
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>"
+                  ],
+                  "submitted_items": [],
+                  "submitted_revisions": []
+                }
+              },
+              "host_check": "<redacted>",
+              "chosen": {
+                "action": "continue_checkpoint",
+                "next_step": "<redacted>"
+              },
+              "decision_id": "fixture-decision-04",
+              "trigger": "internal_work",
+              "host_facts": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "active_blockers",
+                    "boundary_type",
+                    "capabilities",
+                    "checkpoint_present",
+                    "declared_backup",
+                    "diagnosis",
+                    "hard_boundary",
+                    "health_summary",
+                    "pending_human_request",
+                    "recovery_ladder",
+                    "run_supervisor",
+                    "scope",
+                    "stop_reason",
+                    "trigger",
+                    "unknown_tool_effects",
+                    "upward_report"
+                  ]
+                }
+              },
+              "decision_tokens": 0,
+              "decision_seconds": 0.4529908000258729,
+              "diagnosis": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "confidence_source",
+                    "contract_effect",
+                    "evidence_refs",
+                    "hard_boundary",
+                    "policy_version",
+                    "primary_kind",
+                    "recommended_action",
+                    "schema_version",
+                    "secondary_signals"
+                  ]
+                }
+              },
+              "clearance_conditions": [],
+              "execution_status": "<redacted>",
+              "presentation": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "eta",
+                    "input_revision",
+                    "kind",
+                    "next_step",
+                    "note",
+                    "open_item_count",
+                    "phase",
+                    "progress",
+                    "reason",
+                    "schema_version",
+                    "segment_id",
+                    "title"
+                  ]
+                }
+              }
+            },
+            {
+              "action": "continue_checkpoint",
+              "source": "host_progress_checkpoint",
+              "boundary_type": "continuation",
+              "continuation_receipt": {
+                "input_revision": "<redacted>",
+                "segment_id": "<redacted>",
+                "progress_after": {
+                  "schema_version": 2,
+                  "observed_sources": [
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>"
+                  ],
+                  "inline_outputs": [
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>"
+                  ],
+                  "review_complete": 0,
+                  "review_recorded": 0,
+                  "write_receipts": [
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>"
+                  ],
+                  "submitted_items": [],
+                  "submitted_revisions": []
+                }
+              },
+              "host_check": "<redacted>",
+              "chosen": {
+                "action": "continue_checkpoint",
+                "next_step": "<redacted>"
+              },
+              "decision_id": "fixture-decision-05",
+              "trigger": "internal_work",
+              "host_facts": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "active_blockers",
+                    "boundary_type",
+                    "capabilities",
+                    "checkpoint_present",
+                    "declared_backup",
+                    "diagnosis",
+                    "hard_boundary",
+                    "health_summary",
+                    "pending_human_request",
+                    "recovery_ladder",
+                    "run_supervisor",
+                    "scope",
+                    "stop_reason",
+                    "trigger",
+                    "unknown_tool_effects",
+                    "upward_report"
+                  ]
+                }
+              },
+              "decision_tokens": 0,
+              "decision_seconds": 0.6820767999743111,
+              "diagnosis": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "confidence_source",
+                    "contract_effect",
+                    "evidence_refs",
+                    "hard_boundary",
+                    "policy_version",
+                    "primary_kind",
+                    "recommended_action",
+                    "schema_version",
+                    "secondary_signals"
+                  ]
+                }
+              },
+              "clearance_conditions": [],
+              "execution_status": "<redacted>",
+              "presentation": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "eta",
+                    "input_revision",
+                    "kind",
+                    "next_step",
+                    "note",
+                    "open_item_count",
+                    "phase",
+                    "progress",
+                    "reason",
+                    "schema_version",
+                    "segment_id",
+                    "title"
+                  ]
+                }
+              }
+            },
+            {
+              "action": "continue_checkpoint",
+              "source": "host_progress_checkpoint",
+              "boundary_type": "continuation",
+              "continuation_receipt": {
+                "input_revision": "<redacted>",
+                "segment_id": "<redacted>",
+                "progress_after": {
+                  "schema_version": 2,
+                  "observed_sources": [
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>"
+                  ],
+                  "inline_outputs": [
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>"
+                  ],
+                  "review_complete": 0,
+                  "review_recorded": 0,
+                  "write_receipts": [
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>",
+                    "<redacted>"
+                  ],
+                  "submitted_items": [],
+                  "submitted_revisions": []
+                }
+              },
+              "host_check": "<redacted>",
+              "chosen": {
+                "action": "continue_checkpoint",
+                "next_step": "<redacted>"
+              },
+              "decision_id": "fixture-decision-06",
+              "trigger": "internal_work",
+              "host_facts": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "active_blockers",
+                    "boundary_type",
+                    "capabilities",
+                    "checkpoint_present",
+                    "declared_backup",
+                    "diagnosis",
+                    "hard_boundary",
+                    "health_summary",
+                    "pending_human_request",
+                    "recovery_ladder",
+                    "run_supervisor",
+                    "scope",
+                    "stop_reason",
+                    "trigger",
+                    "unknown_tool_effects",
+                    "upward_report"
+                  ]
+                }
+              },
+              "decision_tokens": 0,
+              "decision_seconds": 0.5773740000440739,
+              "diagnosis": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "confidence_source",
+                    "contract_effect",
+                    "evidence_refs",
+                    "hard_boundary",
+                    "policy_version",
+                    "primary_kind",
+                    "recommended_action",
+                    "schema_version",
+                    "secondary_signals"
+                  ]
+                }
+              },
+              "clearance_conditions": [],
+              "execution_status": "<redacted>",
+              "presentation": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "eta",
+                    "input_revision",
+                    "kind",
+                    "next_step",
+                    "note",
+                    "open_item_count",
+                    "phase",
+                    "progress",
+                    "reason",
+                    "schema_version",
+                    "segment_id",
+                    "title"
+                  ]
+                }
+              }
+            },
+            {
+              "action": "hold_until_clearance",
+              "error": "<redacted>",
+              "host_check": "<redacted>",
+              "diagnostic_card": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "boundary_reason",
+                    "diagnosis",
+                    "evidence_refs",
+                    "ladder",
+                    "options",
+                    "prior_attempts",
+                    "retained_process_files",
+                    "schema_version",
+                    "upward_report",
+                    "work_cursor"
+                  ]
+                }
+              },
+              "decision_id": "fixture-decision-07",
+              "trigger": "capability_missing",
+              "host_facts": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "active_blockers",
+                    "boundary_type",
+                    "capabilities",
+                    "checkpoint_present",
+                    "declared_backup",
+                    "diagnosis",
+                    "hard_boundary",
+                    "health_summary",
+                    "pending_human_request",
+                    "recovery_ladder",
+                    "run_supervisor",
+                    "scope",
+                    "stop_reason",
+                    "trigger",
+                    "unknown_tool_effects",
+                    "upward_report"
+                  ]
+                }
+              },
+              "decision_tokens": 0,
+              "decision_seconds": 0.05299970001215115,
+              "diagnosis": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "confidence_source",
+                    "contract_effect",
+                    "evidence_refs",
+                    "hard_boundary",
+                    "policy_version",
+                    "primary_kind",
+                    "recommended_action",
+                    "schema_version",
+                    "secondary_signals"
+                  ]
+                }
+              },
+              "clearance_conditions": [
+                {
+                  "kind": "capability_missing",
+                  "ref": "<redacted>",
+                  "clearance": "<redacted>",
+                  "clearance_satisfied": false
+                }
+              ],
+              "execution_status": "<redacted>",
+              "presentation": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "eta",
+                    "input_revision",
+                    "kind",
+                    "next_step",
+                    "note",
+                    "open_item_count",
+                    "phase",
+                    "progress",
+                    "reason",
+                    "schema_version",
+                    "segment_id",
+                    "title"
+                  ]
+                }
+              }
+            },
+            {
+              "action": "hold_until_clearance",
+              "error": "<redacted>",
+              "host_check": "<redacted>",
+              "diagnostic_card": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "boundary_reason",
+                    "diagnosis",
+                    "evidence_refs",
+                    "ladder",
+                    "options",
+                    "prior_attempts",
+                    "retained_process_files",
+                    "schema_version",
+                    "upward_report",
+                    "work_cursor"
+                  ]
+                }
+              },
+              "decision_id": "fixture-decision-08",
+              "trigger": "capability_missing",
+              "host_facts": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "active_blockers",
+                    "boundary_type",
+                    "capabilities",
+                    "checkpoint_present",
+                    "declared_backup",
+                    "diagnosis",
+                    "hard_boundary",
+                    "health_summary",
+                    "pending_human_request",
+                    "recovery_ladder",
+                    "run_supervisor",
+                    "scope",
+                    "stop_reason",
+                    "trigger",
+                    "unknown_tool_effects",
+                    "upward_report"
+                  ]
+                }
+              },
+              "decision_tokens": 0,
+              "decision_seconds": 0.07483870000578463,
+              "diagnosis": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "confidence_source",
+                    "contract_effect",
+                    "evidence_refs",
+                    "hard_boundary",
+                    "policy_version",
+                    "primary_kind",
+                    "recommended_action",
+                    "schema_version",
+                    "secondary_signals"
+                  ]
+                }
+              },
+              "clearance_conditions": [
+                {
+                  "kind": "capability_missing",
+                  "ref": "<redacted>",
+                  "clearance": "<redacted>",
+                  "clearance_satisfied": false
+                }
+              ],
+              "execution_status": "<redacted>",
+              "presentation": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "eta",
+                    "input_revision",
+                    "kind",
+                    "next_step",
+                    "note",
+                    "open_item_count",
+                    "phase",
+                    "progress",
+                    "reason",
+                    "schema_version",
+                    "segment_id",
+                    "title"
+                  ]
+                }
+              }
+            },
+            {
+              "action": "hold_until_clearance",
+              "error": "<redacted>",
+              "host_check": "<redacted>",
+              "diagnostic_card": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "boundary_reason",
+                    "diagnosis",
+                    "evidence_refs",
+                    "ladder",
+                    "options",
+                    "prior_attempts",
+                    "retained_process_files",
+                    "schema_version",
+                    "upward_report",
+                    "work_cursor"
+                  ]
+                }
+              },
+              "decision_id": "fixture-decision-09",
+              "trigger": "capability_missing",
+              "host_facts": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "active_blockers",
+                    "boundary_type",
+                    "capabilities",
+                    "checkpoint_present",
+                    "declared_backup",
+                    "diagnosis",
+                    "hard_boundary",
+                    "health_summary",
+                    "pending_human_request",
+                    "recovery_ladder",
+                    "run_supervisor",
+                    "safety_review",
+                    "scope",
+                    "stop_reason",
+                    "trigger",
+                    "unknown_tool_effects",
+                    "upward_report"
+                  ]
+                }
+              },
+              "decision_tokens": 0,
+              "decision_seconds": 0.10295199998654425,
+              "diagnosis": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "confidence_source",
+                    "contract_effect",
+                    "evidence_refs",
+                    "hard_boundary",
+                    "policy_version",
+                    "primary_kind",
+                    "recommended_action",
+                    "schema_version",
+                    "secondary_signals"
+                  ]
+                }
+              },
+              "clearance_conditions": [
+                {
+                  "kind": "capability_missing",
+                  "ref": "<redacted>",
+                  "clearance": "<redacted>",
+                  "clearance_satisfied": false
+                }
+              ],
+              "execution_status": "<redacted>",
+              "presentation": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "eta",
+                    "input_revision",
+                    "kind",
+                    "next_step",
+                    "note",
+                    "open_item_count",
+                    "phase",
+                    "progress",
+                    "reason",
+                    "schema_version",
+                    "segment_id",
+                    "title"
+                  ]
+                }
+              }
+            },
+            {
+              "action": "hold_until_clearance",
+              "error": "<redacted>",
+              "host_check": "<redacted>",
+              "diagnostic_card": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "boundary_reason",
+                    "diagnosis",
+                    "evidence_refs",
+                    "ladder",
+                    "options",
+                    "prior_attempts",
+                    "retained_process_files",
+                    "schema_version",
+                    "upward_report",
+                    "work_cursor"
+                  ]
+                }
+              },
+              "decision_id": "fixture-decision-10",
+              "trigger": "capability_missing",
+              "host_facts": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "active_blockers",
+                    "boundary_type",
+                    "capabilities",
+                    "checkpoint_present",
+                    "declared_backup",
+                    "diagnosis",
+                    "hard_boundary",
+                    "health_summary",
+                    "pending_human_request",
+                    "recovery_ladder",
+                    "run_supervisor",
+                    "scope",
+                    "stop_reason",
+                    "trigger",
+                    "unknown_tool_effects",
+                    "upward_report"
+                  ]
+                }
+              },
+              "decision_tokens": 0,
+              "decision_seconds": 0.21302549995016307,
+              "diagnosis": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "confidence_source",
+                    "contract_effect",
+                    "evidence_refs",
+                    "hard_boundary",
+                    "policy_version",
+                    "primary_kind",
+                    "recommended_action",
+                    "schema_version",
+                    "secondary_signals"
+                  ]
+                }
+              },
+              "clearance_conditions": [
+                {
+                  "kind": "capability_missing",
+                  "ref": "<redacted>",
+                  "clearance": "<redacted>",
+                  "clearance_satisfied": false
+                }
+              ],
+              "execution_status": "<redacted>",
+              "presentation": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "eta",
+                    "input_revision",
+                    "kind",
+                    "next_step",
+                    "note",
+                    "open_item_count",
+                    "phase",
+                    "progress",
+                    "reason",
+                    "schema_version",
+                    "segment_id",
+                    "title"
+                  ]
+                }
+              }
+            },
+            {
+              "action": "hold_until_clearance",
+              "error": "<redacted>",
+              "host_check": "<redacted>",
+              "diagnostic_card": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "boundary_reason",
+                    "diagnosis",
+                    "evidence_refs",
+                    "ladder",
+                    "options",
+                    "prior_attempts",
+                    "retained_process_files",
+                    "schema_version",
+                    "upward_report",
+                    "work_cursor"
+                  ]
+                }
+              },
+              "decision_id": "fixture-decision-11",
+              "trigger": "capability_missing",
+              "host_facts": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "active_blockers",
+                    "boundary_type",
+                    "capabilities",
+                    "checkpoint_present",
+                    "declared_backup",
+                    "diagnosis",
+                    "hard_boundary",
+                    "health_summary",
+                    "pending_human_request",
+                    "recovery_ladder",
+                    "run_supervisor",
+                    "scope",
+                    "stop_reason",
+                    "trigger",
+                    "unknown_tool_effects",
+                    "upward_report"
+                  ]
+                }
+              },
+              "decision_tokens": 0,
+              "decision_seconds": 0.1109324999852106,
+              "diagnosis": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "confidence_source",
+                    "contract_effect",
+                    "evidence_refs",
+                    "hard_boundary",
+                    "policy_version",
+                    "primary_kind",
+                    "recommended_action",
+                    "schema_version",
+                    "secondary_signals"
+                  ]
+                }
+              },
+              "clearance_conditions": [
+                {
+                  "kind": "capability_missing",
+                  "ref": "<redacted>",
+                  "clearance": "<redacted>",
+                  "clearance_satisfied": false
+                }
+              ],
+              "execution_status": "<redacted>",
+              "presentation": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "eta",
+                    "input_revision",
+                    "kind",
+                    "next_step",
+                    "note",
+                    "open_item_count",
+                    "phase",
+                    "progress",
+                    "reason",
+                    "schema_version",
+                    "segment_id",
+                    "title"
+                  ]
+                }
+              }
+            },
+            {
+              "action": "hold_until_clearance",
+              "error": "<redacted>",
+              "host_check": "<redacted>",
+              "diagnostic_card": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "boundary_reason",
+                    "diagnosis",
+                    "evidence_refs",
+                    "ladder",
+                    "options",
+                    "prior_attempts",
+                    "retained_process_files",
+                    "schema_version",
+                    "upward_report",
+                    "work_cursor"
+                  ]
+                }
+              },
+              "decision_id": "fixture-decision-12",
+              "trigger": "capability_missing",
+              "host_facts": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "active_blockers",
+                    "boundary_type",
+                    "capabilities",
+                    "checkpoint_present",
+                    "declared_backup",
+                    "diagnosis",
+                    "hard_boundary",
+                    "health_summary",
+                    "pending_human_request",
+                    "recovery_ladder",
+                    "run_supervisor",
+                    "scope",
+                    "stop_reason",
+                    "trigger",
+                    "unknown_tool_effects",
+                    "upward_report"
+                  ]
+                }
+              },
+              "decision_tokens": 0,
+              "decision_seconds": 0.11918390000937507,
+              "diagnosis": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "confidence_source",
+                    "contract_effect",
+                    "evidence_refs",
+                    "hard_boundary",
+                    "policy_version",
+                    "primary_kind",
+                    "recommended_action",
+                    "schema_version",
+                    "secondary_signals"
+                  ]
+                }
+              },
+              "clearance_conditions": [
+                {
+                  "kind": "capability_missing",
+                  "ref": "<redacted>",
+                  "clearance": "<redacted>",
+                  "clearance_satisfied": false
+                }
+              ],
+              "execution_status": "<redacted>",
+              "presentation": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "eta",
+                    "input_revision",
+                    "kind",
+                    "next_step",
+                    "note",
+                    "open_item_count",
+                    "phase",
+                    "progress",
+                    "reason",
+                    "schema_version",
+                    "segment_id",
+                    "title"
+                  ]
+                }
+              }
+            },
+            {
+              "action": "hold_until_clearance",
+              "error": "<redacted>",
+              "host_check": "<redacted>",
+              "diagnostic_card": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "boundary_reason",
+                    "diagnosis",
+                    "evidence_refs",
+                    "ladder",
+                    "options",
+                    "prior_attempts",
+                    "retained_process_files",
+                    "schema_version",
+                    "upward_report",
+                    "work_cursor"
+                  ]
+                }
+              },
+              "decision_id": "fixture-decision-13",
+              "trigger": "capability_missing",
+              "host_facts": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "active_blockers",
+                    "boundary_type",
+                    "capabilities",
+                    "checkpoint_present",
+                    "declared_backup",
+                    "diagnosis",
+                    "hard_boundary",
+                    "health_summary",
+                    "pending_human_request",
+                    "recovery_ladder",
+                    "run_supervisor",
+                    "scope",
+                    "stop_reason",
+                    "trigger",
+                    "unknown_tool_effects",
+                    "upward_report"
+                  ]
+                }
+              },
+              "decision_tokens": 0,
+              "decision_seconds": 0.12288849998731166,
+              "diagnosis": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "confidence_source",
+                    "contract_effect",
+                    "evidence_refs",
+                    "hard_boundary",
+                    "policy_version",
+                    "primary_kind",
+                    "recommended_action",
+                    "schema_version",
+                    "secondary_signals"
+                  ]
+                }
+              },
+              "clearance_conditions": [
+                {
+                  "kind": "capability_missing",
+                  "ref": "<redacted>",
+                  "clearance": "<redacted>",
+                  "clearance_satisfied": false
+                }
+              ],
+              "execution_status": "<redacted>",
+              "presentation": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "eta",
+                    "input_revision",
+                    "kind",
+                    "next_step",
+                    "note",
+                    "open_item_count",
+                    "phase",
+                    "progress",
+                    "reason",
+                    "schema_version",
+                    "segment_id",
+                    "title"
+                  ]
+                }
+              }
+            },
+            {
+              "action": "hold_until_clearance",
+              "error": "<redacted>",
+              "host_check": "<redacted>",
+              "diagnostic_card": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "boundary_reason",
+                    "diagnosis",
+                    "evidence_refs",
+                    "ladder",
+                    "options",
+                    "prior_attempts",
+                    "retained_process_files",
+                    "schema_version",
+                    "upward_report",
+                    "work_cursor"
+                  ]
+                }
+              },
+              "decision_id": "fixture-decision-14",
+              "trigger": "capability_missing",
+              "host_facts": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "active_blockers",
+                    "boundary_type",
+                    "capabilities",
+                    "checkpoint_present",
+                    "declared_backup",
+                    "diagnosis",
+                    "hard_boundary",
+                    "health_summary",
+                    "pending_human_request",
+                    "recovery_ladder",
+                    "run_supervisor",
+                    "safety_review",
+                    "scope",
+                    "stop_reason",
+                    "trigger",
+                    "unknown_tool_effects",
+                    "upward_report"
+                  ]
+                }
+              },
+              "decision_tokens": 0,
+              "decision_seconds": 0.3092241000267677,
+              "diagnosis": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "confidence_source",
+                    "contract_effect",
+                    "evidence_refs",
+                    "hard_boundary",
+                    "policy_version",
+                    "primary_kind",
+                    "recommended_action",
+                    "schema_version",
+                    "secondary_signals"
+                  ]
+                }
+              },
+              "clearance_conditions": [
+                {
+                  "kind": "capability_missing",
+                  "ref": "<redacted>",
+                  "clearance": "<redacted>",
+                  "clearance_satisfied": false
+                }
+              ],
+              "execution_status": "<redacted>",
+              "presentation": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "eta",
+                    "input_revision",
+                    "kind",
+                    "next_step",
+                    "note",
+                    "open_item_count",
+                    "phase",
+                    "progress",
+                    "reason",
+                    "schema_version",
+                    "segment_id",
+                    "title"
+                  ]
+                }
+              }
+            },
+            {
+              "action": "hold_until_clearance",
+              "error": "<redacted>",
+              "host_check": "<redacted>",
+              "diagnostic_card": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "boundary_reason",
+                    "diagnosis",
+                    "evidence_refs",
+                    "ladder",
+                    "options",
+                    "prior_attempts",
+                    "retained_process_files",
+                    "schema_version",
+                    "upward_report",
+                    "work_cursor"
+                  ]
+                }
+              },
+              "decision_id": "fixture-decision-15",
+              "trigger": "capability_missing",
+              "host_facts": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "active_blockers",
+                    "boundary_type",
+                    "capabilities",
+                    "checkpoint_present",
+                    "declared_backup",
+                    "diagnosis",
+                    "hard_boundary",
+                    "health_summary",
+                    "pending_human_request",
+                    "recovery_ladder",
+                    "run_supervisor",
+                    "safety_review",
+                    "scope",
+                    "stop_reason",
+                    "trigger",
+                    "unknown_tool_effects",
+                    "upward_report"
+                  ]
+                }
+              },
+              "decision_tokens": 0,
+              "decision_seconds": 0.15047569997841492,
+              "diagnosis": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "confidence_source",
+                    "contract_effect",
+                    "evidence_refs",
+                    "hard_boundary",
+                    "policy_version",
+                    "primary_kind",
+                    "recommended_action",
+                    "schema_version",
+                    "secondary_signals"
+                  ]
+                }
+              },
+              "clearance_conditions": [
+                {
+                  "kind": "capability_missing",
+                  "ref": "<redacted>",
+                  "clearance": "<redacted>",
+                  "clearance_satisfied": false
+                }
+              ],
+              "execution_status": "<redacted>",
+              "presentation": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "eta",
+                    "input_revision",
+                    "kind",
+                    "next_step",
+                    "note",
+                    "open_item_count",
+                    "phase",
+                    "progress",
+                    "reason",
+                    "schema_version",
+                    "segment_id",
+                    "title"
+                  ]
+                }
+              }
+            },
+            {
+              "action": "hold_until_clearance",
+              "error": "<redacted>",
+              "host_check": "<redacted>",
+              "diagnostic_card": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "boundary_reason",
+                    "diagnosis",
+                    "evidence_refs",
+                    "ladder",
+                    "options",
+                    "prior_attempts",
+                    "retained_process_files",
+                    "schema_version",
+                    "upward_report",
+                    "work_cursor"
+                  ]
+                }
+              },
+              "decision_id": "fixture-decision-16",
+              "trigger": "capability_missing",
+              "host_facts": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "active_blockers",
+                    "boundary_type",
+                    "capabilities",
+                    "checkpoint_present",
+                    "declared_backup",
+                    "diagnosis",
+                    "hard_boundary",
+                    "health_summary",
+                    "pending_human_request",
+                    "recovery_ladder",
+                    "run_supervisor",
+                    "scope",
+                    "stop_reason",
+                    "trigger",
+                    "unknown_tool_effects",
+                    "upward_report"
+                  ]
+                }
+              },
+              "decision_tokens": 0,
+              "decision_seconds": 0.13572990003740415,
+              "diagnosis": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "confidence_source",
+                    "contract_effect",
+                    "evidence_refs",
+                    "hard_boundary",
+                    "policy_version",
+                    "primary_kind",
+                    "recommended_action",
+                    "schema_version",
+                    "secondary_signals"
+                  ]
+                }
+              },
+              "clearance_conditions": [
+                {
+                  "kind": "capability_missing",
+                  "ref": "<redacted>",
+                  "clearance": "<redacted>",
+                  "clearance_satisfied": false
+                }
+              ],
+              "execution_status": "<redacted>",
+              "presentation": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "eta",
+                    "input_revision",
+                    "kind",
+                    "next_step",
+                    "note",
+                    "open_item_count",
+                    "phase",
+                    "progress",
+                    "reason",
+                    "schema_version",
+                    "segment_id",
+                    "title"
+                  ]
+                }
+              }
+            },
+            {
+              "action": "hold_until_clearance",
+              "error": "<redacted>",
+              "host_check": "<redacted>",
+              "diagnostic_card": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "boundary_reason",
+                    "diagnosis",
+                    "evidence_refs",
+                    "ladder",
+                    "options",
+                    "prior_attempts",
+                    "retained_process_files",
+                    "schema_version",
+                    "upward_report",
+                    "work_cursor"
+                  ]
+                }
+              },
+              "decision_id": "fixture-decision-17",
+              "trigger": "capability_missing",
+              "host_facts": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "active_blockers",
+                    "boundary_type",
+                    "capabilities",
+                    "checkpoint_present",
+                    "declared_backup",
+                    "diagnosis",
+                    "hard_boundary",
+                    "health_summary",
+                    "pending_human_request",
+                    "recovery_ladder",
+                    "run_supervisor",
+                    "scope",
+                    "stop_reason",
+                    "trigger",
+                    "unknown_tool_effects",
+                    "upward_report"
+                  ]
+                }
+              },
+              "decision_tokens": 0,
+              "decision_seconds": 0.4341590999974869,
+              "diagnosis": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "confidence_source",
+                    "contract_effect",
+                    "evidence_refs",
+                    "hard_boundary",
+                    "policy_version",
+                    "primary_kind",
+                    "recommended_action",
+                    "schema_version",
+                    "secondary_signals"
+                  ]
+                }
+              },
+              "clearance_conditions": [
+                {
+                  "kind": "capability_missing",
+                  "ref": "<redacted>",
+                  "clearance": "<redacted>",
+                  "clearance_satisfied": false
+                }
+              ],
+              "execution_status": "<redacted>",
+              "presentation": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "eta",
+                    "input_revision",
+                    "kind",
+                    "next_step",
+                    "note",
+                    "open_item_count",
+                    "phase",
+                    "progress",
+                    "reason",
+                    "schema_version",
+                    "segment_id",
+                    "title"
+                  ]
+                }
+              }
+            },
+            {
+              "action": "hold_until_clearance",
+              "error": "<redacted>",
+              "host_check": "<redacted>",
+              "diagnostic_card": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "boundary_reason",
+                    "diagnosis",
+                    "evidence_refs",
+                    "ladder",
+                    "options",
+                    "prior_attempts",
+                    "retained_process_files",
+                    "schema_version",
+                    "upward_report",
+                    "work_cursor"
+                  ]
+                }
+              },
+              "decision_id": "fixture-decision-18",
+              "trigger": "capability_missing",
+              "host_facts": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "active_blockers",
+                    "boundary_type",
+                    "capabilities",
+                    "checkpoint_present",
+                    "declared_backup",
+                    "diagnosis",
+                    "hard_boundary",
+                    "health_summary",
+                    "pending_human_request",
+                    "recovery_ladder",
+                    "run_supervisor",
+                    "scope",
+                    "stop_reason",
+                    "trigger",
+                    "unknown_tool_effects",
+                    "upward_report"
+                  ]
+                }
+              },
+              "decision_tokens": 0,
+              "decision_seconds": 0.1479772999882698,
+              "diagnosis": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "confidence_source",
+                    "contract_effect",
+                    "evidence_refs",
+                    "hard_boundary",
+                    "policy_version",
+                    "primary_kind",
+                    "recommended_action",
+                    "schema_version",
+                    "secondary_signals"
+                  ]
+                }
+              },
+              "clearance_conditions": [
+                {
+                  "kind": "capability_missing",
+                  "ref": "<redacted>",
+                  "clearance": "<redacted>",
+                  "clearance_satisfied": false
+                }
+              ],
+              "execution_status": "<redacted>",
+              "presentation": {
+                "redacted": true,
+                "shape": {
+                  "type": "object",
+                  "keys": [
+                    "eta",
+                    "input_revision",
+                    "kind",
+                    "next_step",
+                    "note",
+                    "open_item_count",
+                    "phase",
+                    "progress",
+                    "reason",
+                    "schema_version",
+                    "segment_id",
+                    "title"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "maintenance_rows": [
+    {
+      "source_rowid": 6,
+      "source_keys": [
+        "applied_at",
+        "applied_version",
+        "base",
+        "base_hash",
+        "call_id",
+        "conversation_id",
+        "created_at",
+        "error",
+        "id",
+        "messages",
+        "mode",
+        "node_ids",
+        "project",
+        "proposal",
+        "revision",
+        "run_id",
+        "run_notice",
+        "runtime_repair",
+        "status",
+        "updated_at"
+      ],
+      "mode": "fix",
+      "status": "applied",
+      "revision": 5,
+      "run_id_alias": "capability_missing",
+      "message_count": 4,
+      "proposal_present": true,
+      "error_present": false,
+      "base_shape": {
+        "type": "object",
+        "keys": [
+          "edges",
+          "finalizer_node_id",
+          "goal",
+          "goal_contract",
+          "label",
+          "meta",
+          "nodes",
+          "require_confirm_gate",
+          "spec_id",
+          "template_id",
+          "version"
+        ]
+      },
+      "runtime_repair": {
+        "keys": [
+          "action",
+          "checkpoint_id",
+          "command_started",
+          "gate_state",
+          "missing_evidence",
+          "native_ready",
+          "ready",
+          "reason",
+          "recoverable",
+          "recovery_authorized",
+          "task_identity_restored"
+        ],
+        "value_types": {
+          "ready": "boolean",
+          "gate_state": "string",
+          "reason": "string",
+          "missing_evidence": "array",
+          "recovery_authorized": "boolean",
+          "recoverable": "boolean",
+          "command_started": "boolean",
+          "action": "string",
+          "native_ready": "boolean",
+          "task_identity_restored": "boolean",
+          "checkpoint_id": "string"
+        }
+      },
+      "agent_history_event_count": null,
+      "agent_event_count": 0
+    },
+    {
+      "source_rowid": 10,
+      "source_keys": [
+        "applied_at",
+        "applied_version",
+        "base",
+        "base_hash",
+        "call_id",
+        "conversation_id",
+        "created_at",
+        "error",
+        "id",
+        "messages",
+        "mode",
+        "node_ids",
+        "project",
+        "proposal",
+        "revision",
+        "run_id",
+        "run_notice",
+        "runtime_repair",
+        "status",
+        "updated_at"
+      ],
+      "mode": "fix",
+      "status": "applied",
+      "revision": 3,
+      "run_id_alias": "capability_missing",
+      "message_count": 2,
+      "proposal_present": true,
+      "error_present": false,
+      "base_shape": {
+        "type": "object",
+        "keys": [
+          "edges",
+          "finalizer_node_id",
+          "goal",
+          "goal_contract",
+          "label",
+          "meta",
+          "nodes",
+          "require_confirm_gate",
+          "spec_id",
+          "template_id",
+          "version"
+        ]
+      },
+      "runtime_repair": {
+        "keys": [
+          "action",
+          "checkpoint_id",
+          "command_started",
+          "gate_state",
+          "missing_evidence",
+          "native_ready",
+          "ready",
+          "reason",
+          "recoverable",
+          "recovery_authorized",
+          "task_identity_restored"
+        ],
+        "value_types": {
+          "ready": "boolean",
+          "gate_state": "string",
+          "reason": "string",
+          "missing_evidence": "array",
+          "recovery_authorized": "boolean",
+          "recoverable": "boolean",
+          "command_started": "boolean",
+          "action": "string",
+          "native_ready": "boolean",
+          "task_identity_restored": "boolean",
+          "checkpoint_id": "string"
+        }
+      },
+      "agent_history_event_count": null,
+      "agent_event_count": 0
+    },
+    {
+      "source_rowid": 445,
+      "source_keys": [
+        "agent",
+        "agent_history",
+        "applied_at",
+        "applied_version",
+        "base",
+        "base_hash",
+        "call_id",
+        "conversation_id",
+        "created_at",
+        "error",
+        "id",
+        "messages",
+        "mode",
+        "node_ids",
+        "project",
+        "proposal",
+        "revision",
+        "run_id",
+        "run_notice",
+        "runtime_repair",
+        "status",
+        "updated_at"
+      ],
+      "mode": "fix",
+      "status": "applied",
+      "revision": 4,
+      "run_id_alias": "capability_missing",
+      "message_count": 3,
+      "proposal_present": true,
+      "error_present": true,
+      "base_shape": {
+        "type": "object",
+        "keys": [
+          "edges",
+          "finalizer_node_id",
+          "goal",
+          "goal_contract",
+          "label",
+          "meta",
+          "nodes",
+          "require_confirm_gate",
+          "spec_id",
+          "template_id",
+          "version"
+        ]
+      },
+      "runtime_repair": {
+        "keys": [
+          "action",
+          "checkpoint_id",
+          "command_receipt_blockers",
+          "command_receipt_reconciliation",
+          "command_started",
+          "gate_state",
+          "missing_evidence",
+          "native_ready",
+          "ready",
+          "reason",
+          "recoverable",
+          "recovery_authorized",
+          "task_identity_restored"
+        ],
+        "value_types": {
+          "ready": "boolean",
+          "gate_state": "string",
+          "reason": "string",
+          "missing_evidence": "array",
+          "recovery_authorized": "boolean",
+          "recoverable": "boolean",
+          "command_started": "boolean",
+          "action": "string",
+          "native_ready": "boolean",
+          "task_identity_restored": "boolean",
+          "command_receipt_blockers": "array",
+          "command_receipt_reconciliation": "object",
+          "checkpoint_id": "string"
+        }
+      },
+      "agent_history_event_count": null,
+      "agent_event_count": 100
+    }
+  ],
+  "run_input_contract": [
+    {
+      "name": "pdf_paths",
+      "required": true,
+      "source_type_field_present": false,
+      "source_effective_type": "text",
+      "default": "<fixture>/input_01.pdf\n<fixture>/input_02.pdf\n<fixture>/input_03.pdf\n<fixture>/input_04.pdf",
+      "default_redacted": true
+    },
+    {
+      "name": "new_output_directory",
+      "required": true,
+      "source_type_field_present": false,
+      "source_effective_type": "text",
+      "default": "<redacted>",
+      "default_redacted": true
+    },
+    {
+      "name": "model_bindings",
+      "required": false,
+      "source_type_field_present": false,
+      "source_effective_type": "text",
+      "default": "<redacted>",
+      "default_redacted": true
+    },
+    {
+      "name": "content_external_authorization",
+      "required": true,
+      "source_type_field_present": false,
+      "source_effective_type": "text",
+      "default": null
+    },
+    {
+      "name": "model_cost_policy",
+      "required": true,
+      "source_type_field_present": false,
+      "source_effective_type": "text",
+      "default": null
+    },
+    {
+      "name": "enable_vector_search",
+      "required": true,
+      "source_type_field_present": false,
+      "source_effective_type": "text",
+      "default": null
+    },
+    {
+      "name": "publication_choice",
+      "required": true,
+      "source_type_field_present": false,
+      "source_effective_type": "text",
+      "default": null
+    },
+    {
+      "name": "hierarchy_label_interpretation",
+      "required": true,
+      "source_type_field_present": false,
+      "source_effective_type": "text",
+      "default": null
+    },
+    {
+      "name": "embedding_binding",
+      "required": false,
+      "source_type_field_present": false,
+      "source_effective_type": "text",
+      "default": null
+    }
+  ]
+}

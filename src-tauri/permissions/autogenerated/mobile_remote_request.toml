@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-mobile-remote-request"
+description = "Enables the mobile_remote_request command without any pre-configured scope."
+commands.allow = ["mobile_remote_request"]
+
+[[permission]]
+identifier = "deny-mobile-remote-request"
+description = "Denies the mobile_remote_request command without any pre-configured scope."
+commands.deny = ["mobile_remote_request"]

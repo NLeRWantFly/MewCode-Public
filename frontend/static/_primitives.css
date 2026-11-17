@@ -1,0 +1,219 @@
+/* MewCode shared UI primitives — independent of page layout. */
+.density-compact { font-size: var(--font-sm); line-height: var(--line-compact); }
+.density-comfortable { font-size: var(--font-md); line-height: var(--line-comfortable); }
+
+.ui-icon {
+  width: 16px;
+  height: 16px;
+  display: block;
+  flex: 0 0 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.ui-icon.is-solid { fill: currentColor; stroke: none; }
+
+.material-bar {
+  border-color: var(--border-soft);
+  background: var(--bg-soft);
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+.material-float {
+  border-color: var(--border-soft);
+  background: var(--bg-panel);
+  box-shadow: var(--shadow-floating);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+.material-modal {
+  border-color: var(--border-soft);
+  background: var(--bg-panel);
+  box-shadow: var(--shadow-modal);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+.symbol-badge {
+  width: 18px;
+  height: 18px;
+  border-radius: var(--radius-xs);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 18px;
+  color: var(--on-accent);
+  background: var(--accent-gradient);
+  font-size: var(--font-xs);
+  font-weight: 700;
+  line-height: 1;
+}
+
+button, input, textarea, select, summary {
+  transition:
+    background-color var(--motion-fast),
+    border-color var(--motion-fast),
+    color var(--motion-fast),
+    opacity var(--motion-fast);
+}
+:where(button, input, textarea, select, summary, [tabindex]):focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+button:active:not(:disabled) { transform: scale(0.97); }
+
+#mew-feedback-toasts {
+  position: fixed;
+  top: var(--space-4);
+  right: var(--space-4);
+  z-index: 2200;
+  display: grid;
+  gap: var(--space-2);
+  width: min(380px, calc(100vw - 32px));
+  pointer-events: none;
+}
+.is-desktop #mew-feedback-toasts {
+  top: max(64px, calc(env(titlebar-area-height, 0px) + var(--space-3)));
+}
+.mew-toast {
+  display: grid;
+  grid-template-columns: 18px 1fr 22px;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  padding: var(--space-2) var(--space-2) var(--space-2) var(--space-3);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  background: var(--glass-float);
+  color: var(--text);
+  box-shadow: var(--shadow-floating), var(--shadow-hairline);
+  -webkit-backdrop-filter: blur(28px) saturate(100%);
+  backdrop-filter: blur(28px) saturate(100%);
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity var(--motion-fast), transform var(--motion-enter);
+  pointer-events: auto;
+}
+.mew-toast.show { opacity: 1; transform: translateY(0); }
+.mew-toast-icon {
+  width: 18px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-pill);
+  background: var(--info-soft);
+  color: var(--info);
+  font-size: var(--font-xs);
+  font-weight: 800;
+}
+.mew-toast.success .mew-toast-icon { background: var(--ok-soft); color: var(--ok); }
+.mew-toast.warning .mew-toast-icon { background: var(--warn-soft); color: var(--warn); }
+.mew-toast.error .mew-toast-icon { background: var(--error-soft); color: var(--error); }
+.mew-toast-text { font-size: var(--font-md); line-height: var(--line-compact); }
+.mew-toast-close {
+  width: 22px;
+  height: 22px;
+  border: 0;
+  border-radius: var(--radius-xs);
+  background: transparent;
+  color: var(--text-faint);
+  cursor: pointer;
+  font-size: var(--font-lg);
+  line-height: 1;
+  display: grid;
+  place-items: center;
+}
+.mew-toast-close:hover { background: var(--bg-hover); color: var(--text); }
+
+.mew-confirm-mask {
+  box-sizing: border-box;
+  position: fixed;
+  inset: 0;
+  z-index: 2300;
+  display: grid;
+  place-items: center;
+  padding: var(--space-4);
+  background: var(--overlay);
+  opacity: 0;
+  transition: opacity var(--motion-standard);
+}
+.mew-confirm-mask.show { opacity: 1; }
+.mew-confirm {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  width: min(440px, 100%);
+  max-height: calc(100vh - 2 * var(--space-4));
+  max-height: calc(100dvh - 2 * var(--space-4));
+  overflow: hidden;
+  padding: var(--space-6);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  background: var(--glass-modal);
+  color: var(--text);
+  box-shadow: var(--shadow-modal), var(--shadow-hairline);
+  -webkit-backdrop-filter: blur(32px) saturate(100%);
+  backdrop-filter: blur(32px) saturate(100%);
+  transform: translateY(8px) scale(.985);
+  transition: transform var(--motion-enter);
+}
+.mew-confirm-mask.show .mew-confirm { transform: translateY(0) scale(1); }
+.mew-confirm h2 { flex: 0 0 auto; margin: 0; font-size: var(--font-lg); line-height: 1.35; overflow-wrap: anywhere; }
+.mew-confirm p {
+  min-height: 0;
+  overflow: auto;
+  overflow-wrap: anywhere;
+  overscroll-behavior: contain;
+  margin: var(--space-3) 0 0;
+  color: var(--text-dim);
+  font-size: var(--font-md);
+  line-height: var(--line-comfortable);
+  white-space: pre-wrap;
+}
+.mew-confirm-actions {
+  display: flex;
+  flex: 0 0 auto;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--space-2);
+  margin-top: var(--space-6);
+}
+.mew-confirm-actions button {
+  min-height: 34px;
+  padding: 0 var(--space-3);
+  border-radius: var(--radius-sm);
+  font: inherit;
+  cursor: pointer;
+}
+.mew-confirm-cancel { border: 1px solid var(--border); background: var(--bg-panel); color: var(--text-dim); }
+.mew-confirm-cancel:hover { background: var(--bg-hover); color: var(--text); }
+.mew-confirm-accept { border: 1px solid var(--accent); background: var(--accent); color: var(--on-accent); font-weight: 650; }
+.mew-confirm-accept:hover { background: var(--accent-hover); }
+.mew-confirm.danger .mew-confirm-accept { border-color: var(--error); background: var(--error); }
+
+@supports not ((backdrop-filter: blur(1px))) {
+  .material-bar, .material-float, .material-modal,
+  .mew-toast, .mew-confirm { background: var(--bg-panel); }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+  }
+}
+@media (prefers-contrast: more), (forced-colors: active) {
+  :root { --glass-border: var(--border); }
+  .material-bar, .material-float, .material-modal,
+  .mew-toast, .mew-confirm { backdrop-filter: none; background: var(--bg-panel); }
+}
+@media (max-width: 600px) {
+  #mew-feedback-toasts { left: var(--space-3); right: var(--space-3); width: auto; }
+  .mew-confirm { padding: var(--space-4); }
+}

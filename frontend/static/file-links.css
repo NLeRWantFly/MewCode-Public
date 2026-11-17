@@ -1,0 +1,12 @@
+.mew-file-dialog { box-sizing:border-box;width:min(1000px,calc(100vw - 48px));max-height:calc(100vh - 48px);border:1px solid #b8c0cc;border-radius:12px;padding:20px;background:#fff;color:#202735;font:14px/1.6 system-ui,sans-serif; }
+.mew-file-dialog::backdrop { background:rgb(0 0 0 / .35); }
+.mew-file-dialog header { display:flex;justify-content:space-between;align-items:center;gap:20px; }
+.mew-file-dialog header strong { overflow-wrap:anywhere; }
+.mew-file-dialog button,.mew-file-download { border:1px solid #bac3d0;border-radius:6px;padding:6px 12px;color:inherit;background:transparent;font:inherit;cursor:pointer;text-decoration:none; }
+.mew-file-path { overflow-wrap:anywhere;font-size:12px;color:#586579;user-select:text; }
+.mew-file-status { margin:12px 0; }
+.mew-file-actions { display:flex;flex-wrap:wrap;gap:8px; }
+.mew-file-preview { margin:16px 0 0;max-height:65vh;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;padding:16px;border-radius:8px;background:#f0f3f7;color:inherit;font:13px/1.6 Consolas,"Microsoft YaHei",monospace; }
+[data-theme="dark"] .mew-file-dialog { background:#20252d;color:#edf0f6;border-color:#495465; }
+[data-theme="dark"] .mew-file-preview { background:#171b21; }
+[data-theme="dark"] .mew-file-path { color:#aab6c8; }

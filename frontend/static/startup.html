@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MewCode</title>
+  <script>document.documentElement.dataset.theme = window.__MEWCODE_STARTUP_THEME__ || 'light';</script>
+  <style>
+    :root { color-scheme: light; --bg: #f8f9fc; --card: #fff; --text: #252a34; --muted: #7c8493; --line: #e4e8ef; --accent: #009ee2; --glow: #e4f4fc; }
+    :root[data-theme="dark"] { color-scheme: dark; --bg: #13161d; --card: #1b202a; --text: #edf1f7; --muted: #9ba6b8; --line: #303948; --accent: #48b9f0; --glow: #1c3143; }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; display: grid; place-items: center; color: var(--text); background: var(--bg); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif; }
+    main { width: min(440px, calc(100vw - 48px)); text-align: center; padding: 40px 0; }
+    .mark { display: grid; place-items: center; width: 72px; height: 72px; margin: 0 auto 24px; border: 1px solid var(--line); border-radius: 22px; background: var(--card); box-shadow: 0 12px 40px var(--glow); }
+    .mark span { font-size: 36px; font-weight: 850; font-style: italic; letter-spacing: -5px; padding-right: 5px; }
+    h1 { font-size: 27px; letter-spacing: -.8px; margin: 0 0 10px; font-weight: 650; }
+    .tagline { margin: 0; color: var(--muted); font-size: 13px; letter-spacing: 2px; }
+    .progress { width: 190px; height: 3px; background: var(--line); border-radius: 4px; overflow: hidden; margin: 36px auto 18px; }
+    .progress::after { content: ""; display: block; height: 100%; width: 45%; border-radius: inherit; background: var(--accent); animation: slide 1.5s ease-in-out infinite; }
+    #message { margin: 0; font-size: 13px; line-height: 1.7; }
+    #hint { color: var(--muted); font-size: 12px; min-height: 18px; margin: 9px 0 0; }
+    #actions { display: flex; justify-content: center; gap: 10px; margin-top: 24px; }
+    button { border: 1px solid var(--line); border-radius: 7px; padding: 9px 17px; background: var(--card); color: var(--text); font: inherit; font-size: 13px; cursor: pointer; }
+    #retry { background: var(--accent); border-color: var(--accent); color: #fff; }
+    button:disabled { opacity: .5; cursor: default; }
+    button:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+    details { margin-top: 22px; text-align: left; color: var(--muted); font-size: 12px; }
+    summary { cursor: pointer; text-align: center; }
+    pre { white-space: pre-wrap; overflow-wrap: anywhere; max-height: 180px; overflow-y: auto; line-height: 1.6; padding: 14px; background: var(--card); border: 1px solid var(--line); border-radius: 8px; }
+    [hidden] { display: none !important; }
+    body[data-phase="error"] .progress::after { animation: none; width: 100%; background: #d68b42; }
+    @keyframes slide { 0% { transform: translateX(-110%); } 100% { transform: translateX(330%); } }
+    @media (prefers-reduced-motion: reduce) { .progress::after { animation: none; width: 100%; opacity: .6; } }
+  </style>
+</head>
+<body data-phase="starting">
+  <main aria-label="MewCode 启动">
+    <div class="mark" aria-hidden="true"><span>M</span></div>
+    <h1>MewCode</h1>
+    <p class="tagline">从一个想法开始</p>
+    <div class="progress" aria-hidden="true"></div>
+    <div role="status" aria-live="polite"><p id="message">正在启动本地服务</p><p id="hint">即将进入你的工作区</p></div>
+    <div id="actions" hidden><button id="retry" type="button">重试启动</button><button id="logs" type="button">查看日志</button></div>
+    <details id="error" hidden><summary>启动详情</summary><pre id="detail"></pre></details>
+  </main>
+  <script>
+    (() => {
+      const invoke = window.__TAURI__?.core?.invoke;
+      const message = document.getElementById('message'), hint = document.getElementById('hint');
+      const retry = document.getElementById('retry'), logs = document.getElementById('logs');
+      let lastStatus, timer, closed = false;
+      function render(status) {
+        lastStatus = status;
+        const failed = status.phase === 'error';
+        document.body.dataset.phase = status.phase;
+        message.textContent = status.message;
+        hint.textContent = failed ? '可以重试启动，或查看日志了解原因' : '即将进入你的工作区';
+        document.getElementById('actions').hidden = !failed;
+        document.getElementById('error').hidden = !failed;
+        document.getElementById('detail').textContent = status.detail || '';
+        retry.disabled = !failed;
+        logs.disabled = !status.log_dir;
+      }
+      async function poll() {
+        if (closed) return;
+        try { render(await invoke('startup_status')); }
+        catch (error) { render({ phase: 'error', message: '无法读取启动状态', detail: String(error) }); retry.disabled = true; }
+        if (!closed) timer = setTimeout(poll, 500);
+      }
+      retry.addEventListener('click', async () => {
+        retry.disabled = true;
+        try { await invoke('retry_startup'); }
+        catch (error) { hint.textContent = String(error); retry.disabled = false; }
+      });
+      logs.addEventListener('click', async () => {
+        try { await invoke('open_directory', { directoryPath: lastStatus.log_dir }); }
+        catch (error) { hint.textContent = String(error); }
+      });
+      window.addEventListener('pagehide', () => { closed = true; clearTimeout(timer); });
+      if (invoke) poll();
+      else render({ phase: 'error', message: '请从 MewCode 桌面应用启动', detail: '当前页面未连接桌面启动服务。' });
+    })();
+  </script>
+</body>
+</html>

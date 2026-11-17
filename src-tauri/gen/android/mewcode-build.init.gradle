@@ -1,0 +1,42 @@
+// MewCode Android build init script.
+//
+// Restored on 2026-08-28: the generated `src-tauri/gen` tree was wiped during a
+// cleanup and this file was not tracked by git, so there was no copy to recover.
+// It is a Gradle init script: it only reshapes repository resolution and never
+// touches the app's own build logic, so regenerating it is safe.
+//
+// The Aliyun mirrors come first because dl.google.com and repo1.maven.org are
+// unreliable from mainland China; the upstream repositories stay in the list so
+// the build still works when the mirrors are unreachable.
+
+def mirror = { handler, url ->
+    handler.maven { repo -> repo.setUrl(url) }
+}
+
+allprojects {
+    buildscript {
+        repositories {
+            mirror(delegate, 'https://maven.aliyun.com/repository/public')
+            mirror(delegate, 'https://maven.aliyun.com/repository/google')
+            google()
+            mavenCentral()
+        }
+    }
+    repositories {
+        mirror(delegate, 'https://maven.aliyun.com/repository/public')
+        mirror(delegate, 'https://maven.aliyun.com/repository/google')
+        google()
+        mavenCentral()
+    }
+}
+
+settingsEvaluated { settings ->
+    settings.pluginManagement {
+        repositories {
+            mirror(delegate, 'https://maven.aliyun.com/repository/gradle-plugin')
+            gradlePluginPortal()
+            google()
+            mavenCentral()
+        }
+    }
+}

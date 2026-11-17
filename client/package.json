@@ -1,0 +1,26 @@
+{
+  "name": "mewcode-desktop",
+  "version": "0.1.0",
+  "description": "MewCode composite-agent desktop client",
+  "main": "main.cjs",
+  "private": true,
+  "scripts": {
+    "start": "electron-forge start",
+    "backend": "node scripts/build-backend.cjs",
+    "package": "electron-forge package",
+    "make": "node scripts/make.cjs",
+    "make:win:x64": "node scripts/make.cjs win32 x64",
+    "make:mac:x64": "node scripts/make.cjs darwin x64",
+    "make:mac:arm64": "node scripts/make.cjs darwin arm64",
+    "make:linux:x64": "node scripts/make.cjs linux x64",
+    "test": "node --test tests/*.test.cjs"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^7.8.1",
+    "@electron-forge/maker-deb": "^7.8.1",
+    "@electron-forge/maker-rpm": "^7.8.1",
+    "@electron-forge/maker-squirrel": "^7.8.1",
+    "@electron-forge/maker-zip": "^7.8.1",
+    "electron": "^37.2.0"
+  }
+}

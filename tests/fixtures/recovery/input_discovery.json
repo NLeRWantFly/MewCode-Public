@@ -1,0 +1,388 @@
+{
+  "run_id": "982cd643621d4ca2a066380071d300bc",
+  "conversation_id": "session_20261007_234156_aidp",
+  "status": "paused",
+  "locked_flow": {
+    "flow_id": "input-discovery-frozen",
+    "version": 1,
+    "label": "输入发现恢复测试",
+    "nodes": [
+      {
+        "node_id": "n_scope_gate",
+        "role": "manager",
+        "label": "范围门禁",
+        "kind": "role"
+      },
+      {
+        "node_id": "n_prep_plan",
+        "role": "planner",
+        "label": "准备阶段方向交接与验证口径",
+        "kind": "role"
+      },
+      {
+        "node_id": "n_method_review",
+        "role": "planner",
+        "label": "主控方法复核与批大小确定",
+        "kind": "role"
+      }
+    ],
+    "edges": [],
+    "finalizer_node_id": "n_method_review",
+    "meta": {
+      "run_input_contract": [
+        {
+          "name": "batch_size",
+          "label": "每批页数",
+          "description": "每批处理的页数。",
+          "required": true,
+          "collect_at": "n_method_review",
+          "default": null
+        }
+      ]
+    }
+  },
+  "run_inputs": {
+    "batch_size": ""
+  },
+  "node_states": {
+    "n_prep_plan": {
+      "status": "paused",
+      "epoch": 0,
+      "input_revision": "aad016831ac46d0f1f609343587bea7e1958bc2f21b4b33bc0140f540effb249",
+      "pending_recovery_case": {
+        "case_id": "627fa0866b4200c9564a6c5b",
+        "round": 1
+      },
+      "recovery_phase": "已汇报",
+      "handoff": {
+        "summary": "原节点尚未完成 SubmitHandoff。",
+        "status": "needs_attention",
+        "blockers": [
+          "原节点尚未提交实际交接。"
+        ]
+      },
+      "assistance_receipts": [
+        {
+          "request_id": "8103c490a19c26d428e99c5e2e3657aa",
+          "node_id": "n_prep_plan",
+          "epoch": 0,
+          "next_step": "resume",
+          "question": "",
+          "authority_needed": "",
+          "actions": [
+            {
+              "tool": "Glob",
+              "summary": "前言 电力会计专项总结.pdf\n数学习题.pdf\n电机学.pdf\n第一章 电路的模型及其基本规律.pdf",
+              "receipt_id": "call_ed2fa41c3df6453b9fdd9a6a43f84101",
+              "permission_decision": "allow: read-only"
+            },
+            {
+              "tool": "ReadStageResult",
+              "summary": "saved planner checkpoint",
+              "receipt_id": "call_f89d4bb0d2014a84870f9869f8c26442",
+              "permission_decision": "allow: read-only"
+            }
+          ]
+        }
+      ],
+      "recovery_case": {
+        "case_id": "627fa0866b4200c9564a6c5b",
+        "node_id": "n_prep_plan",
+        "epoch": 0,
+        "input_revision": "aad016831ac46d0f1f609343587bea7e1958bc2f21b4b33bc0140f540effb249",
+        "signature": {
+          "node_id": "n_prep_plan",
+          "blocker_kinds": [],
+          "capability": "",
+          "error_head_hash": "42f29d73971d65cf38d59081d27eccc74ac7aa8a405bc06ea40092554fb6bc0f"
+        },
+        "status": "reported",
+        "rounds": [
+          {
+            "n": 1,
+            "option_id": "locate_pdfs_in_user_directory",
+            "method_fingerprint": "585bfbb3a77bb536432e43f42e33da2f25b95ab28db608ec59e57d07dc939e4a",
+            "root_cause": "input_defect",
+            "authority": "none",
+            "executor_receipt_ref": "8103c490a19c26d428e99c5e2e3657aa",
+            "verification": {
+              "result": "unchanged",
+              "evidence_refs": [
+                "saved-glob"
+              ]
+            },
+            "evidence_digest": "saved-evidence",
+            "tokens": 0,
+            "seconds": 0.0
+          }
+        ],
+        "max_rounds": 5,
+        "analyst_session": "n_prep_plan__analyst__627fa0866b4200c9564a6c5b",
+        "opened_by": "host",
+        "events": [
+          "open:1",
+          "wait:0c71fb7233846c66f78b69e8bc1083f0d57646941e8f5482b937f55518718eda",
+          "answer:627fa0866b4200c9564a6c5b:0:input:0c71fb723384",
+          "start:1",
+          "finish:1",
+          "report:67ae91fba55e33b48ff9b7fc1202275d4817281170745d992c954a223d07ae74"
+        ],
+        "pending": {
+          "kind": "incident",
+          "round": 1,
+          "options": [
+            {
+              "value": "close",
+              "label": "关闭当前入口卡",
+              "description": "保留检查点。"
+            }
+          ]
+        },
+        "report": {
+          "kind": "incident",
+          "case_id": "627fa0866b4200c9564a6c5b",
+          "node_id": "n_prep_plan",
+          "node_label": "准备阶段方向交接与验证口径",
+          "title": "恢复需要你的决定",
+          "reason": "当前阶段没有需要立即提交的输入；缺失参数将在对应节点收集：每批页数→主控方法复核与批大小确定。",
+          "root_cause": "input_defect",
+          "pending": {
+            "kind": "incident",
+            "round": 1,
+            "question": "当前阶段没有需要立即提交的输入；缺失参数将在对应节点收集：每批页数→主控方法复核与批大小确定。",
+            "options": [
+              {
+                "value": "close",
+                "label": "关闭当前入口卡",
+                "description": "保留检查点。"
+              }
+            ]
+          }
+        },
+        "plan": {
+          "case_id": "627fa0866b4200c9564a6c5b",
+          "round": 1,
+          "root_cause": {
+            "class": "input_defect",
+            "summary": "原准备规划缺少 book_paths；已保存只读目录发现回执，需原节点核对。",
+            "evidence_refs": [
+              "saved-glob"
+            ],
+            "confidence": "high"
+          },
+          "options": [
+            {
+              "option_id": "locate_pdfs_in_user_directory",
+              "method": "依据用户已补充的目录线索，只读列出指定目录中的 PDF 路径，交由宿主核对原规划输入。",
+              "strategy": {
+                "kind": "input_discovery",
+                "tools": [
+                  "Glob",
+                  "ReadStageResult"
+                ],
+                "target": "原 n_prep_plan 的 book_paths 输入核对。"
+              },
+              "needs": {
+                "capabilities": [],
+                "authority": [],
+                "user_input": []
+              },
+              "risk": "low",
+              "reversible": true,
+              "changes_acceptance": false,
+              "verification": {
+                "tool": "Glob",
+                "arguments": {
+                  "pattern": "**/*.pdf",
+                  "path": "C:\\Users\\example-user\\Desktop\\sample-project"
+                }
+              }
+            }
+          ],
+          "recommended_option_id": "locate_pdfs_in_user_directory",
+          "not_recommended": []
+        },
+        "failed_step": {},
+        "phases": [
+          "发现问题",
+          "已汇报"
+        ]
+      }
+    },
+    "n_prep_plan__assist_8103c490a19c": {
+      "status": "completed",
+      "epoch": 0,
+      "input_revision": "aad016831ac46d0f1f609343587bea7e1958bc2f21b4b33bc0140f540effb249",
+      "handoff": {
+        "summary": "本段只读输入发现已完成，等待宿主核对并回调原规划节点。",
+        "status": "completed",
+        "blockers": [],
+        "question": "",
+        "authority_needed": "",
+        "inline_outputs": [
+          {
+            "name": "四书路径",
+            "content": "C:\\Users\\example-user\\Desktop\\sample-project\\前言 电力会计专项总结.pdf\nC:\\Users\\example-user\\Desktop\\sample-project\\数学习题.pdf\nC:\\Users\\example-user\\Desktop\\sample-project\\电机学.pdf\nC:\\Users\\example-user\\Desktop\\sample-project\\第一章 电路的模型及其基本规律.pdf"
+          }
+        ]
+      },
+      "tools": {
+        "call_ed2fa41c3df6453b9fdd9a6a43f84101": {
+          "epoch": 0,
+          "name": "Glob",
+          "args": {
+            "pattern": "**/*.pdf",
+            "path": "C:\\Users\\example-user\\Desktop\\sample-project"
+          },
+          "status": "completed",
+          "started_at": 1.0,
+          "completed_at": 2.0,
+          "output": "前言 电力会计专项总结.pdf\n数学习题.pdf\n电机学.pdf\n第一章 电路的模型及其基本规律.pdf",
+          "is_error": false
+        }
+      }
+    }
+  },
+  "case_inputs": {},
+  "node_ledgers": {
+    "n_prep_plan": {
+      "version": 1,
+      "facts": [
+        {
+          "fact_id": "saved-case-fact",
+          "node_id": "n_prep_plan",
+          "epoch": 0,
+          "kind": "case",
+          "payload": {
+            "case": {
+              "case_id": "627fa0866b4200c9564a6c5b",
+              "node_id": "n_prep_plan",
+              "epoch": 0,
+              "input_revision": "aad016831ac46d0f1f609343587bea7e1958bc2f21b4b33bc0140f540effb249",
+              "signature": {
+                "node_id": "n_prep_plan",
+                "blocker_kinds": [],
+                "capability": "",
+                "error_head_hash": "42f29d73971d65cf38d59081d27eccc74ac7aa8a405bc06ea40092554fb6bc0f"
+              },
+              "status": "reported",
+              "rounds": [
+                {
+                  "n": 1,
+                  "option_id": "locate_pdfs_in_user_directory",
+                  "method_fingerprint": "585bfbb3a77bb536432e43f42e33da2f25b95ab28db608ec59e57d07dc939e4a",
+                  "root_cause": "input_defect",
+                  "authority": "none",
+                  "executor_receipt_ref": "8103c490a19c26d428e99c5e2e3657aa",
+                  "verification": {
+                    "result": "unchanged",
+                    "evidence_refs": [
+                      "saved-glob"
+                    ]
+                  },
+                  "evidence_digest": "saved-evidence",
+                  "tokens": 0,
+                  "seconds": 0.0
+                }
+              ],
+              "max_rounds": 5,
+              "analyst_session": "n_prep_plan__analyst__627fa0866b4200c9564a6c5b",
+              "opened_by": "host",
+              "events": [
+                "open:1",
+                "wait:0c71fb7233846c66f78b69e8bc1083f0d57646941e8f5482b937f55518718eda",
+                "answer:627fa0866b4200c9564a6c5b:0:input:0c71fb723384",
+                "start:1",
+                "finish:1",
+                "report:67ae91fba55e33b48ff9b7fc1202275d4817281170745d992c954a223d07ae74"
+              ],
+              "pending": {
+                "kind": "incident",
+                "round": 1,
+                "options": [
+                  {
+                    "value": "close",
+                    "label": "关闭当前入口卡",
+                    "description": "保留检查点。"
+                  }
+                ]
+              },
+              "report": {
+                "kind": "incident",
+                "case_id": "627fa0866b4200c9564a6c5b",
+                "node_id": "n_prep_plan",
+                "node_label": "准备阶段方向交接与验证口径",
+                "title": "恢复需要你的决定",
+                "reason": "当前阶段没有需要立即提交的输入；缺失参数将在对应节点收集：每批页数→主控方法复核与批大小确定。",
+                "root_cause": "input_defect",
+                "pending": {
+                  "kind": "incident",
+                  "round": 1,
+                  "question": "当前阶段没有需要立即提交的输入；缺失参数将在对应节点收集：每批页数→主控方法复核与批大小确定。",
+                  "options": [
+                    {
+                      "value": "close",
+                      "label": "关闭当前入口卡",
+                      "description": "保留检查点。"
+                    }
+                  ]
+                }
+              },
+              "plan": {
+                "case_id": "627fa0866b4200c9564a6c5b",
+                "round": 1,
+                "root_cause": {
+                  "class": "input_defect",
+                  "summary": "原准备规划缺少 book_paths；已保存只读目录发现回执，需原节点核对。",
+                  "evidence_refs": [
+                    "saved-glob"
+                  ],
+                  "confidence": "high"
+                },
+                "options": [
+                  {
+                    "option_id": "locate_pdfs_in_user_directory",
+                    "method": "依据用户已补充的目录线索，只读列出指定目录中的 PDF 路径，交由宿主核对原规划输入。",
+                    "strategy": {
+                      "kind": "input_discovery",
+                      "tools": [
+                        "Glob",
+                        "ReadStageResult"
+                      ],
+                      "target": "原 n_prep_plan 的 book_paths 输入核对。"
+                    },
+                    "needs": {
+                      "capabilities": [],
+                      "authority": [],
+                      "user_input": []
+                    },
+                    "risk": "low",
+                    "reversible": true,
+                    "changes_acceptance": false,
+                    "verification": {
+                      "tool": "Glob",
+                      "arguments": {
+                        "pattern": "**/*.pdf",
+                        "path": "C:\\Users\\example-user\\Desktop\\sample-project"
+                      }
+                    }
+                  }
+                ],
+                "recommended_option_id": "locate_pdfs_in_user_directory",
+                "not_recommended": []
+              },
+              "failed_step": {},
+              "phases": [
+                "发现问题",
+                "已汇报"
+              ]
+            }
+          },
+          "source": "host",
+          "created_at": 1.0,
+          "superseded_by": null
+        }
+      ]
+    }
+  }
+}

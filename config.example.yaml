@@ -1,0 +1,8 @@
+# Copy into your local configuration; do not commit filled credentials.
+providers:
+  - name: example-openai
+    protocol: openai
+    base_url: https://api.openai.com/v1
+    model: your-model-id
+    api_key: ${OPENAI_API_KEY}
+permission_mode: default

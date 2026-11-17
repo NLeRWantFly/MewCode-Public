@@ -1,0 +1,21 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "build": {
+    "frontendDist": "mobile-dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "label": "main",
+        "title": "MewCode",
+        "url": "static/mobile.html",
+        "useHttpsScheme": true,
+        "fullscreen": false,
+        "resizable": true
+      }
+    ]
+  },
+  "bundle": {
+    "resources": []
+  }
+}

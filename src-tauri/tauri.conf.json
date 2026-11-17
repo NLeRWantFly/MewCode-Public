@@ -1,0 +1,21 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "MewCode",
+  "version": "0.1.8",
+  "identifier": "com.mewcode.desktop",
+  "build": {
+    "devUrl": "http://127.0.0.1:8765",
+    "frontendDist": "../frontend/static"
+  },
+  "app": {
+    "withGlobalTauri": true,
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "resources": ["../frontend", "../mewcode", "../pyproject.toml", "../uv.lock"]
+  }
+}

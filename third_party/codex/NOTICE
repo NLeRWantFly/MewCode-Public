@@ -1,0 +1,16 @@
+MewCode includes a Python adaptation of the review deadline and retry-budget
+mechanism from OpenAI Codex.
+
+OpenAI Codex
+Copyright 2025 OpenAI
+Licensed under the Apache License, Version 2.0 (see LICENSE).
+
+Source revision: afb436df8b70bb5bc57b86d9a3e829968988cd21
+Source file: codex-rs/ext/guardian-reviewer/src/retry.rs
+Source URL: https://github.com/openai/codex/blob/afb436df8b70bb5bc57b86d9a3e829968988cd21/codex-rs/ext/guardian-reviewer/src/retry.rs
+
+Modified 2026-10-04 for MewCode: Python ReviewBudget, caller-owned asyncio
+cancellation, two review attempts and existing provider cooldown semantics.
+No executable action is retried by this module. No hosted service or model
+implementation is included. UPSTREAM-NOTICE preserves the repository notice;
+no Ratatui code is used in this adaptation.

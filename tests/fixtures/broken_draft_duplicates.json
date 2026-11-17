@@ -1,0 +1,2150 @@
+{
+  "schema_version": 1,
+  "entries": [
+    {
+      "id": "goal",
+      "kind": "goal",
+      "title": "goal",
+      "body": "分批处理材料并独立核验",
+      "state": "active",
+      "data": {},
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "n00",
+      "kind": "node",
+      "title": "n00",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "node_kind": "plan",
+        "inputs": [],
+        "outputs": [
+          "产物"
+        ],
+        "acceptance": [
+          "验收"
+        ]
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "n01",
+      "kind": "node",
+      "title": "n01",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "node_kind": "plan",
+        "inputs": [],
+        "outputs": [
+          "产物"
+        ],
+        "acceptance": [
+          "验收"
+        ]
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "n02",
+      "kind": "node",
+      "title": "n02",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "node_kind": "implement",
+        "inputs": [],
+        "outputs": [
+          "产物"
+        ],
+        "acceptance": [
+          "验收"
+        ]
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "n03",
+      "kind": "node",
+      "title": "n03",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "node_kind": "plan",
+        "inputs": [],
+        "outputs": [
+          "产物"
+        ],
+        "acceptance": [
+          "验收"
+        ]
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "n04",
+      "kind": "node",
+      "title": "n04",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "node_kind": "plan",
+        "inputs": [],
+        "outputs": [
+          "产物"
+        ],
+        "acceptance": [
+          "验收"
+        ]
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "n05",
+      "kind": "node",
+      "title": "n05",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "node_kind": "decision",
+        "inputs": [],
+        "outputs": [
+          "产物"
+        ],
+        "acceptance": [
+          "验收"
+        ]
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "n06",
+      "kind": "node",
+      "title": "n06",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "node_kind": "plan",
+        "inputs": [],
+        "outputs": [
+          "产物"
+        ],
+        "acceptance": [
+          "验收"
+        ]
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "n07",
+      "kind": "node",
+      "title": "n07",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "node_kind": "plan",
+        "inputs": [],
+        "outputs": [
+          "产物"
+        ],
+        "acceptance": [
+          "验收"
+        ]
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "n08",
+      "kind": "node",
+      "title": "n08",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "node_kind": "plan",
+        "inputs": [],
+        "outputs": [
+          "产物"
+        ],
+        "acceptance": [
+          "验收"
+        ]
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "n09",
+      "kind": "node",
+      "title": "n09",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "node_kind": "plan",
+        "inputs": [],
+        "outputs": [
+          "产物"
+        ],
+        "acceptance": [
+          "验收"
+        ]
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "n10",
+      "kind": "node",
+      "title": "n10",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "node_kind": "implement",
+        "inputs": [],
+        "outputs": [
+          "产物"
+        ],
+        "acceptance": [
+          "验收"
+        ]
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "n11",
+      "kind": "node",
+      "title": "n11",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "node_kind": "plan",
+        "inputs": [],
+        "outputs": [
+          "产物"
+        ],
+        "acceptance": [
+          "验收"
+        ]
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "n12",
+      "kind": "node",
+      "title": "n12",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "node_kind": "plan",
+        "inputs": [],
+        "outputs": [
+          "产物"
+        ],
+        "acceptance": [
+          "验收"
+        ]
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "n13",
+      "kind": "node",
+      "title": "n13",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "node_kind": "decision",
+        "inputs": [],
+        "outputs": [
+          "产物"
+        ],
+        "acceptance": [
+          "验收"
+        ]
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "n14",
+      "kind": "node",
+      "title": "n14",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "node_kind": "plan",
+        "inputs": [],
+        "outputs": [
+          "产物"
+        ],
+        "acceptance": [
+          "验收"
+        ]
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "n15",
+      "kind": "node",
+      "title": "n15",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "node_kind": "plan",
+        "inputs": [],
+        "outputs": [
+          "产物"
+        ],
+        "acceptance": [
+          "验收"
+        ]
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "n16",
+      "kind": "node",
+      "title": "n16",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "node_kind": "plan",
+        "inputs": [],
+        "outputs": [
+          "产物"
+        ],
+        "acceptance": [
+          "验收"
+        ]
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "n17",
+      "kind": "node",
+      "title": "n17",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "node_kind": "plan",
+        "inputs": [],
+        "outputs": [
+          "产物"
+        ],
+        "acceptance": [
+          "验收"
+        ]
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "n18",
+      "kind": "node",
+      "title": "n18",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "node_kind": "plan",
+        "inputs": [],
+        "outputs": [
+          "产物"
+        ],
+        "acceptance": [
+          "验收"
+        ]
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "n19",
+      "kind": "node",
+      "title": "n19",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "node_kind": "plan",
+        "inputs": [],
+        "outputs": [
+          "产物"
+        ],
+        "acceptance": [
+          "验收"
+        ]
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "n20",
+      "kind": "node",
+      "title": "n20",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "node_kind": "implement",
+        "inputs": [],
+        "outputs": [
+          "产物"
+        ],
+        "acceptance": [
+          "验收"
+        ]
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "n21",
+      "kind": "node",
+      "title": "n21",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "node_kind": "plan",
+        "inputs": [],
+        "outputs": [
+          "产物"
+        ],
+        "acceptance": [
+          "验收"
+        ]
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "n22",
+      "kind": "node",
+      "title": "n22",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "node_kind": "plan",
+        "inputs": [],
+        "outputs": [
+          "产物"
+        ],
+        "acceptance": [
+          "验收"
+        ]
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "n23",
+      "kind": "node",
+      "title": "n23",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "node_kind": "decision",
+        "inputs": [],
+        "outputs": [
+          "产物"
+        ],
+        "acceptance": [
+          "验收"
+        ]
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "n24",
+      "kind": "node",
+      "title": "n24",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "node_kind": "plan",
+        "inputs": [],
+        "outputs": [
+          "产物"
+        ],
+        "acceptance": [
+          "验收"
+        ]
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "n25",
+      "kind": "node",
+      "title": "n25",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "node_kind": "plan",
+        "inputs": [],
+        "outputs": [
+          "产物"
+        ],
+        "acceptance": [
+          "验收"
+        ]
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "n26",
+      "kind": "node",
+      "title": "n26",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "node_kind": "plan",
+        "inputs": [],
+        "outputs": [
+          "产物"
+        ],
+        "acceptance": [
+          "验收"
+        ]
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "n27",
+      "kind": "node",
+      "title": "n27",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "node_kind": "plan",
+        "inputs": [],
+        "outputs": [
+          "产物"
+        ],
+        "acceptance": [
+          "验收"
+        ]
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "n28",
+      "kind": "node",
+      "title": "n28",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "node_kind": "plan",
+        "inputs": [],
+        "outputs": [
+          "产物"
+        ],
+        "acceptance": [
+          "验收"
+        ]
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "n29",
+      "kind": "node",
+      "title": "n29",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "node_kind": "plan",
+        "inputs": [],
+        "outputs": [
+          "产物"
+        ],
+        "acceptance": [
+          "验收"
+        ]
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "n30",
+      "kind": "node",
+      "title": "n30",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "node_kind": "plan",
+        "inputs": [],
+        "outputs": [
+          "产物"
+        ],
+        "acceptance": [
+          "验收"
+        ]
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "n31",
+      "kind": "node",
+      "title": "n31",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "node_kind": "reduce",
+        "inputs": [],
+        "outputs": [
+          "产物"
+        ],
+        "acceptance": [
+          "验收"
+        ]
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "loop1",
+      "kind": "loop",
+      "title": "loop1",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "loop_id": "L1",
+        "entry_node_id": "n02",
+        "check_node_id": "n05",
+        "node_ids": [
+          "n02",
+          "n03",
+          "n04",
+          "n05"
+        ],
+        "reviewer_node_ids": [
+          "n05"
+        ],
+        "criteria": [
+          {
+            "criterion_id": "C1",
+            "acceptance_test": "核验当前项结果"
+          }
+        ],
+        "exit_condition": "结果通过验证",
+        "control_mode": "team"
+      },
+      "sources": [],
+      "evidence": "saved_graph"
+    },
+    {
+      "id": "loop_copy1",
+      "kind": "loop",
+      "title": "loop1",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "loop_id": "L1",
+        "entry_node_id": "n02",
+        "check_node_id": "n05",
+        "node_ids": [
+          "n02",
+          "n03",
+          "n04",
+          "n05"
+        ],
+        "reviewer_node_ids": [
+          "n05"
+        ],
+        "criteria": [
+          {
+            "criterion_id": "C1",
+            "acceptance_test": "核验当前项结果"
+          }
+        ],
+        "exit_condition": "结果通过验证",
+        "control_mode": "team"
+      },
+      "sources": [],
+      "evidence": "proposal"
+    },
+    {
+      "id": "loop2",
+      "kind": "loop",
+      "title": "loop2",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "loop_id": "L2",
+        "entry_node_id": "n10",
+        "check_node_id": "n13",
+        "node_ids": [
+          "n10",
+          "n11",
+          "n12",
+          "n13"
+        ],
+        "reviewer_node_ids": [
+          "n13"
+        ],
+        "criteria": [
+          {
+            "criterion_id": "C1",
+            "acceptance_test": "核验当前项结果"
+          }
+        ],
+        "exit_condition": "结果通过验证",
+        "control_mode": "team"
+      },
+      "sources": [],
+      "evidence": "saved_graph"
+    },
+    {
+      "id": "loop_copy2",
+      "kind": "loop",
+      "title": "loop2",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "loop_id": "L2",
+        "entry_node_id": "n10",
+        "check_node_id": "n13",
+        "node_ids": [
+          "n10",
+          "n11",
+          "n12",
+          "n13"
+        ],
+        "reviewer_node_ids": [
+          "n13"
+        ],
+        "criteria": [
+          {
+            "criterion_id": "C1",
+            "acceptance_test": "核验当前项结果"
+          }
+        ],
+        "exit_condition": "结果通过验证",
+        "control_mode": "team"
+      },
+      "sources": [],
+      "evidence": "proposal"
+    },
+    {
+      "id": "loop3",
+      "kind": "loop",
+      "title": "loop3",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "loop_id": "L3",
+        "entry_node_id": "n20",
+        "check_node_id": "n23",
+        "node_ids": [
+          "n20",
+          "n21",
+          "n22",
+          "n23"
+        ],
+        "reviewer_node_ids": [
+          "n23"
+        ],
+        "criteria": [
+          {
+            "criterion_id": "C1",
+            "acceptance_test": "核验当前项结果"
+          }
+        ],
+        "exit_condition": "结果通过验证",
+        "control_mode": "team"
+      },
+      "sources": [],
+      "evidence": "saved_graph"
+    },
+    {
+      "id": "loop_copy3",
+      "kind": "loop",
+      "title": "loop3",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "loop_id": "L3",
+        "entry_node_id": "n20",
+        "check_node_id": "n23",
+        "node_ids": [
+          "n20",
+          "n21",
+          "n22",
+          "n23"
+        ],
+        "reviewer_node_ids": [
+          "n23"
+        ],
+        "criteria": [
+          {
+            "criterion_id": "C1",
+            "acceptance_test": "核验当前项结果"
+          }
+        ],
+        "exit_condition": "结果通过验证",
+        "control_mode": "team"
+      },
+      "sources": [],
+      "evidence": "proposal"
+    },
+    {
+      "id": "e00",
+      "kind": "edge",
+      "title": "e00",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n00",
+        "to_node": "n01",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "e01",
+      "kind": "edge",
+      "title": "e01",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n01",
+        "to_node": "n02",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "e02",
+      "kind": "edge",
+      "title": "e02",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n02",
+        "to_node": "n03",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "e03",
+      "kind": "edge",
+      "title": "e03",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n03",
+        "to_node": "n04",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "e04",
+      "kind": "edge",
+      "title": "e04",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n04",
+        "to_node": "n05",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "e05",
+      "kind": "edge",
+      "title": "e05",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n05",
+        "to_node": "n06",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "e06",
+      "kind": "edge",
+      "title": "e06",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n06",
+        "to_node": "n07",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "e07",
+      "kind": "edge",
+      "title": "e07",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n07",
+        "to_node": "n08",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "e08",
+      "kind": "edge",
+      "title": "e08",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n08",
+        "to_node": "n09",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "e09",
+      "kind": "edge",
+      "title": "e09",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n09",
+        "to_node": "n10",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "e10",
+      "kind": "edge",
+      "title": "e10",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n10",
+        "to_node": "n11",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "e11",
+      "kind": "edge",
+      "title": "e11",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n11",
+        "to_node": "n12",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "e12",
+      "kind": "edge",
+      "title": "e12",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n12",
+        "to_node": "n13",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "e13",
+      "kind": "edge",
+      "title": "e13",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n13",
+        "to_node": "n14",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "e14",
+      "kind": "edge",
+      "title": "e14",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n14",
+        "to_node": "n15",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "e15",
+      "kind": "edge",
+      "title": "e15",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n15",
+        "to_node": "n16",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "e16",
+      "kind": "edge",
+      "title": "e16",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n16",
+        "to_node": "n17",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "e17",
+      "kind": "edge",
+      "title": "e17",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n17",
+        "to_node": "n18",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "e18",
+      "kind": "edge",
+      "title": "e18",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n18",
+        "to_node": "n19",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "e19",
+      "kind": "edge",
+      "title": "e19",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n19",
+        "to_node": "n20",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "e20",
+      "kind": "edge",
+      "title": "e20",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n20",
+        "to_node": "n21",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "e21",
+      "kind": "edge",
+      "title": "e21",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n21",
+        "to_node": "n22",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "e22",
+      "kind": "edge",
+      "title": "e22",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n22",
+        "to_node": "n23",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "e23",
+      "kind": "edge",
+      "title": "e23",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n23",
+        "to_node": "n24",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "e24",
+      "kind": "edge",
+      "title": "e24",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n24",
+        "to_node": "n25",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "e25",
+      "kind": "edge",
+      "title": "e25",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n25",
+        "to_node": "n26",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "e26",
+      "kind": "edge",
+      "title": "e26",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n26",
+        "to_node": "n27",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "e27",
+      "kind": "edge",
+      "title": "e27",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n27",
+        "to_node": "n28",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "e28",
+      "kind": "edge",
+      "title": "e28",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n28",
+        "to_node": "n29",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "e29",
+      "kind": "edge",
+      "title": "e29",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n29",
+        "to_node": "n30",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "e30",
+      "kind": "edge",
+      "title": "e30",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n30",
+        "to_node": "n31",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "back1",
+      "kind": "edge",
+      "title": "back1",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n05",
+        "to_node": "n02",
+        "condition": "loop"
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "back2",
+      "kind": "edge",
+      "title": "back2",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n13",
+        "to_node": "n10",
+        "condition": "loop"
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "back3",
+      "kind": "edge",
+      "title": "back3",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n23",
+        "to_node": "n20",
+        "condition": "loop"
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "extra0",
+      "kind": "edge",
+      "title": "extra0",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n00",
+        "to_node": "n06",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "extra1",
+      "kind": "edge",
+      "title": "extra1",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n06",
+        "to_node": "n08",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "extra2",
+      "kind": "edge",
+      "title": "extra2",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n07",
+        "to_node": "n09",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "extra3",
+      "kind": "edge",
+      "title": "extra3",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n14",
+        "to_node": "n16",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "extra4",
+      "kind": "edge",
+      "title": "extra4",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n15",
+        "to_node": "n17",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "extra5",
+      "kind": "edge",
+      "title": "extra5",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n24",
+        "to_node": "n26",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "extra6",
+      "kind": "edge",
+      "title": "extra6",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n25",
+        "to_node": "n27",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "manual"
+    },
+    {
+      "id": "copy_e00",
+      "kind": "edge",
+      "title": "e00",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n00",
+        "to_node": "n01",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "proposal"
+    },
+    {
+      "id": "copy_e01",
+      "kind": "edge",
+      "title": "e01",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n01",
+        "to_node": "n02",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "proposal"
+    },
+    {
+      "id": "copy_e02",
+      "kind": "edge",
+      "title": "e02",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n02",
+        "to_node": "n03",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "proposal"
+    },
+    {
+      "id": "copy_e03",
+      "kind": "edge",
+      "title": "e03",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n03",
+        "to_node": "n04",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "proposal"
+    },
+    {
+      "id": "copy_e04",
+      "kind": "edge",
+      "title": "e04",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n04",
+        "to_node": "n05",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "proposal"
+    },
+    {
+      "id": "copy_e05",
+      "kind": "edge",
+      "title": "e05",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n05",
+        "to_node": "n06",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "proposal"
+    },
+    {
+      "id": "copy_e06",
+      "kind": "edge",
+      "title": "e06",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n06",
+        "to_node": "n07",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "proposal"
+    },
+    {
+      "id": "copy_e07",
+      "kind": "edge",
+      "title": "e07",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n07",
+        "to_node": "n08",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "proposal"
+    },
+    {
+      "id": "copy_e08",
+      "kind": "edge",
+      "title": "e08",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n08",
+        "to_node": "n09",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "proposal"
+    },
+    {
+      "id": "copy_e09",
+      "kind": "edge",
+      "title": "e09",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n09",
+        "to_node": "n10",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "proposal"
+    },
+    {
+      "id": "copy_e10",
+      "kind": "edge",
+      "title": "e10",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n10",
+        "to_node": "n11",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "proposal"
+    },
+    {
+      "id": "copy_e11",
+      "kind": "edge",
+      "title": "e11",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n11",
+        "to_node": "n12",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "proposal"
+    },
+    {
+      "id": "copy_e12",
+      "kind": "edge",
+      "title": "e12",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n12",
+        "to_node": "n13",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "proposal"
+    },
+    {
+      "id": "copy_e13",
+      "kind": "edge",
+      "title": "e13",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n13",
+        "to_node": "n14",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "proposal"
+    },
+    {
+      "id": "copy_e14",
+      "kind": "edge",
+      "title": "e14",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n14",
+        "to_node": "n15",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "proposal"
+    },
+    {
+      "id": "copy_e15",
+      "kind": "edge",
+      "title": "e15",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n15",
+        "to_node": "n16",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "proposal"
+    },
+    {
+      "id": "copy_e16",
+      "kind": "edge",
+      "title": "e16",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n16",
+        "to_node": "n17",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "proposal"
+    },
+    {
+      "id": "copy_e17",
+      "kind": "edge",
+      "title": "e17",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n17",
+        "to_node": "n18",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "proposal"
+    },
+    {
+      "id": "copy_e18",
+      "kind": "edge",
+      "title": "e18",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n18",
+        "to_node": "n19",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "proposal"
+    },
+    {
+      "id": "copy_e19",
+      "kind": "edge",
+      "title": "e19",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n19",
+        "to_node": "n20",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "proposal"
+    },
+    {
+      "id": "copy_e20",
+      "kind": "edge",
+      "title": "e20",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n20",
+        "to_node": "n21",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "proposal"
+    },
+    {
+      "id": "copy_e21",
+      "kind": "edge",
+      "title": "e21",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n21",
+        "to_node": "n22",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "proposal"
+    },
+    {
+      "id": "copy_e22",
+      "kind": "edge",
+      "title": "e22",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n22",
+        "to_node": "n23",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "proposal"
+    },
+    {
+      "id": "copy_e23",
+      "kind": "edge",
+      "title": "e23",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n23",
+        "to_node": "n24",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "proposal"
+    },
+    {
+      "id": "copy_e24",
+      "kind": "edge",
+      "title": "e24",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n24",
+        "to_node": "n25",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "proposal"
+    },
+    {
+      "id": "copy_e25",
+      "kind": "edge",
+      "title": "e25",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n25",
+        "to_node": "n26",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "proposal"
+    },
+    {
+      "id": "copy_e26",
+      "kind": "edge",
+      "title": "e26",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n26",
+        "to_node": "n27",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "proposal"
+    },
+    {
+      "id": "copy_e27",
+      "kind": "edge",
+      "title": "e27",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n27",
+        "to_node": "n28",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "proposal"
+    },
+    {
+      "id": "copy_e28",
+      "kind": "edge",
+      "title": "e28",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n28",
+        "to_node": "n29",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "proposal"
+    },
+    {
+      "id": "copy_e29",
+      "kind": "edge",
+      "title": "e29",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n29",
+        "to_node": "n30",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "proposal"
+    },
+    {
+      "id": "copy_e30",
+      "kind": "edge",
+      "title": "e30",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n30",
+        "to_node": "n31",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "proposal"
+    },
+    {
+      "id": "copy_back1",
+      "kind": "edge",
+      "title": "back1",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n05",
+        "to_node": "n02",
+        "condition": "loop"
+      },
+      "sources": [],
+      "evidence": "proposal"
+    },
+    {
+      "id": "copy_back2",
+      "kind": "edge",
+      "title": "back2",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n13",
+        "to_node": "n10",
+        "condition": "loop"
+      },
+      "sources": [],
+      "evidence": "proposal"
+    },
+    {
+      "id": "copy_back3",
+      "kind": "edge",
+      "title": "back3",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n23",
+        "to_node": "n20",
+        "condition": "loop"
+      },
+      "sources": [],
+      "evidence": "proposal"
+    },
+    {
+      "id": "copy_extra0",
+      "kind": "edge",
+      "title": "extra0",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n00",
+        "to_node": "n06",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "proposal"
+    },
+    {
+      "id": "copy_extra1",
+      "kind": "edge",
+      "title": "extra1",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n06",
+        "to_node": "n08",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "proposal"
+    },
+    {
+      "id": "copy_extra2",
+      "kind": "edge",
+      "title": "extra2",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n07",
+        "to_node": "n09",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "proposal"
+    },
+    {
+      "id": "copy_extra3",
+      "kind": "edge",
+      "title": "extra3",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "from_node": "n14",
+        "to_node": "n16",
+        "condition": "always"
+      },
+      "sources": [],
+      "evidence": "proposal"
+    },
+    {
+      "id": "input0",
+      "kind": "input",
+      "title": "input0",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "name": "pdf_paths",
+        "required": true
+      },
+      "sources": [],
+      "evidence": "saved_graph"
+    },
+    {
+      "id": "copy_input0",
+      "kind": "input",
+      "title": "input0",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "name": "pdf_paths",
+        "required": true
+      },
+      "sources": [],
+      "evidence": "proposal"
+    },
+    {
+      "id": "input1",
+      "kind": "input",
+      "title": "input1",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "name": "new_output_directory",
+        "required": true
+      },
+      "sources": [],
+      "evidence": "saved_graph"
+    },
+    {
+      "id": "copy_input1",
+      "kind": "input",
+      "title": "input1",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "name": "new_output_directory",
+        "required": true
+      },
+      "sources": [],
+      "evidence": "proposal"
+    },
+    {
+      "id": "input2",
+      "kind": "input",
+      "title": "input2",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "name": "model_bindings",
+        "required": true
+      },
+      "sources": [],
+      "evidence": "saved_graph"
+    },
+    {
+      "id": "copy_input2",
+      "kind": "input",
+      "title": "input2",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "name": "model_bindings",
+        "required": true
+      },
+      "sources": [],
+      "evidence": "proposal"
+    },
+    {
+      "id": "input3",
+      "kind": "input",
+      "title": "input3",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "name": "content_external_authorization",
+        "required": true
+      },
+      "sources": [],
+      "evidence": "saved_graph"
+    },
+    {
+      "id": "copy_input3",
+      "kind": "input",
+      "title": "input3",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "name": "content_external_authorization",
+        "required": true
+      },
+      "sources": [],
+      "evidence": "proposal"
+    },
+    {
+      "id": "input4",
+      "kind": "input",
+      "title": "input4",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "name": "model_cost_policy",
+        "required": true
+      },
+      "sources": [],
+      "evidence": "saved_graph"
+    },
+    {
+      "id": "copy_input4",
+      "kind": "input",
+      "title": "input4",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "name": "model_cost_policy",
+        "required": true
+      },
+      "sources": [],
+      "evidence": "proposal"
+    },
+    {
+      "id": "input5",
+      "kind": "input",
+      "title": "input5",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "name": "enable_vector_search",
+        "required": true
+      },
+      "sources": [],
+      "evidence": "saved_graph"
+    },
+    {
+      "id": "copy_input5",
+      "kind": "input",
+      "title": "input5",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "name": "enable_vector_search",
+        "required": true
+      },
+      "sources": [],
+      "evidence": "proposal"
+    },
+    {
+      "id": "input6",
+      "kind": "input",
+      "title": "input6",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "name": "publication_choice",
+        "required": true
+      },
+      "sources": [],
+      "evidence": "saved_graph"
+    },
+    {
+      "id": "copy_input6",
+      "kind": "input",
+      "title": "input6",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "name": "publication_choice",
+        "required": true
+      },
+      "sources": [],
+      "evidence": "proposal"
+    },
+    {
+      "id": "input7",
+      "kind": "input",
+      "title": "input7",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "name": "hierarchy_label_interpretation",
+        "required": true
+      },
+      "sources": [],
+      "evidence": "saved_graph"
+    },
+    {
+      "id": "copy_input7",
+      "kind": "input",
+      "title": "input7",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "name": "hierarchy_label_interpretation",
+        "required": true
+      },
+      "sources": [],
+      "evidence": "proposal"
+    },
+    {
+      "id": "input8",
+      "kind": "input",
+      "title": "input8",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "name": "embedding_binding",
+        "required": true
+      },
+      "sources": [],
+      "evidence": "saved_graph"
+    },
+    {
+      "id": "copy_input8",
+      "kind": "input",
+      "title": "input8",
+      "body": "核验材料",
+      "state": "active",
+      "data": {
+        "name": "embedding_binding",
+        "required": true
+      },
+      "sources": [],
+      "evidence": "proposal"
+    }
+  ],
+  "ignored": []
+}

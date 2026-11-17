@@ -1,0 +1,28 @@
+{
+  "fixture_provenance": "Synthetic sanitized replay of documented counts; no user files or run database read",
+  "node_states": {
+    "N01": {
+      "node_attempt": 24,
+      "input_revision": "sanitized-revision",
+      "status": "needs_attention",
+      "error_kind": "capability_missing",
+      "assistance_request": {"requested_tools": ["InspectVisualEvidence"]},
+      "assistance_receipts": [
+        {"request_id": "assist-a", "next_step": "ask_human", "question": ""},
+        {"request_id": "assist-b", "next_step": "ask_human", "question": ""},
+        {"request_id": "assist-c", "next_step": "ask_human", "question": ""}
+      ],
+      "scheduler_recovery": {"decisions": [
+        {"action": "progress_continue"}, {"action": "progress_continue"}, {"action": "pause"},
+        {"action": "progress_continue"}, {"action": "assist"}, {"action": "progress_continue"},
+        {"action": "pause"}, {"action": "progress_continue"}, {"action": "progress_continue"},
+        {"action": "assist"}, {"action": "pause"}, {"action": "progress_continue"},
+        {"action": "progress_continue"}, {"action": "pause"}, {"action": "progress_continue"},
+        {"action": "progress_continue"}, {"action": "assist"}, {"action": "pause"},
+        {"action": "progress_continue"}, {"action": "progress_continue"}, {"action": "pause"},
+        {"action": "progress_continue"}, {"action": "diagnose_path"}, {"action": "diagnose_path"}
+      ]}
+    }
+  },
+  "node_ledgers": {}
+}
